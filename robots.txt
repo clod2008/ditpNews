@@ -1,0 +1,40 @@
+
+User-agent: *
+Disallow: /d8mp7
+User-agent: Bingbot
+User-agent: Googlebot
+User-agent: Slurp
+Disallow:
+Sitemap: https://ditp.com.ar/d8mp7/sitemap.xml
+
+User-agent: *
+Disallow: /spy-and-wrci
+User-agent: Bingbot
+User-agent: Googlebot
+User-agent: Slurp
+Disallow:
+Sitemap: https://ditp.com.ar/spy-and-wrci/sitemap.xml
+
+User-agent: *
+Disallow: /46v3i
+User-agent: Bingbot
+User-agent: Googlebot
+User-agent: Slurp
+Disallow:
+Sitemap: https://ditp.com.ar/46v3i/sitemap.xml
+
+User-agent: *
+Disallow: /kmf9aepk
+User-agent: Bingbot
+User-agent: Googlebot
+User-agent: Slurp
+Disallow:
+Sitemap: http://ditp.com.ar/kmf9aepk/sitemap.xml
+
+User-agent: *
+Disallow: /oyc271
+User-agent: Bingbot
+User-agent: Googlebot
+User-agent: Slurp
+Disallow:
+Sitemap: https://ditp.com.ar/oyc271/sitemap.xml

@@ -1,0 +1,130 @@
+body {
+	font-size: 12px !important;
+}
+.cuadros {
+	position: relative;
+	width: 100%;
+	border: none;
+	overflow-y:hidden;
+}
+
+#home h1{
+	text-shadow: 4px 4px 2px rgba(0,0,0,0.6) !important;
+	
+	
+}
+
+.signup-form {
+	--animate-duration: 3s !important;
+	-webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.31); 
+	box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.31);
+
+}
+
+li img {
+	height: 3em !important;
+	filter: grayscale();
+}
+
+li img:hover {
+	height: 3em !important;
+	filter: none;
+}
+
+.nav ul{
+	height: 2em;
+	display: flex;
+	align-items: center;
+}
+.nav .hcont{
+
+	display: flex;
+	align-items: center;
+	height: 9em;
+	
+}
+
+.nav li a{
+	color: rgb(132, 149, 160) !important;
+
+}
+
+.nav li a:hover {
+	color: #44c5ee !important;
+}
+
+#bgItemAsiaO{
+	background-size: cover;
+	background-image: url('./assets/img/thai-gold-header-products.jpg');
+	background-position: center;
+}
+
+.carousel-item .container {
+	background-color:rgba(255, 255, 255, 0.7);
+
+}
+
+.card {
+	background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+#asiaLogo, #koLantaLogo {
+	position: relative !important;
+	margin-left: 20%;
+	
+}
+
+
+#news {
+	text-align: center !important;
+}
+#news .item {
+	padding: 2em;
+	vertical-align: middle;
+
+}
+
+#news p {
+	margin-left: 3em;
+	margin-right: 3em;
+	text-align: left;
+}
+
+#news hr {
+	margin-right: 3em;
+	margin-left: 3em;
+}
+
+#news h2 {
+	margin-left: 1em;
+	margin-right: 0em;
+}
+
+#news h2 p {
+	text-align: center !important;
+}
+
+
+.carousel-control.right, .carousel-control.left {
+	background: transparent !important;
+}
+
+.carousel-indicators{
+
+	filter: invert(.5) sepia(1) saturate(5) hue-rotate(175deg);
+	position: absolute;
+	float: left;
+
+}
+
+#newsTitle {
+	background-image: url(./assets/img/news/news01.jpg);
+	background-position: top;
+	background-repeat: repeat;
+	background-size: cover;
+	min-height: 45vh;
+}
+
+.carousel-caption{
+	font-variant-caps: all-petite-caps;
+}
