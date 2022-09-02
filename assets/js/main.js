@@ -1,31 +1,31 @@
 $(document).ready(function () {
-    
+
     "use strict";
-    
+
     // Preloader
-    
-    $(window).load(function () { // makes sure the whole site is loaded
-        $('.page-preloader spinner').fadeOut(); // will first fade out the loading animation
-        $('.page-preloader').delay(350).fadeOut('slow');
-        // will fade out the white DIV that covers the website.
-        $('body').delay(350).css({
-            'overflow': 'visible'
-        });
-    })
-    
+
+    // $(window).load(function () { // makes sure the whole site is loaded
+    //     $('.page-preloader spinner').fadeOut(); // will first fade out the loading animation
+    //     $('.page-preloader').delay(350).fadeOut('slow');
+    //     // will fade out the white DIV that covers the website.
+    //     $('body').delay(350).css({
+    //         'overflow': 'visible'
+    //     });
+    // })
+
     // Animated typing text
 
-    $(".animated-text").typed({
-        strings: [
-            "Financial Services Evolved",
-            "M+A Advisory",
-            "Capital Raising",
-            "Asset Management",
-            "Management Consulting"
-        ],
-        typeSpeed: 40,
-        loop: true,
-    });
+    // $(".animated-text").typed({
+    //     strings: [
+    //         "Financial Services Evolved",
+    //         "M+A Advisory",
+    //         "Capital Raising",
+    //         "Asset Management",
+    //         "Management Consulting"
+    //     ],
+    //     typeSpeed: 40,
+    //     loop: true,
+    // });
 
     // PopUp Effect
 
@@ -131,7 +131,7 @@ $(document).ready(function () {
             title: 'Hello World!'
         });
     }
-    
+
 
 
 });
