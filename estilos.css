@@ -128,3 +128,27 @@ li img:hover {
 .carousel-caption{
 	font-variant-caps: all-petite-caps;
 }
+
+.logoCards{
+	position: relative;
+	height: 36%;
+}
+
+.logoCardPosition{
+	height: 100%;
+	display: flex;
+}
+
+.logoCardPosition img{
+	margin: auto;
+}
+.bootomContact{
+	position: absolute;
+	bottom: 10px;
+
+	
+}
+
+.team-member{
+	position: relative;
+}

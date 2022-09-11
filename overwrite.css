@@ -1,0 +1,17 @@
+:root {
+    --bs-primary: #0166fe;
+    --bs-secondary: #dcdcdc;
+    --bs-success: #198754;
+    --bs-info: #0dcaf0;
+    --bs-warning: #ffc107;
+    --bs-danger: #dc3545;
+    --bs-light: #f8f9fa;
+    --bs-dark: #212529;
+    --thaiNewCarH: 50vh;
+
+}
+
+.accordion-flush .accordion-item .accordion-button{
+    text-transform: uppercase !important ;
+    font-size: medium;
+}
