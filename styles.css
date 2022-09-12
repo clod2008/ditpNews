@@ -25,10 +25,6 @@ nav a{
     transition: all 0.5s;
 }
 
-#mobileMenu{
-    padding: 2em;
-    margin-top: 2em;
-}
 
 .nav-item img:hover {
     filter: none;
@@ -92,6 +88,11 @@ nav a{
 }
 
 @media screen and (max-width: 576px ) {
+
+    #mobileMenu {
+            padding: 2em;
+            margin-top: 2em;
+        }
     
     #hero h1 {
         color: aliceblue;
