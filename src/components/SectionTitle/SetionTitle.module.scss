@@ -1,0 +1,19 @@
+$margin: 50px;
+
+.title{
+    // height: 120px;
+    h2{
+        margin-top: $margin;
+        // padding-bottom: 2em;
+    }
+}
+.headerLine{
+    text-align: center;
+    h5{
+        font-size: 18px;
+        font-weight: 200;
+    }
+    :last-child{
+        margin-bottom: $margin;
+    }
+}
