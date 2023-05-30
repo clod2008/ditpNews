@@ -29,6 +29,7 @@ export const Credenciales = () => {
     <>
       <div style={{ height: '1500px', marginTop: '800px'}}>credenciales
         <LottieScroll />
+        <h1>Cred</h1>
       </div>
     </>
   )
