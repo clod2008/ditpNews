@@ -358,13 +358,13 @@ const thaiDelegationList2 =[
         logo: smileHart,
         url: 'https://smileheart.co.th/'
     },
-    { 
-        sector: `${rubros.foodAndBeverage.en}`,
-        sectorEs: `${rubros.foodAndBeverage.es}`,
-        brand: ['Life Coffee'],
-        logo: vegaNatural,
-        url: 'http://www.vega-natural.com/'
-    },
+    // { 
+    //     sector: `${rubros.foodAndBeverage.en}`,
+    //     sectorEs: `${rubros.foodAndBeverage.es}`,
+    //     brand: ['Life Coffee'],
+    //     logo: vegaNatural,
+    //     url: 'http://www.vega-natural.com/'
+    // },
     { 
         sector: `${rubros.foodAndBeverage.en}`,
         sectorEs: `${rubros.foodAndBeverage.es}`,
