@@ -1,10 +1,6 @@
 import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
 
-import { aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy } from "../assets"
-import { plolawat } from "../assets"
-import { solex } from "../assets"
-import { muangthong } from "../assets"
-import { tcp } from "../assets"
+import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy } from "../assets"
 
 const paths ={
     home: `/`,
@@ -21,8 +17,8 @@ const navBarData =[
         link: `${paths.home}`,
     },
     {
-        text: `Business Wheel`,
-        textEs: `Rueda de Negocios`,
+        text: `Business Matching`,
+        textEs: `Búsqueda de negocios`,
         link: `${paths.bussinesWeel}`,
     },
 ]
@@ -409,7 +405,7 @@ const thaiDelegationList2 =[
     },
     //End of Food
 ]
-// Fon Business Wheel
+// Fin Business Wheel
 export{
     paths,
     navBarData,
