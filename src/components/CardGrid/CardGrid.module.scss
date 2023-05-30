@@ -1,0 +1,33 @@
+.cardGrid{
+    padding-bottom: 20px;
+
+    li{
+        list-style: none;
+    }
+
+}
+.accordionBody{
+    
+    svg{
+        margin-right: 0.5em;
+    }
+}
+.socialIcons{
+
+    div{
+        text-align: center;
+        padding: 10px;
+        a{
+            // color: red;
+        }   
+    }
+}
+
+.accordionHeader{
+    button{
+        font-size: 12px;
+        text-transform: uppercase;
+        // background-color: aquamarine;
+
+    }
+}
