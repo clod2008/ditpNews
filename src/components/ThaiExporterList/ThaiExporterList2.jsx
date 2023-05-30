@@ -10,7 +10,7 @@ import { logoBM } from "../../assets";
 
 import styles from './ThaiExporterList2.module.scss'
 
-export const ThaiExporterList2 = ({list}) => {
+export const ThaiExporterList2 = ({list, initialBtn=0}) => {
 
     //reducer
     const sectors = list.reduce((acumulador, valorActual) => {
@@ -34,7 +34,7 @@ export const ThaiExporterList2 = ({list}) => {
     };
     
     useEffect(() => {
-        filtrarPorSector(list, sectors[0].sector);
+        filtrarPorSector(list, sectors[initialBtn].sector);
     }, []);
    
     const handleClick = (e)=>{
@@ -62,7 +62,7 @@ export const ThaiExporterList2 = ({list}) => {
                 </Row>
                 <Row>
                     <>
-                        <ToggleButtonGroup type="radio" name="options" defaultValue={sectors[0].sector} className='mb-3'>
+                        <ToggleButtonGroup type="radio" name="options" defaultValue={sectors[initialBtn].sector} className='mb-3'>
                             {
                                 Array.from(sectors).map((data, id)=>(
                                 

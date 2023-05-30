@@ -24,7 +24,7 @@ export const BussinesWeel = () => {
         </Container>
       </Row>
       <HeaderText text={businessWheelHeaderText} />
-      <ThaiExporterList2 list={thaiDelegationList2}/>
+      <ThaiExporterList2 list={thaiDelegationList2} initialBtn={0}/>
     </>
   )
 }

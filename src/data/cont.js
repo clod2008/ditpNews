@@ -5,7 +5,10 @@ import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJur
 const paths ={
     home: `/`,
     bussinesWeel: `business`,    
-    credentials: `credentials`,    
+    credentials: `credentials`,
+    foodPage: `food`,
+    constructionPage: `construction`,
+    autoPartsPage: `autoparts`,  
 }
 
 // Home Page

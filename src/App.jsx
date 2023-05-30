@@ -8,6 +8,9 @@ import { ditpIsoLogo } from './assets';
 import { Container, Row } from 'react-bootstrap';
 import { FooterPage } from './components/Footer/Footer';
 import { Credenciales } from './pages/Credenciales';
+import { AutoPartsPage } from './pages/AutoPartsPage';
+import { FoodPage } from './pages/FoodPage';
+import { ConstructionPage } from './pages/ConstructionPage';
 
 
 
@@ -23,6 +26,9 @@ function App() {
         <Route path={paths.home} element={<Home />}/>
         <Route path={paths.bussinesWeel} element={<BussinesWeel />} />
         <Route path={paths.credentials} element={<Credenciales />} />
+        <Route path={paths.autoPartsPage} element={<AutoPartsPage />} />
+        <Route path={paths.foodPage} element={<FoodPage />} />
+        <Route path={paths.constructionPage} element={<ConstructionPage />} />
       </Routes>
       <FooterPage/>
     </Container>
