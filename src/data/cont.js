@@ -8,7 +8,8 @@ const paths ={
     credentials: `credentials`,
     foodPage: `food`,
     constructionPage: `construction`,
-    autoPartsPage: `autoparts`,  
+    autoPartsPage: `autoparts`,
+    heroVideoPage: `herovideo` 
 }
 
 // Home Page

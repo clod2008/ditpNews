@@ -11,6 +11,7 @@ import { Credenciales } from './pages/Credenciales';
 import { AutoPartsPage } from './pages/AutoPartsPage';
 import { FoodPage } from './pages/FoodPage';
 import { ConstructionPage } from './pages/ConstructionPage';
+import { HeroVideoPage } from './pages/HeroVideoPage';
 
 
 
@@ -29,6 +30,7 @@ function App() {
         <Route path={paths.autoPartsPage} element={<AutoPartsPage />} />
         <Route path={paths.foodPage} element={<FoodPage />} />
         <Route path={paths.constructionPage} element={<ConstructionPage />} />
+        <Route path={paths.heroVideoPage} element={<HeroVideoPage />} />
       </Routes>
       <FooterPage/>
     </Container>
