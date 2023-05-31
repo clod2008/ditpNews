@@ -1,6 +1,6 @@
 import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
 
-import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy } from "../assets"
+import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts } from "../assets"
 
 const paths ={
     home: `/`,
@@ -290,6 +290,13 @@ const thaiDelegationList2 =[
         brand: ['KAWAMA'],
         logo: plolawat,
         url: 'https://www.polawatengine.co.th'
+    },
+    { 
+        sector: `${rubros.autoParts.en}`,
+        sectorEs: `${rubros.autoParts.es}`,
+        brand: ['PC'],
+        logo: pcProducts,
+        url: 'https://www.pcproductsinter.com'
     },
     { 
         sector: `${rubros.autoParts.en}`,

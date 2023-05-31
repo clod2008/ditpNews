@@ -36,5 +36,6 @@ export { default as logoKhaosan } from './img/logoKhaosan.png';
     export { default as ctyFarm  } from './img/delgationBrand/delegationBrand__0017_CityFarm.webp';
     export { default as monty  } from './img/delgationBrand/delegationBrand__0018_Monty.webp';
     export { default as heirtage } from './img/delgationBrand/delegationBrand__0019_Heiritage.webp';
+    export { default as pcProducts } from './img/delgationBrand/delegationBrand__0020_PC_product.webp';
 
 
