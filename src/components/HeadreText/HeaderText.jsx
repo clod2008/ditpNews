@@ -3,17 +3,33 @@ import { LangSelector } from "../LangSelector"
 
 import styles from './HeaderText.module.scss'
 import { EventDate } from "../EventDate/EventDate"
+import { useEffect, useRef, useState } from "react"
 
 export const HeaderText = ({text}) => {
 
+
+
+    const [divH, setDivH] = useState(300);
+
     const formAddress = 'https://docs.google.com/forms/d/e/1FAIpQLSd6K-h0KiE5D3-5dQKYNL_Vifd9PAu40QhhYZXKkUkpWq4RMg/viewform?embedded=true'
-  return (
+  
+    const divRef= useRef(null);
+    
+    useEffect(()=>{
+        setDivH(divRef.current.offsetHeight)
+    }, [])
+    
+
+    console.log(divH)
+
+    return (
     <Row className={styles.wrapper}>
         <Container fluid>
             <Container>
-                <Row
+                <Row className="h-100"
                 >
-                    <Col md={6} className={`${styles.header}`}>
+                    <Col ref={divRef} id="colIz" md={6} className={`${styles.header} h-100`}
+                    >
                         <Col>
                             <h1 className="mt-5">
                                 <LangSelector enText={text.en} esText={text.es}/>
@@ -21,14 +37,16 @@ export const HeaderText = ({text}) => {
                             <EventDate />
                         </Col>
                     </Col>
-                    <Col  md={6} className={`h-100 `}>
+                    <Col  md={6} className={`${styles.formWarper} h-100`}
+                        
+                    >
                         <iframe
 
                             className={`mt-5 mb-5 ${styles.formStyle}`}
                             title="Gform"
                             src={formAddress}
                             width="100%" 
-                            height="500px" 
+                            height={`${divH -80}px`}
                             frameborder="0" 
                             marginheight="0" 
                             marginwidth="0">

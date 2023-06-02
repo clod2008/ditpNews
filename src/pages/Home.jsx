@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { HeroImg } from '../components/HeroImg/HeroImg'
 import { carouselHome, distThaiProducts, textHero } from '../data/cont'
 import { CarouselFullWith } from '../components/CarouselFullWith/CarouselFullWith'
