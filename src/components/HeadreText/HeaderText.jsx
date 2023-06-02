@@ -38,7 +38,6 @@ export const HeaderText = ({text}) => {
                         </Col>
                     </Col>
                     <Col  md={6} className={`${styles.formWarper} h-100`}
-                        
                     >
                         <iframe
 
@@ -46,7 +45,7 @@ export const HeaderText = ({text}) => {
                             title="Gform"
                             src={formAddress}
                             width="100%" 
-                            height={`${divH -80}px`}
+                            height={`${divH}px`}
                             frameborder="0" 
                             marginheight="0" 
                             marginwidth="0">
