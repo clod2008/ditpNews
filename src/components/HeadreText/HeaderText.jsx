@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button } from "react-bootstrap"
+import { Container, Row, Col} from "react-bootstrap"
 import { LangSelector } from "../LangSelector"
 
 import styles from './HeaderText.module.scss'

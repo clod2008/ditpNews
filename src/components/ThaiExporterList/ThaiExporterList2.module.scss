@@ -8,6 +8,11 @@
 
 .selector{
     height: 3em;
+    @media (max-width: 575.98px) { 
+        height: 5em;
+        display: flex;
+        align-items: center;
+     }
 }
 
 .cardStyle{
