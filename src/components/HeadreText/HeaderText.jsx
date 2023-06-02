@@ -2,6 +2,7 @@ import { Container, Row, Col, Button } from "react-bootstrap"
 import { LangSelector } from "../LangSelector"
 
 import styles from './HeaderText.module.scss'
+import { EventDate } from "../EventDate/EventDate"
 
 export const HeaderText = ({text}) => {
 
@@ -17,6 +18,7 @@ export const HeaderText = ({text}) => {
                             <h1 className="mt-5">
                                 <LangSelector enText={text.en} esText={text.es}/>
                             </h1>
+                            <EventDate />
                         </Col>
                     </Col>
                     <Col  md={6} className={`h-100 `}>

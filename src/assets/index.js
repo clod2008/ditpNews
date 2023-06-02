@@ -15,6 +15,7 @@ export { default as logoAsiaOriental } from './img/logoAsia.png';
 export { default as logoKoLanta } from './img/logoKhoLanta.png';
 export { default as logoNewGarden } from './img/logoNewGarden.png';
 export { default as logoKhaosan } from './img/logoKhaosan.png';
+export { default as logoSheraton } from './img/si_logo_L.webp';
     // DelegationBrand
     export { default as tcp } from './img/delgationBrand/delegationBrand__0000_tcp.webp';
     export { default as solex } from './img/delgationBrand/delegationBrand__0001_solex.webp';
@@ -37,5 +38,6 @@ export { default as logoKhaosan } from './img/logoKhaosan.png';
     export { default as monty  } from './img/delgationBrand/delegationBrand__0018_Monty.webp';
     export { default as heirtage } from './img/delgationBrand/delegationBrand__0019_Heiritage.webp';
     export { default as pcProducts } from './img/delgationBrand/delegationBrand__0020_PC_product.webp';
+    export { default as ayPOrchard } from './img/delgationBrand/delegationBrand__0021_AyP_Orchard.webp';
 
 

@@ -1,0 +1,27 @@
+.eventDate{
+    margin: 2em 0 2em 0;
+    background-color:white;
+    border-radius: 10px;
+    display: flex;
+    padding: 40px;
+    svg{
+        padding: 20px;
+        // height: 100%;
+    }
+
+    .dateNum{
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        
+        h1{
+            text-align: center;
+        }
+        img{
+            padding-top: 1em;
+            width: 100%;
+        }
+    }
+
+
+}

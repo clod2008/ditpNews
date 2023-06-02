@@ -1,6 +1,6 @@
 import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
 
-import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts } from "../assets"
+import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard } from "../assets"
 
 const paths ={
     home: `/`,
@@ -411,7 +411,7 @@ const thaiDelegationList2 =[
         sector: `${rubros.foodAndBeverage.en}`,
         sectorEs: `${rubros.foodAndBeverage.es}`,
         brand: ['A&P Orchard Since 1959'],
-        logo: noPic450x450,
+        logo: ayPOrchard,
         url: 'https://www.aporchard.com'
     },
     //End of Food
