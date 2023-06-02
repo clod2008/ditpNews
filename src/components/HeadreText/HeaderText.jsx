@@ -45,7 +45,7 @@ export const HeaderText = ({text}) => {
                             title="Gform"
                             src={formAddress}
                             width="100%" 
-                            height={`${divH}px`}
+                            height={`${divH + 10}px`}
                             frameborder="0" 
                             marginheight="0" 
                             marginwidth="0">
