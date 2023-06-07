@@ -39,5 +39,6 @@ export { default as logoSheraton } from './img/si_logo_L.webp';
     export { default as heirtage } from './img/delgationBrand/delegationBrand__0019_Heiritage.webp';
     export { default as pcProducts } from './img/delgationBrand/delegationBrand__0020_PC_product.webp';
     export { default as ayPOrchard } from './img/delgationBrand/delegationBrand__0021_AyP_Orchard.webp';
+    export { default as siamProduce } from './img/delgationBrand/delegationBrand__0022_SiamProduce.webp';
 
 

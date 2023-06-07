@@ -4,7 +4,7 @@ export const LangContext = createContext()
 
 export function LangContextProvider( {children} ){
 
-    const [langSelected, setLangSelected] = useState('en')
+    const [langSelected, setLangSelected] = useState('es')
 
     const lang = {langSelected, setLangSelected}
 

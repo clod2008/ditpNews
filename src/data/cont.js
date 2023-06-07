@@ -1,6 +1,6 @@
 import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
 
-import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard } from "../assets"
+import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard, siamProduce } from "../assets"
 
 const paths ={
     home: `/`,
@@ -379,13 +379,13 @@ const thaiDelegationList2 =[
         logo: fooSpacialize,
         url: 'http://www.foodspecialize.com/'
     },
-    { 
-        sector: `${rubros.foodAndBeverage.en}`,
-        sectorEs: `${rubros.foodAndBeverage.es}`,
-        brand: ['ASANEE', 'IYORY',' ASANEE FLOWER',' MAE - U - BON'],
-        logo: goldenGrain,
-        url: 'https://www.goldengrain.co.th/EN/home.html'
-    },
+    // { 
+    //     sector: `${rubros.foodAndBeverage.en}`,
+    //     sectorEs: `${rubros.foodAndBeverage.es}`,
+    //     brand: ['ASANEE', 'IYORY',' ASANEE FLOWER',' MAE - U - BON'],
+    //     logo: goldenGrain,
+    //     url: 'https://www.goldengrain.co.th/EN/home.html'
+    // },
     { 
         sector: `${rubros.foodAndBeverage.en}`,
         sectorEs: `${rubros.foodAndBeverage.es}`,
@@ -406,6 +406,13 @@ const thaiDelegationList2 =[
         brand: ['A&P Orchard Since 1959'],
         logo: ayPOrchard,
         url: 'https://www.aporchard.com'
+    },
+    {
+        sector: `${rubros.foodAndBeverage.en}`,
+        sectorEs: `${rubros.foodAndBeverage.es}`,
+        brand: ['SB SIAM PRODUCE'],
+        logo: siamProduce,
+        url: 'https://www.sbsiamproduce.co.th'
     },
     {
         sector: `${rubros.foodAndBeverage.en}`,
