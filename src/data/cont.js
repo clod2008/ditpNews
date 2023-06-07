@@ -358,13 +358,13 @@ const thaiDelegationList2 =[
     //     logo: ctyFarm,
     //     url: 'https://cityfarminterfood.com/2022/'
     // },
-    { 
-        sector: `${rubros.foodAndBeverage.en}`,
-        sectorEs: `${rubros.foodAndBeverage.es}`,
-        brand: ['A - ROY MARK', 'SEA SMILE', 'LAY - YIM AND UMI AJI'],
-        logo: smileHart,
-        url: 'https://smileheart.co.th/'
-    },
+    // { 
+    //     sector: `${rubros.foodAndBeverage.en}`,
+    //     sectorEs: `${rubros.foodAndBeverage.es}`,
+    //     brand: ['A - ROY MARK', 'SEA SMILE', 'LAY - YIM AND UMI AJI'],
+    //     logo: smileHart,
+    //     url: 'https://smileheart.co.th/'
+    // },
     // { 
     //     sector: `${rubros.foodAndBeverage.en}`,
     //     sectorEs: `${rubros.foodAndBeverage.es}`,
@@ -379,13 +379,6 @@ const thaiDelegationList2 =[
         logo: fooSpacialize,
         url: 'http://www.foodspecialize.com/'
     },
-    // { 
-    //     sector: `${rubros.foodAndBeverage.en}`,
-    //     sectorEs: `${rubros.foodAndBeverage.es}`,
-    //     brand: ['MAMA'],
-    //     logo: thaiPresidentFood,
-    //     url: 'https://www.mama.co.th/en/index.php'
-    // },
     { 
         sector: `${rubros.foodAndBeverage.en}`,
         sectorEs: `${rubros.foodAndBeverage.es}`,
@@ -413,6 +406,13 @@ const thaiDelegationList2 =[
         brand: ['A&P Orchard Since 1959'],
         logo: ayPOrchard,
         url: 'https://www.aporchard.com'
+    },
+    {
+        sector: `${rubros.foodAndBeverage.en}`,
+        sectorEs: `${rubros.foodAndBeverage.es}`,
+        brand: ['MAMA'],
+        logo: thaiPresidentFood,
+        url: 'https://www.mama.co.th'
     },
     //End of Food
 ]
