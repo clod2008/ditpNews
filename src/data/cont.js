@@ -407,13 +407,13 @@ const thaiDelegationList2 =[
         logo: ayPOrchard,
         url: 'https://www.aporchard.com'
     },
-    {
-        sector: `${rubros.foodAndBeverage.en}`,
-        sectorEs: `${rubros.foodAndBeverage.es}`,
-        brand: ['SB SIAM PRODUCE'],
-        logo: siamProduce,
-        url: 'https://www.sbsiamproduce.co.th'
-    },
+    // {
+    //     sector: `${rubros.foodAndBeverage.en}`,
+    //     sectorEs: `${rubros.foodAndBeverage.es}`,
+    //     brand: ['SB SIAM PRODUCE'],
+    //     logo: siamProduce,
+    //     url: 'https://www.sbsiamproduce.co.th'
+    // },
     {
         sector: `${rubros.foodAndBeverage.en}`,
         sectorEs: `${rubros.foodAndBeverage.es}`,
