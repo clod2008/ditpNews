@@ -6,15 +6,15 @@ export { default as esFlag } from './svg/spanish.svg';
 export { default as logoBM } from './svg/logoBM.svg';
 
 // Img
-export { default as logoTTC } from './img/new-logo-2.png';
+export { default as logoTTC } from './img/new-logo-2.webp';
 export { default as noPic450x450 } from './img/noPicture450x450.webp';
-export { default as bannerHomeBM } from './img/thaiArg450Banner.png';
-export { default as bannerHomeTradeMinister } from './img/minister450Banner.png';
-export { default as bannerHomeJurin } from './img/news02.jpg';
-export { default as logoAsiaOriental } from './img/logoAsia.png';
-export { default as logoKoLanta } from './img/logoKhoLanta.png';
-export { default as logoNewGarden } from './img/logoNewGarden.png';
-export { default as logoKhaosan } from './img/logoKhaosan.png';
+export { default as bannerHomeBM } from './img/thaiArg450Banner.webp';
+export { default as bannerHomeTradeMinister } from './img/minister450Banner.webp';
+export { default as bannerHomeJurin } from './img/news02.webp';
+export { default as logoAsiaOriental } from './img/logoAsia.webp';
+export { default as logoKoLanta } from './img/logoKhoLanta.webp';
+export { default as logoNewGarden } from './img/logoNewGarden.webp';
+export { default as logoKhaosan } from './img/logoKhaosan.webp';
 export { default as logoSheraton } from './img/si_logo_L.webp';
     // DelegationBrand
     export { default as tcp } from './img/delgationBrand/delegationBrand__0000_tcp.webp';
