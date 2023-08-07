@@ -14,7 +14,7 @@ export const CardGrid = ({data, rows: rowsMd=2}) => {
         {Array.from(data).map((data, id) => (
             <Col key={id} >
             <Card className='h-100'>
-                <Card.Img variant="top" src={data.img} />
+                <Card.Img variant="top" src={data.img} alt={data.title} />
                 <Card.Body>
                     <Card.Title>
                         <h5>
@@ -61,7 +61,7 @@ export const CardGrid = ({data, rows: rowsMd=2}) => {
                                     ):''}
                                     <br/>
                                     {item.url ?(
-                                        <a href={item.url} target="_blank" rel="noreferrer"><LangSelector enText={'Learn More ==>'} esText={'Saber Más ==>'}/></a>
+                                        <a href={item.url} target="_blank" rel="noreferrer" aria-label={item.name}><LangSelector enText={'Learn More ==>'} esText={'Saber Más ==>'}/></a>
                                     ):''}
                                 </Accordion.Body>
                             </Accordion.Item>
@@ -73,7 +73,7 @@ export const CardGrid = ({data, rows: rowsMd=2}) => {
                     {
                         Array.from(data.socialMedia).map((item, id) =>(
                             <Col key={id}>
-                                <a href={item.url} target="_blanck">
+                                <a href={item.url} target="_blanck" aria-label={item.net}>
                                     <FontAwesomeIcon icon={item.faIcon} size='2xl' />
                                 </a>
                             </Col>
