@@ -15,9 +15,9 @@ export const SectionTitle = ({titleEn='', titleEs='', subTitleEn, subTitleEs}) =
                     </h2>
                     {
                         subTitleEn || subTitleEs ? (
-                            <h5>
+                            <p>
                                 <LangSelector enText={subTitleEn} esText={subTitleEs} />
-                            </h5>
+                            </p>
                         ):''
                     }
                 </Col>
