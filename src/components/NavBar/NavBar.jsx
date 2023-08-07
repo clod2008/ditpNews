@@ -19,7 +19,7 @@ export const NavBar = ( {navData, brand} ) => {
                 <Row className='w-100 justify-content-between'>
                     <Col md={2}>
                         <NavLink to={'/'}>
-                            <Image src={brand} className='img-fluid' />
+                            <Image src={brand} className='img-fluid' alt='DITP logo'/>
                         </NavLink>
                     </Col>
                     <Col>

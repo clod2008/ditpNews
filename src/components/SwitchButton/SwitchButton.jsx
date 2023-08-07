@@ -23,14 +23,14 @@ export const SwitchButton = ({label}) => {
             disabled
             style={{filter:' grayscale(100%)'}}
           >
-            <Image src={enFlag} />
+            <Image src={enFlag} alt='English Flag' />
 
           </Col> ):
           <Col
             className={styles.langFlag}
             onClick={()=>{setLangSelected('en')}}
           >
-            <Image src={enFlag} />
+            <Image src={enFlag} alt='English Flag'/>
 
           </Col>
         }
@@ -41,13 +41,13 @@ export const SwitchButton = ({label}) => {
           disabled
           style={{filter:' grayscale(100%)'}}
           >
-            <Image src={esFlag} />
+            <Image src={esFlag} alt='Bandera Española' />
           </Col>):
           <Col
             className={styles.langFlag}
             onClick={()=>setLangSelected('es')}
           >
-          <Image src={esFlag} />
+          <Image src={esFlag} alt='Bandera Española'/>
 
           </Col>  
         }
