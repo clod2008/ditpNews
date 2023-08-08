@@ -13,8 +13,8 @@ export const FooterPage = () => {
       <Container>
         <Row className={`${styles.logo} h-100`}>
           <Col md={3} className='text-center'>
-            <a href='https://www.ditpthinkthailand.com/' target='_blanck' alt='DITP logo - Think Thailand'>
-            <Image src={logoTTC} fluid />
+            <a href='https://www.ditpthinkthailand.com/' target='_blanck' aria-label='Department of International Trade Promotion, Ministry of Commerce, Thailand'>
+            <Image src={logoTTC} fluid  alt='DITP logo - Think Thailand'/>
             </a>
             <Col className={styles.poweredBy}>
               <a href='http://www.apsis.com.ar' target='_blank' rel='noreferrer' aria-label='APSIS Comunicación y diseño'>

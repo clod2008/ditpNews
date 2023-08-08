@@ -17,14 +17,14 @@ export const CardGrid = ({data, rows: rowsMd=2}) => {
                 <Card.Img variant="top" src={data.img} alt={data.title} />
                 <Card.Body>
                     <Card.Title>
-                        <h5>
+                        <h2>
                             <LangSelector enText={data.title} esText={data.titleEs}/>
-                        </h5>
+                        </h2>
                     </Card.Title>
                     <Card.Title>
-                        <h6>
+                        <h3>
                             <LangSelector enText={data.subTitle} esText={data.subTitleEs} />
-                        </h6>
+                        </h3>
                     </Card.Title>
                     <hr/>
                     <Card.Text>
