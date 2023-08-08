@@ -34,9 +34,9 @@ export const CardGrid = ({data, rows: rowsMd=2}) => {
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                    <h6>
+                    <h4>
                         <LangSelector enText='Contacts' esText='Contáctos' />
-                    </h6>
+                    </h4>
                     {Array.from(data.contact).map((item, id) =>(
                         <Accordion key={id}>
                             <Accordion.Item eventKey={item.name}>
