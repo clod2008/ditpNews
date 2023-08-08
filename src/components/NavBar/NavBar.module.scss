@@ -1,12 +1,9 @@
 .mainNavBar{
-    height: 100px;
-    display: flex;
-    align-content: center;
+      
     
 }
 
-
-.navItem{
+.customNavLink{
     a{
         color: black;
         text-decoration: none;
@@ -18,7 +15,23 @@
     }
     
 }
+
+.navActive{
+    color: darkgray !important;
+    
+}
+
+
+
 .navLink{
     display: flex;
     justify-content: end;
+}
+
+@media (max-width: 575.98px) { 
+
+    .customOffCanvas{
+        flex-direction: column-reverse;
+    }
+
 }

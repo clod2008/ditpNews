@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { Home } from './pages/Home';
 import { BussinesWeel } from './pages/BussinesWeel';
@@ -22,7 +22,7 @@ function App() {
   
   return (
     <Container fluid>
-      <NavBar navData={navBarData} brand={ditpIsoLogo} />
+      <NavBar navData={navBarData} brand={ditpIsoLogo} expand={'md'} />
       <Routes>
         <Route path={paths.home} element={<Home />}/>
         <Route path={paths.bussinesWeel} element={<BussinesWeel />} />
@@ -31,6 +31,8 @@ function App() {
         <Route path={paths.foodPage} element={<FoodPage />} />
         <Route path={paths.constructionPage} element={<ConstructionPage />} />
         <Route path={paths.heroVideoPage} element={<HeroVideoPage />} />
+
+        <Route path="/*" element={ <Navigate  to={paths.home} replace />} />
       </Routes>
       <FooterPage/>
     </Container>

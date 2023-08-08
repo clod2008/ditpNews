@@ -18,7 +18,7 @@ export const SwitchButton = ({label}) => {
       >
         {
           langSelected === 'en'?(
-          <Col
+          <Col xs={2}
             className={styles.langFlag}
             disabled
             style={{filter:' grayscale(100%)'}}
@@ -26,7 +26,7 @@ export const SwitchButton = ({label}) => {
             <Image src={enFlag} alt='English Flag' />
 
           </Col> ):
-          <Col
+          <Col xs={2} 
             className={styles.langFlag}
             onClick={()=>{setLangSelected('en')}}
           >
@@ -36,14 +36,14 @@ export const SwitchButton = ({label}) => {
         }
         {
           langSelected === 'es'?(
-          <Col
+          <Col xs={2}
           className={styles.langFlag}
           disabled
           style={{filter:' grayscale(100%)'}}
           >
             <Image src={esFlag} alt='Bandera Española' />
           </Col>):
-          <Col
+          <Col xs={2}
             className={styles.langFlag}
             onClick={()=>setLangSelected('es')}
           >
@@ -51,6 +51,7 @@ export const SwitchButton = ({label}) => {
 
           </Col>  
         }
+
       </Row>
     </>
   )

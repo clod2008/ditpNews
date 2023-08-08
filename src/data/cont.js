@@ -3,7 +3,7 @@ import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faWhatsa
 import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard, siamProduce } from "../assets"
 
 const paths ={
-    home: `/`,
+    home: `/home`,
     bussinesWeel: `business`,    
     credentials: `credentials`,
     foodPage: `food`,
