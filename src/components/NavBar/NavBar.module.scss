@@ -1,7 +1,11 @@
 .mainNavBar{
-      
-    
+    span{
+        img{
+
+        }
+    }
 }
+
 
 .customNavLink{
     a{
@@ -26,6 +30,13 @@
 .navLink{
     display: flex;
     justify-content: end;
+}
+
+.customBrand{
+    img{
+        height: 35px;
+        width: auto;
+    }
 }
 
 @media (max-width: 575.98px) { 
