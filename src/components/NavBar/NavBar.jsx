@@ -17,7 +17,7 @@ export const NavBar = ( {navData, brand, expand} ) => {
     <Navbar key={expand} expand={expand} className={`bg-body-tertiary mb-3 ${styles.mainNavBar}`}>
       <Container fluid>
         <NavLink to={'/'}>
-            <Navbar.Brand className={styles.customBrand}><Image src={brand} className='img-fluid' alt='DITP logo'/></Navbar.Brand>
+            <Navbar.Brand className={styles.customBrand}><Image src={brand} alt='DITP logo'/></Navbar.Brand>
         </NavLink>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
         <Navbar.Offcanvas
@@ -28,7 +28,7 @@ export const NavBar = ( {navData, brand, expand} ) => {
         >
           <Offcanvas.Header closeButton>
             <Offcanvas.Title className={styles.customBrand} id={`offcanvasNavbarLabel-expand-${expand}`}>
-              <Image src={brand} className='img-fluid' alt='DITP logo' />
+              <Image src={brand} alt='DITP logo' />
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
