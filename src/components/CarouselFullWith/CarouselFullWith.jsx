@@ -6,74 +6,98 @@ import { LangSelector } from '../LangSelector'
 
 import styles from './CarouselFullWith.module.scss'
 import { Link } from 'react-router-dom'
+import { bannerHomeBM, carouselBMvideo, carouselBMvideo500x500 } from '../../assets'
+import { isMobile } from 'react-device-detect'
+
 
 
 export const CarouselFullWith = ({data}) => {
     
     const [index, setIndex] = useState(0);
 
-    const handleSelect = (selectedIndex, e) => {
-        setIndex(selectedIndex);
-        }
+    const handleSelect = (selectedIndex, ) => {
+        setIndex(selectedIndex)
+    }
 
   return (
     <Row className={styles.carouselFullWith}>
-        <Carousel activeIndex={index} onSelect={handleSelect}>
-            {data.map((item, id) =>
-                
-                <Carousel.Item key={id}>
+        <Carousel activeIndex={index} onSelect={handleSelect}
+            className={styles.setInner}
+        >
+            {data.map(({text, textEs , img, interval= 2000, cta}, id) =>
+                <Carousel.Item key={id} interval={interval}>
                     <Container>
                         <Row>
                             <Col md={3} >
                                 <Image
                                     fluid
-                                    src={item.img}
-                                    alt={item.text.title}
+                                    src={img}
+                                    alt={text.title}
                                 />
                             </Col>
                             <Col className={styles.text}>
                                 <Col>
                                     {
                                         <h2>
-                                            <LangSelector enText={item.text.body} esText={item.textEs.body} />
+                                            <LangSelector enText={text.body} esText={textEs.body} />
                                         </h2>
                                     }
                                     <hr />
                                     {
-                                        item.cta ? (
+                                        cta ? (
                                             <Row className='justify-content-center'>
                                                 <Col md={3} className='d-grid'>
                                                     {
-                                                        item.cta.to ?(
+                                                        cta.to ?(
                                                         <Link
-                                                            to={item.cta.to}
+                                                            to={cta.to}
                                                         >
                                                             <Button>
-                                                                <LangSelector enText={item.cta.text} esText={item.cta.textEs}/>
+                                                                <LangSelector enText={cta.text} esText={cta.textEs}/>
                                                             </Button>
                                                         </Link>
 
                                                         ) : (
-                                                            <a href={item.cta.url} target='_blank' rel='noreferrer'>
+                                                            <a href={cta.url} target='_blank' rel='noreferrer'>
                                                             <Button>
-                                                                <LangSelector enText={item.cta.text} esText={item.cta.textEs}/>
+                                                                <LangSelector enText={cta.text} esText={cta.textEs}/>
                                                             </Button>
                                                             </a>
                                                         )
                                                     }
 
                                                 </Col>
-                                            </Row>
-                                            
-                                            ): ''
+                                            </Row>    
+                                        ): ''
                                     }
                                 </Col>
                             </Col>
                         </Row>
                     </Container>
                 </Carousel.Item>
-
             )}
+                <Carousel.Item interval={15000}> 
+                    <Container>
+                        <Row>
+                            <Col md={3}>
+                                    <Image fluid src={bannerHomeBM}/>
+                            </Col>
+                            <Col>
+                                {isMobile?(
+                                    <video autoPlay muted loop
+                                        src={carouselBMvideo500x500}>
+                                    </video>
+
+                                ):(
+                                    <video autoPlay muted loop
+                                        src={carouselBMvideo}>
+                                    </video>
+                                )}
+
+                            </Col>
+                        </Row>
+                    </Container>
+                </Carousel.Item>
         </Carousel>
     </Row>
   )

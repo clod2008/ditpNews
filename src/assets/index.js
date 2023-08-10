@@ -40,5 +40,8 @@ export { default as logoSheraton } from './img/si_logo_L.webp';
     export { default as pcProducts } from './img/delgationBrand/delegationBrand__0020_PC_product.webp';
     export { default as ayPOrchard } from './img/delgationBrand/delegationBrand__0021_AyP_Orchard.webp';
     export { default as siamProduce } from './img/delgationBrand/delegationBrand__0022_SiamProduce.webp';
-
-
+    
+//Videos
+export { default as carouselBMvideo } from './videos/ReseumenBMwFormat.webm';
+export { default as carouselBMvideo500x500 } from './videos/ResumenBM500x500.webm';
+    

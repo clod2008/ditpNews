@@ -2,7 +2,10 @@
     background-color: rgb(210, 207, 207);
     padding: 2em;
 
+}
 
+.setInner{
+    height: 312px;
 }
 
 .text{
@@ -22,3 +25,31 @@
     }
 
 }
+
+@media (max-width: 576px) { 
+    .carouselFullWith{
+       video{
+        margin-top: 2em;
+        margin-bottom: 60px;
+        height: 302px;
+        width: 302px;
+       }
+
+    }
+
+    .setInner{
+    height: unset;
+    }    
+    .text{
+        button{
+            margin-bottom: 60px;
+            
+        }
+
+    }
+
+
+
+
+}
+ 

@@ -35,22 +35,22 @@ const textHero=[
 ]
 
 const carouselHome=[
-    {
-        text: {
-            body: `We invite you to our next business roundtable. Expand your network of business contacts and establish successful business relationships with the best suppliers in the market. Register now so you don't miss this unique opportunity.`,
-            title:`The Ministry of Commerce`,
-        },
-        textEs: {
-            body: `Los invitamos a nuestra próxima rueda de negocios. Amplíen su red de contactos comerciales y establezcan relaciones de negocios exitosas con los mejores proveedores del mercado. Regístrense ahora para no perder esta oportunidad única.`,
-            title: `El Ministerio de Comercio`,
-        },
-        img: bannerHomeBM,
-        cta:{
-            to: paths.bussinesWeel,
-            text: `Sign Up`,
-            textEs: `Regístrense`, 
-        }
-    },
+    // {
+    //     text: {
+    //         body: `We invite you to our next business roundtable. Expand your network of business contacts and establish successful business relationships with the best suppliers in the market. Register now so you don't miss this unique opportunity.`,
+    //         title:`The Ministry of Commerce`,
+    //     },
+    //     textEs: {
+    //         body: `Los invitamos a nuestra próxima rueda de negocios. Amplíen su red de contactos comerciales y establezcan relaciones de negocios exitosas con los mejores proveedores del mercado. Regístrense ahora para no perder esta oportunidad única.`,
+    //         title: `El Ministerio de Comercio`,
+    //     },
+    //     img: bannerHomeBM,
+    //     cta:{
+    //         to: paths.bussinesWeel,
+    //         text: `Sign Up`,
+    //         textEs: `Regístrense`, 
+    //     }
+    // },
     {
         text: {
             body: `The Ministry of Commerce builds confidence in the safety of Thai food for buyers and consumers around the world`,
@@ -65,7 +65,8 @@ const carouselHome=[
             url: `https://www.instagram.com/p/CSwnAlxLBwn/`,
             text: `Learn More`,
             textEs: `Saber más`,
-        }
+        },
+        interval: 5000,
     },
     {
         text: {
@@ -82,6 +83,7 @@ const carouselHome=[
             text: `Learn More`,
             textEs: `Saber más`,
         },
+        interval: 5000,
     },
 ]
 
