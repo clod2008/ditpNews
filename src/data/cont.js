@@ -21,8 +21,8 @@ const navBarData =[
         link: `${paths.home}`,
     },
     {
-        text: `Business Matching`,
-        textEs: `Búsqueda de negocios`,
+        text: `Business Matching 2023`,
+        textEs: `Ronda de negocios 2023`,
         link: `${paths.bussinesWeel}`,
     },
 ]
