@@ -61,7 +61,7 @@ export const CardGrid = ({data, rows: rowsMd=2}) => {
                                     ):''}
                                     <br/>
                                     {item.url ?(
-                                        <a href={item.url} target="_blank" rel="noreferrer" aria-label={item.name}><LangSelector enText={'Learn More ==>'} esText={'Saber Más ==>'}/></a>
+                                        <a href={item.url} target="_blank" rel="noreferrer" aria-label={item.name}  className='cardLinkSaberMas'><LangSelector enText={'Learn More ==>'} esText={'Saber Más ==>'}/></a>
                                     ):''}
                                 </Accordion.Body>
                             </Accordion.Item>
