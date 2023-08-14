@@ -1,7 +1,9 @@
 .carouselFullWith{
     background-color: rgb(210, 207, 207);
     padding: 2em;
-
+    video{
+        width: 100%;
+    }
 }
 
 .setInner{
@@ -31,7 +33,6 @@
         height: 85vh; 
        video{
         margin-top: 2em;
-
         height: auto;
         width: 100%;
        }
