@@ -11,7 +11,7 @@ export const HeaderText = ({text}) => {
 
     const [divH, setDivH] = useState(300);
 
-    const formAddress = 'https://docs.google.com/forms/d/e/1FAIpQLSd6K-h0KiE5D3-5dQKYNL_Vifd9PAu40QhhYZXKkUkpWq4RMg/viewform?embedded=true'
+    // const formAddress = 'https://docs.google.com/forms/d/e/1FAIpQLSd6K-h0KiE5D3-5dQKYNL_Vifd9PAu40QhhYZXKkUkpWq4RMg/viewform?embedded=true'
   
     const divRef= useRef(null);
     
@@ -26,18 +26,17 @@ export const HeaderText = ({text}) => {
     <Row className={styles.wrapper}>
         <Container fluid>
             <Container>
-                <Row className="h-100"
-                >
-                    <Col ref={divRef} id="colIz" md={6} className={`${styles.header} h-100`}
+                <Row>
+                    <Col ref={divRef} id="colIz" md={6} className={`${styles.header} h-100 pb-4`}
                     >
-                        <Col>
-                            <h1 className="mt-5">
-                                <LangSelector enText={text.en} esText={text.es}/>
-                            </h1>
-                            <EventDate />
-                        </Col>
+                        <h1 className="mt-5">
+                            <LangSelector enText={text.en} esText={text.es}/>
+                        </h1>
                     </Col>
-                    <Col  md={6} className={`${styles.formWarper} h-100`}
+                    <Col md={6} className={styles.eventDate}>
+                        <EventDate />
+                    </Col>
+                    {/* <Col  md={6} className={`${styles.formWarper} h-100`}
                     >
                         <iframe
 
@@ -51,7 +50,7 @@ export const HeaderText = ({text}) => {
                             marginwidth="0">
                                 Cargando…
                         </iframe>
-                    </Col>
+                    </Col> */}
                 </Row>
             </Container>
         </Container>
