@@ -36,7 +36,7 @@ export const HeaderText = ({text}) => {
                     <Col md={6} className={styles.eventDate}>
                         <EventDate />
                     </Col>
-                    {/* <Col  md={6} className={`${styles.formWarper} h-100`}
+                    {/* <Col  md={6} className={`${styles.formWarper} h-100`} 
                     >
                         <iframe
 
