@@ -22,7 +22,7 @@ export const EventDate = () => {
                     <Row className='justify-content-center'
                     >
                       <Col>
-                        <h1><LangSelector enText={'Jun 29'} esText={' 29 de junio'} /></h1>
+                        <h1><LangSelector enText={'Jun 29 2023'} esText={' 29 de junio 2023'} /></h1>
                       </Col>
                     </Row>
                     <Row className='pt-2 pb-2 justify-content-center'>
