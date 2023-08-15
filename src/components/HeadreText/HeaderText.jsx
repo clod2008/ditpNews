@@ -50,7 +50,7 @@ export const HeaderText = ({text}) => {
                             marginwidth="0">
                                 Cargando…
                         </iframe>
-                    </Col> */}
+                    </Col>  */}
                 </Row>
             </Container>
         </Container>
