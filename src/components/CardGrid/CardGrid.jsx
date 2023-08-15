@@ -28,9 +28,7 @@ export const CardGrid = ({data, rows: rowsMd=2}) => {
                     </Card.Title>
                     <hr/>
                     <Card.Text>
-                        <p>
-                            <LangSelector enText={data.body} esText={data.bodyEs} />
-                        </p>
+                        <LangSelector enText={data.body} esText={data.bodyEs} />
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>

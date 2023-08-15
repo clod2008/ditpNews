@@ -35,18 +35,19 @@ export const NavBar = ( {navData, brand, expand} ) => {
 
             <Nav className={`justify-content-end flex-grow-1 pe-3 ${styles.customOffCanvas}`}>
                 {navData.map((item, id ) => 
-                    <Nav.Link
+                    <div
                         key={id}
                         className={styles.customNavLink}
+                       
                         
                     >
                         <NavLink
                             to={item.link}
-                            className={ ({isActive }) => isActive ? styles.navActive : '' }
+                            className={({isActive }) => isActive ? styles.navActive : '' }
                         >
                             { langSelected ==='en' ? item.text : item.textEs }
                         </NavLink>
-                    </Nav.Link>
+                    </div>
                 )}
                     <Nav.Link >  
                         <SwitchButton label={langSelected} id={'lang'}/>
