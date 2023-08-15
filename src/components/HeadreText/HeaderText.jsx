@@ -36,21 +36,6 @@ export const HeaderText = ({text}) => {
                     <Col md={6} className={styles.eventDate}>
                         <EventDate />
                     </Col>
-                    {/* <Col  md={6} className={`${styles.formWarper} h-100`} 
-                    >
-                        <iframe
-
-                            className={`mt-5 mb-5 ${styles.formStyle}`}
-                            title="Gform"
-                            src={formAddress}
-                            width="100%" 
-                            height={`${divH + 12}px`}
-                            frameborder="0" 
-                            marginheight="0" 
-                            marginwidth="0">
-                                Cargando…
-                        </iframe>
-                    </Col>  */}
                 </Row>
             </Container>
         </Container>
