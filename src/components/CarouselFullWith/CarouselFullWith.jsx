@@ -1,4 +1,5 @@
-import {  useState } from 'react'
+/* eslint-disable no-cond-assign */
+import {  useEffect, useState } from 'react'
 
 import { Button, Carousel, Col, Container, Image, Row } from 'react-bootstrap'
 
@@ -12,7 +13,19 @@ import { isMobile } from 'react-device-detect'
 
 
 export const CarouselFullWith = ({data}) => {
-    
+
+    const [changeVideo, setChangeVideo] = useState(false);
+
+    useEffect(() => {
+        
+        if(isMobile === true && window.innerWidth < 576){
+            setChangeVideo(true)
+        } else { 
+            setChangeVideo(false)
+        }
+
+    }, [changeVideo]);
+
     const [index, setIndex] = useState(0);
 
     const handleSelect = (selectedIndex, ) => {
@@ -65,7 +78,6 @@ export const CarouselFullWith = ({data}) => {
                                                             </a>
                                                         )
                                                     }
-
                                                 </Col>
                                             </Row>    
                                         ): ''
@@ -80,10 +92,10 @@ export const CarouselFullWith = ({data}) => {
                     <Container>
                         <Row>
                             <Col md={3}>
-                                    <Image fluid src={bannerHomeBM}/>
+                                <Image fluid src={bannerHomeBM}/>
                             </Col>
                             <Col>
-                                {isMobile?(
+                                {changeVideo?(
                                     <video autoPlay muted loop
                                         src={carouselBMvideo500x500}>
                                     </video>
@@ -93,7 +105,6 @@ export const CarouselFullWith = ({data}) => {
                                         src={carouselBMvideo}>
                                     </video>
                                 )}
-
                             </Col>
                         </Row>
                     </Container>
