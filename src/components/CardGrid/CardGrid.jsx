@@ -71,7 +71,7 @@ export const CardGrid = ({data, rows: rowsMd=2}) => {
                     {
                         Array.from(data.socialMedia).map((item, id) =>(
                             <Col key={id}>
-                                <a href={item.url} target="_blanck" aria-label={item.net}>
+                                <a className='partnerSocialButton' href={item.url} target="_blanck" aria-label={item.net}>
                                     <FontAwesomeIcon icon={item.faIcon} size='2xl' />
                                 </a>
                             </Col>
