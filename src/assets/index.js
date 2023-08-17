@@ -4,6 +4,7 @@ export { default as ditpIsoLogo } from './svg/ditpIsoLogo.svg';
 export { default as enFlag } from './svg/english.svg';
 export { default as esFlag } from './svg/spanish.svg';
 export { default as logoBM } from './svg/logoBM.svg';
+export { default as logoIG } from './svg/logo.svg';
 
 // Img
 export { default as logoTTC } from './img/new-logo-2.webp';
@@ -40,6 +41,10 @@ export { default as logoSheraton } from './img/si_logo_L.webp';
     export { default as pcProducts } from './img/delgationBrand/delegationBrand__0020_PC_product.webp';
     export { default as ayPOrchard } from './img/delgationBrand/delegationBrand__0021_AyP_Orchard.webp';
     export { default as siamProduce } from './img/delgationBrand/delegationBrand__0022_SiamProduce.webp';
+
+// Campaigns img    
+export { default as paulianCocina } from './img/paulinaCocina.webp';
+export { default as gordoCocina } from './img/gordoCocina.webp';
     
 //Videos
 export { default as carouselBMvideo } from './videos/ReseumenBMwFormat.webm';

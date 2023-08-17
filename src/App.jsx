@@ -12,8 +12,7 @@ import { AutoPartsPage } from './pages/AutoPartsPage';
 import { FoodPage } from './pages/FoodPage';
 import { ConstructionPage } from './pages/ConstructionPage';
 import { HeroVideoPage } from './pages/HeroVideoPage';
-
-
+import { Campaigns } from './pages/Campaigns';
 
 
 function App() {
@@ -24,13 +23,14 @@ function App() {
     <Container fluid>
       <NavBar navData={navBarData} brand={ditpIsoLogo} expand={'md'} />
       <Routes>
-        <Route path={paths.home} element={<Home />}/>
-        <Route path={paths.bussinesWeel} element={<BussinesWeel />} />
-        <Route path={paths.credentials} element={<Credenciales />} />
         <Route path={paths.autoPartsPage} element={<AutoPartsPage />} />
-        <Route path={paths.foodPage} element={<FoodPage />} />
+        <Route path={paths.bussinesWeel} element={<BussinesWeel />} />
+        <Route path={paths.campaigns} element={<Campaigns />}/>
         <Route path={paths.constructionPage} element={<ConstructionPage />} />
+        <Route path={paths.credentials} element={<Credenciales />} />
+        <Route path={paths.foodPage} element={<FoodPage />} />
         <Route path={paths.heroVideoPage} element={<HeroVideoPage />} />
+        <Route path={paths.home} element={<Home />}/>
 
         <Route path="/*" element={ <Navigate  to={paths.home} replace />} />
       </Routes>

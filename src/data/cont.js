@@ -1,6 +1,6 @@
-import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
+import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faWhatsapp, faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons"
 
-import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard, siamProduce } from "../assets"
+import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard, siamProduce, paulianCocina, gordoCocina } from "../assets"
 
 const paths ={
     home: `/home`,
@@ -9,7 +9,8 @@ const paths ={
     foodPage: `food`,
     constructionPage: `construction`,
     autoPartsPage: `autoparts`,
-    heroVideoPage: `herovideo` 
+    heroVideoPage: `herovideo`,
+    campaigns: `campaigns` 
 }
 
 // Home Page
@@ -24,6 +25,11 @@ const navBarData =[
         text: `Business Matching 2023`,
         textEs: `Ronda de negocios 2023`,
         link: `${paths.bussinesWeel}`,
+    },
+    {
+        text: `Campaigns`,
+        textEs: `Campañas`,
+        link: `${paths.campaigns}`,
     },
 ]
 
@@ -426,6 +432,71 @@ const thaiDelegationList2 =[
     //End of Food
 ]
 // Fin Business Wheel
+// Campaigns Page
+const campaign = [
+    {
+        title: {En: 'Campaign 2020', Es: 'Campaña 2020'},
+        actor: 'Paulina Cocina',
+        img: paulianCocina,
+        decription: 
+        { 
+            En:`Paulina Cocina is an expert in the handling of digital tools and has managed to position herself as one of the authors most followed and valued by the management of their YouTube and Instagram profiles. It started as a game and today, many videos, posts and recipes later gathers 2 million followers. In their networks you can find all kinds of recipes, which anyone can do at home, tricks and tips to make you better and stop giving excuses when cooking and eating real food.`,
+            Es:`Paulina Cocina es una experta en el manejo de las herramientas digitales y ha conseguido posicionarse como una de las autoras más seguidas y valoradas por la gestión de sus perfiles de YouTube e Instagram. Empezó como un juego y hoy, muchos vídeos, posteos y recetas después reúne 2 millones de seguidores. En sus redes podrás encontrar recetas de todo tipo, que cualquiera puede hacer en su casa, trucos y consejos para que te salgan mejor y dejes de dar excusas a la hora de cocinar y comer comida de verdad.`
+        },
+        videos:[
+            {
+                icon: faYoutube,
+                title: { En: 'Meat with basil', Es:'Ternera con albahaca'},
+                iframeUrl: 'https://www.youtube.com/embed/Z9v0yU7Pt4Q?si=6tF_bZNpYEKdRWsi',
+                socialNet: 'youTube',
+            },
+            {
+                icon: faYoutube,
+                title: { En: 'Marinated pork skewers', Es:'Pinchos de cerdo marinados'},
+                iframeUrl: 'https://www.youtube.com/embed/-aQifTROFBg?si=9_L8jAh8d_bQ9Q3D',
+                socialNet: 'youTube',
+            },
+            {
+                icon: faYoutube,
+                title: { En: 'Pad Thai Step by step', Es:'Pad Thai PASO A PASO'},
+                iframeUrl: 'https://www.youtube.com/embed/OcV2agmtTk4?si=-b9gUQ2K7NEkyE33',
+                socialNet: 'youTube',
+            },
+        ]
+    },
+    {
+        title: {En: 'Campaign 2022', Es: 'Campaña 2022'},
+        actor: 'El Gordo Cocina',
+        img: gordoCocina,
+        decription: 
+        { 
+            En:`She always liked to cook. Guided by his desire and the insistence of his friends, in June 2015 he opened an account on the social network dedicated to pleasure and image "to share what he did". From 10,000, followers were growing and, after a year, he left his position in marketing a multinational to dedicate himself every day to cooking, photographing and publishing the final product.`,
+            Es:`Según cuenta, siempre le gustó cocinar. Guiado por su deseo y la insistencia de sus amigos, en junio de 2015 abrió una cuenta en la red social dedicada al placer y a la imagen "para compartir lo que hacía". De a 10.000, los seguidores aumentaban y, al cabo de un año, dejó su puesto en marketing de una multinacional para dedicarse todos los días a cocinar, fotografiarlo y publicar el producto final.`
+        },
+        videos:[
+            {
+                icon: faInstagram,
+                title:{En: 'Thai Food 01', Es:'Comida Tailandesa 01'},
+                iframeUrl: 'CidocC5AliB',
+                socialNet: 'ig',
+            },
+            {
+                icon: faInstagram,
+                title:{En: 'Thai Food 02', Es:'Comida Tailandesa 02'},
+                iframeUrl: 'CivyndPAWgP',
+                socialNet: 'ig',
+            },
+            {
+                icon: faInstagram,
+                title: { En: 'Thai Food 03', Es:'Arroz salteado con ananá'},
+                iframeUrl: 'Ci72-C2AXMt',
+                socialNet: 'ig',
+            },
+        ]
+    },
+]
+// end of Campaigns Page
+
 export{
     paths,
     navBarData,
@@ -434,4 +505,5 @@ export{
     distThaiProducts,
     businessWheelHeaderText,
     thaiDelegationList2,
+    campaign,
 }
