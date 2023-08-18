@@ -51,7 +51,7 @@ export const Campaigns = () => {
                     <Row className={`${styles.videoLouncher} d-grid gap-3`}>
                       {
                         Array.from(item.videos).map((item, id)=>(
-                          <Button key={id} onClick={() => handleShow(item.iframeUrl, item.title, item.socialNet)}>
+                          <Button className='campaignVideos' key={id} onClick={() => handleShow(item.iframeUrl, item.title, item.socialNet)}>
                               <FontAwesomeIcon icon={item.icon} size='2xl'/>
                               <br/>
                               <span><LangSelector enText={item.title.En} esText={item.title.Es}  /></span>
