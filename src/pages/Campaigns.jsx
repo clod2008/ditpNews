@@ -7,11 +7,12 @@ import styles from './Campaigns.module.scss'
 import { CampaignModal } from '../components/CampaignModal/CampaignModal'
 import { campaign } from '../data/cont'
 import { LangSelector } from '../components/LangSelector'
+import TagManager from 'react-gtm-module'
 
 
 
 export const Campaigns = () => {
-  
+
   // Modals def
   const [enModalTitle, setEnModalTitle] = useState('');
   const [esModalTitle, setEsModalTitle] = useState('');
@@ -21,13 +22,29 @@ export const Campaigns = () => {
 
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false)
+    TagManager.dataLayer({
+      dataLayer:{
+        event: `campaigClickClose`,
+        viewVideo: `close ${enModalTitle} ${esModalTitle}`
+      }
+    })
+  };
   const handleShow  =  (url, title, net) => {
     setEnModalTitle(title.En)
     setEsModalTitle(title.Es)
     setSocialNet(net)
     setIframeUrl(url)
     setShow(true)
+    
+    TagManager.dataLayer({
+      dataLayer:{
+        event: `campaigClick`,
+        viewVideo: `Video ${enModalTitle} ${esModalTitle}`
+      }
+    })
+
   };
 
   return (

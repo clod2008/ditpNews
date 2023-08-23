@@ -13,11 +13,24 @@ import { FoodPage } from './pages/FoodPage';
 import { ConstructionPage } from './pages/ConstructionPage';
 import { HeroVideoPage } from './pages/HeroVideoPage';
 import { Campaigns } from './pages/Campaigns';
+import TagManager from 'react-gtm-module';
 
+
+const tagManagerArgs = {
+  gtmId: `${process.env.REACT_APP_TAG_ID}`,
+}
+
+TagManager.initialize(tagManagerArgs)
+TagManager.dataLayer({
+  dataLayer:{
+    event: 'pageview',
+    title: 'DITP'
+  }
+})
 
 function App() {
 
-  
+ 
   
   return (
     <Container fluid>

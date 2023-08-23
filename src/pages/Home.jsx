@@ -6,7 +6,10 @@ import styles from './Home.module.scss'
 import { SectionTitle } from '../components/SectionTitle/SectionTitle'
 import { CardGrid } from '../components/CardGrid/CardGrid'
 
+
+
 export const Home = () => {
+  
   
   return (
     <>
