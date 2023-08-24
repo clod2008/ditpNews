@@ -2,14 +2,12 @@ import { HeroImg } from '../components/HeroImg/HeroImg'
 import { carouselHome, distThaiProducts, textHero } from '../data/cont'
 import { CarouselFullWith } from '../components/CarouselFullWith/CarouselFullWith'
 
-import styles from './Home.module.scss'
 import { SectionTitle } from '../components/SectionTitle/SectionTitle'
 import { CardGrid } from '../components/CardGrid/CardGrid'
 
 
 
 export const Home = () => {
-  
   
   return (
     <>

@@ -2,14 +2,28 @@
 import { useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Button, Col, Container, Form, Image, Nav, NavDropdown, Navbar, Offcanvas, Row } from 'react-bootstrap'
+import TagManager from 'react-gtm-module'
 
 import { LangContext } from '../../context/langContex'
 
 import styles from './NavBar.module.scss'
 import { SwitchButton } from '../SwitchButton/SwitchButton'
 
+
+
+
 export const NavBar = ( {navData, brand, expand} ) => {
     const {langSelected} = useContext(LangContext)
+
+    const handleClick = (link)=>{
+      TagManager.dataLayer({
+        dataLayer:{
+          event: 'pageview',
+          pageChange: link,
+        }
+      })
+      console.log(link)
+    }
 
     
   return (
@@ -38,18 +52,18 @@ export const NavBar = ( {navData, brand, expand} ) => {
                     <div
                         key={id}
                         className={styles.customNavLink}
-                       
-                        
-                    >
+                        >
                         <NavLink
                             to={item.link}
                             className={({isActive }) => isActive ? styles.navActive : '' }
+                            onClick={()=> handleClick(item.text, item.textEs)}  
                         >
-                            { langSelected ==='en' ? item.text : item.textEs }
+                             { langSelected ==='en' ? item.text : item.textEs }
                         </NavLink>
                     </div>
                 )}
-                    <Nav.Link >  
+                    <Nav.Link 
+                    >  
                         <SwitchButton label={langSelected} id={'lang'}/>
                     </Nav.Link>
             </Nav>

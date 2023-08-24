@@ -19,8 +19,7 @@ export const HeaderText = ({text}) => {
         setDivH(divRef.current.offsetHeight)
     }, [])
     
-
-    console.log(divH)
+    // console.log(divH)
 
     return (
     <Row className={styles.wrapper}>

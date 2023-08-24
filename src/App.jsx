@@ -5,7 +5,7 @@ import { BussinesWeel } from './pages/BussinesWeel';
 import { NavBar } from './components/NavBar/NavBar';
 import { navBarData, paths } from './data/cont';
 import { ditpIsoLogo } from './assets';
-import { Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { FooterPage } from './components/Footer/Footer';
 import { Credenciales } from './pages/Credenciales';
 import { AutoPartsPage } from './pages/AutoPartsPage';

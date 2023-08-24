@@ -50,7 +50,7 @@ export const ThaiExporterList2 = ({list, initialBtn=0}) => {
     
   return (
     <Row className={styles.wrapper}>
-        <Container flud>
+        <Container fluid>
             <Container>
                 <Row className="justify-content-center mt-5 mb-5">
                     <Col md={3}>
@@ -104,7 +104,7 @@ export const ThaiExporterList2 = ({list, initialBtn=0}) => {
                                         </Row>
                                     </Col>
                                     <Card.Footer className={styles.footer}>
-                                        <FontAwesomeIcon icon={faGlobe} size='1.5xl'/> 
+                                        <FontAwesomeIcon icon={faGlobe} size='1x'/> 
                                         <a href={data.url} rel="noreferrer" target="_blank">{data.url}</a>
                                     </Card.Footer>
                                 </Card>
