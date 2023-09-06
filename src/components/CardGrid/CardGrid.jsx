@@ -5,8 +5,19 @@ import {  faPhoneAlt } from '@fortawesome/free-solid-svg-icons'
 import { LangSelector } from "../LangSelector"
   
 import styles from './CardGrid.module.scss'
+import TagManager from "react-gtm-module"
 
 export const CardGrid = ({data, rows: rowsMd=2}) => {
+
+    const handleClick = (id)=>{
+      TagManager.dataLayer({
+        dataLayer:{
+          event: 'click',
+          pageChange: id,
+        }
+      })
+    //   console.log(id)
+    }
 
   return (
     <Container>
@@ -59,7 +70,19 @@ export const CardGrid = ({data, rows: rowsMd=2}) => {
                                     ):''}
                                     <br/>
                                     {item.url ?(
-                                        <a id={item.gTagId} href={item.url} target="_blank" rel="noreferrer" aria-label={item.name}  className='cardLinkSaberMas'><LangSelector enText={'Learn More ==>'} esText={'Saber Más ==>'}/></a>
+                                        <a 
+                                            id={item.gTagId} 
+                                            href={item.url} 
+                                            target="_blank" 
+                                            rel="noreferrer" 
+                                            aria-label={item.name}  
+                                            className='cardLinkSaberMas'
+                                            onClick={()=>{handleClick(item.gTagId)}}
+                                            >
+                                            
+                                                <LangSelector enText={'Learn More ==>'} esText={'Saber Más ==>'}/>
+                                            </a>
+
                                     ):''}
                                 </Accordion.Body>
                             </Accordion.Item>
