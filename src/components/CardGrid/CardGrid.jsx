@@ -12,8 +12,8 @@ export const CardGrid = ({data, rows: rowsMd=2}) => {
     const handleClick = (id)=>{
       TagManager.dataLayer({
         dataLayer:{
-          event: 'click',
-          pageChange: id,
+          event: id,
+        //   pageChange: id,
         }
       })
     //   console.log(id)
