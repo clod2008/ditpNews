@@ -109,6 +109,7 @@ const distThaiProducts = [
                 name: 'PALERMO SOHO, BUENOS AIRES',
                 address: 'Gorriti 4647, C1414BJI',
                 phone: ['+54 11 4831-0440','+54 11 3855-45755'],
+                gTagId:'kolantaClick',
             }   
             
         ],
@@ -141,7 +142,8 @@ const distThaiProducts = [
                 name: 'BARRIO CHINO DE BUENOS AIRES',
                 address: 'Mendoza 1661, C1428DJO',
                 phone: ['+54 9 11 4706-3980',' +54 9 11 4785-8155'],
-                url: 'https://asiaoriental.mercadoshops.com.ar/tailandia'
+                url: 'https://asiaoriental.mercadoshops.com.ar/tailandia',
+                gTagId: 'asiaOrientalClick',
             }   
             
         ],
@@ -179,12 +181,14 @@ const distThaiProducts = [
             {
                 name: 'Córdoba Capital',
                 address: 'Belgrano 867 local 9',
-                url: 'https://linktr.ee/Khaosanthaifood.cba'
+                url: 'https://linktr.ee/Khaosanthaifood.cba',
+                gTagId: 'kaosanCorClick',
             },
             {
                 name: 'Mendoza Capital',
                 address: 'Peatonal Sarmiento 65',
-                url: 'https://linktr.ee/Khaosanthaifood.mdz'
+                url: 'https://linktr.ee/Khaosanthaifood.mdz',
+                gTagId: 'kaosanManClick',
             },
 
             
@@ -212,7 +216,8 @@ const distThaiProducts = [
                 name: ' Capital Federal, Buenos Aires, Mar del Plata',
                 address: 'Gorriti 4647, C1414BJI',
                 phone: ['+54 11 4831-0440','+54 11 3855-45755'],
-                url: 'https://newgarden.com.ar/catalogsearch/result/?q=tailandia'
+                url: 'https://newgarden.com.ar/catalogsearch/result/?q=tailandia',
+                gTagId: 'newGardenClick',
             }   
             
         ],
@@ -476,13 +481,13 @@ const campaign = [
         videos:[
             {
                 icon: faInstagram,
-                title:{En: 'Thai Food 01', Es:'Comida Tailandesa 01'},
+                title: {En: 'Pumpkin Curry', Es:'Curry de calabaza'},
                 iframeUrl: 'CidocC5AliB',
                 socialNet: 'ig',
             },
             {
                 icon: faInstagram,
-                title:{En: 'Thai Food 02', Es:'Comida Tailandesa 02'},
+                title:{En: 'Pad Thai', Es:'Pad Thai'},
                 iframeUrl: 'CivyndPAWgP',
                 socialNet: 'ig',
             },
