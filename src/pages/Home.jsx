@@ -1,5 +1,5 @@
 import { HeroImg } from '../components/HeroImg/HeroImg'
-import { carouselHome, distThaiProducts, textHero } from '../data/cont'
+import { carouselHome, distThaiProducts, restThai, textHero } from '../data/cont'
 import { CarouselFullWith } from '../components/CarouselFullWith/CarouselFullWith'
 
 import { SectionTitle } from '../components/SectionTitle/SectionTitle'
@@ -17,10 +17,17 @@ export const Home = () => {
       <SectionTitle 
         titleEn='Distribution of Thai products' 
         titleEs='Distribución de productos Tailandeses' 
+        subTitleEs='Productos gastronómicos que cuentan con el apoyo del DITP en Argentina'
+        subTitleEn='Gastronomic products that have the support of the DITP in Argentina'
+      />
+      <CardGrid data={distThaiProducts} rows={2}/>
+      <SectionTitle 
+        titleEn='Thai Restaurants' 
+        titleEs='Restaurantes Thai' 
         subTitleEs='Establecimientos gastronómicos que cuentan con el apoyo del DITP en Argentina'
         subTitleEn='Gastronomic establishments that have the support of the DITP in Argentina'
       />
-      <CardGrid data={distThaiProducts} rows={4}/>
+      <CardGrid data={restThai} rows={2}/>
     </>
   )
 }

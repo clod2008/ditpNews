@@ -95,39 +95,6 @@ const carouselHome=[
 
 const distThaiProducts = [
     {
-        tag: 'resto',
-        img: logoKoLanta,
-        title: 'Koh Lanta',
-        titleEs: 'Koh Lanta',
-        subTitle: 'Thai cuisine and signature drinks',
-        subTitleEs: 'Cocina Tailandesa y tragos de autor',
-        body: 'Thai cuisine and signature drinks Koh Lanta is a restaurant located in Palermo Soho that serves Thai cuisine. It stands out for a wide variety of dishes that each time offer a different experience. As main, pad thai, based on rice noodles, tofu, eggs and bean sprouts, with prawns and dessert to crown the tasting of banana, coconut and honey donuts.',
-        bodyEs: 'Cocina Tailandesa y tragos de autor Koh Lanta es un restaurante situado en Palermo Soho que sirve cocina tailandesa. Destaca por una gran variedad de platos que en cada ocasión ofrecen una experiencia diferente. Como principal, pad thai, a base de fideos de arroz, tofu, huevos y brotes de judías, con gambas y postre para coronar la degustación de plátano, coco y rosquillas de miel.',
-        contact: [
-            
-            {
-                name: 'PALERMO SOHO, BUENOS AIRES',
-                address: 'Gorriti 4647, C1414BJI',
-                phone: ['+54 11 4831-0440','+54 11 3855-45755'],
-                gTagId:'kolantaClick',
-            }   
-            
-        ],
-        socialMedia:[
-            {
-                net: 'Instagram',
-                faIcon: faInstagramSquare,
-                url: 'https://www.instagram.com/kohlantaresto/?hl=es/',
-            },
-            {
-                net: 'Faceboock',
-                faIcon: faFacebook,
-                url: 'https://www.facebook.com/Koh-Lanta-Resto-Bar-127094600708309/',
-
-            }
-        ]
-    },
-    {
         tag: 'market',
         img: logoAsiaOriental,
         title: 'Asia Oriental',
@@ -157,47 +124,13 @@ const distThaiProducts = [
                 net: 'Faceboock',
                 faIcon: faFacebook,
                 url: 'https://www.facebook.com/asiaorientalbsas/',
-
+                
             },
             {
                 net: 'WhatsApp',
                 faIcon: faWhatsappSquare,
                 url: 'https://wa.me/541160104368',
-
-            },
-        ]
-    },
-    {
-        tag: 'resto',
-        img: logoKhaosan,
-        title: 'Khaosan Thai Food',
-        titleEs: 'Khaosan Thai Food',
-        subTitle: 'To taste Thai dishes and imagine yourself in Khaosan street',
-        subTitleEs: 'Para degustar platos Thai e imaginarse en la calle Khaosan',
-        body: 'Khao-san means raw rice and gives its name to a street in Bangkok where restaurants, bars, hotels and traditional food vendors are located. Its wide color and its intense nightlife made it one of the main tourist attractions of this capital. Khaosan is the gateway to the great taste experience of Thailand, which is why we import directly.',
-        bodyEs: 'Khao-san significa arroz crudo y da su nombre a una calle de Bangkok donde se encuentran restaurantes, bares, hoteles y vendedores ambulantes de comida tradicional. Su amplio color y su intensa vida nocturna la convirtieron en uno de los principales atractivos turísticos de esta capital. El Khaosan es la puerta de entrada a la gran experiencia de sabor de Tailandia por esto importamos directamente.',
-        contact: [
-            
-            {
-                name: 'Córdoba Capital',
-                address: 'Belgrano 867 local 9',
-                url: 'https://linktr.ee/Khaosanthaifood.cba',
-                gTagId: 'kaosanCorClick',
-            },
-            {
-                name: 'Mendoza Capital',
-                address: 'Peatonal Sarmiento 65',
-                url: 'https://linktr.ee/Khaosanthaifood.mdz',
-                gTagId: 'kaosanManClick',
-            },
-
-            
-        ],
-        socialMedia:[
-            {
-                net: 'Instagram',
-                faIcon: faInstagramSquare,
-                url: 'https://www.instagram.com/khaosan.thaifood/',
+                
             },
         ]
     },
@@ -211,17 +144,17 @@ const distThaiProducts = [
         body: 'We are the main natural and gourmet food chain in Argentina. We sell products such as dried and dried fruits, flours, cereals, legumes, spices, seeds, whole and artisanal baked goods, gluten-free and organic products, natural cosmetics, dietary supplements and for athletes.',
         bodyEs: 'Somos la principal cadena de alimentos naturales y gourmet de Argentina. Comercializamos productos como frutas secas, desecadas, harinas, cereales, legumbres, especias, semillas, panificados integrales y artesanales, productos sin gluten, orgánicos, cosmética natural, suplementos dietarios y para deportistas.',
         contact: [
-            
+
             {
                 name: ' Capital Federal, Buenos Aires, Mar del Plata',
                 address: 'Gorriti 4647, C1414BJI',
-                phone: ['+54 11 4831-0440','+54 11 3855-45755'],
+                phone: ['+54 11 4831-0440', '+54 11 3855-45755'],
                 url: 'https://newgarden.com.ar/catalogsearch/result/?q=tailandia',
                 gTagId: 'newGardenClick',
-            }   
-            
+            }
+
         ],
-        socialMedia:[
+        socialMedia: [
             {
                 net: 'Instagram',
                 faIcon: faInstagramSquare,
@@ -240,6 +173,78 @@ const distThaiProducts = [
         ]
     },
 
+    
+
+]
+
+const restThai =[
+    {
+        tag: 'resto',
+        img: logoKhaosan,
+        title: 'Khaosan Thai Food',
+        titleEs: 'Khaosan Thai Food',
+        subTitle: 'To taste Thai dishes and imagine yourself in Khaosan street',
+        subTitleEs: 'Para degustar platos Thai e imaginarse en la calle Khaosan',
+        body: 'Khao-san means raw rice and gives its name to a street in Bangkok where restaurants, bars, hotels and traditional food vendors are located. Its wide color and its intense nightlife made it one of the main tourist attractions of this capital. Khaosan is the gateway to the great taste experience of Thailand, which is why we import directly.',
+        bodyEs: 'Khao-san significa arroz crudo y da su nombre a una calle de Bangkok donde se encuentran restaurantes, bares, hoteles y vendedores ambulantes de comida tradicional. Su amplio color y su intensa vida nocturna la convirtieron en uno de los principales atractivos turísticos de esta capital. El Khaosan es la puerta de entrada a la gran experiencia de sabor de Tailandia por esto importamos directamente.',
+        contact: [
+
+            {
+                name: 'Córdoba Capital',
+                address: 'Belgrano 867 local 9',
+                url: 'https://linktr.ee/Khaosanthaifood.cba',
+                gTagId: 'kaosanCorClick',
+            },
+            {
+                name: 'Mendoza Capital',
+                address: 'Peatonal Sarmiento 65',
+                url: 'https://linktr.ee/Khaosanthaifood.mdz',
+                gTagId: 'kaosanManClick',
+            },
+
+
+        ],
+        socialMedia: [
+            {
+                net: 'Instagram',
+                faIcon: faInstagramSquare,
+                url: 'https://www.instagram.com/khaosan.thaifood/',
+            },
+        ]
+    },
+    {
+        tag: 'resto',
+        img: logoKoLanta,
+        title: 'Koh Lanta',
+        titleEs: 'Koh Lanta',
+        subTitle: 'Thai cuisine and signature drinks',
+        subTitleEs: 'Cocina Tailandesa y tragos de autor',
+        body: 'Thai cuisine and signature drinks Koh Lanta is a restaurant located in Palermo Soho that serves Thai cuisine. It stands out for a wide variety of dishes that each time offer a different experience. As main, pad thai, based on rice noodles, tofu, eggs and bean sprouts, with prawns and dessert to crown the tasting of banana, coconut and honey donuts.',
+        bodyEs: 'Cocina Tailandesa y tragos de autor Koh Lanta es un restaurante situado en Palermo Soho que sirve cocina tailandesa. Destaca por una gran variedad de platos que en cada ocasión ofrecen una experiencia diferente. Como principal, pad thai, a base de fideos de arroz, tofu, huevos y brotes de judías, con gambas y postre para coronar la degustación de plátano, coco y rosquillas de miel.',
+        contact: [
+
+            {
+                name: 'PALERMO SOHO, BUENOS AIRES',
+                address: 'Gorriti 4647, C1414BJI',
+                phone: ['+54 11 4831-0440', '+54 11 3855-45755'],
+                gTagId: 'kolantaClick',
+            }
+
+        ],
+        socialMedia: [
+            {
+                net: 'Instagram',
+                faIcon: faInstagramSquare,
+                url: 'https://www.instagram.com/kohlantaresto/?hl=es/',
+            },
+            {
+                net: 'Faceboock',
+                faIcon: faFacebook,
+                url: 'https://www.facebook.com/Koh-Lanta-Resto-Bar-127094600708309/',
+
+            }
+        ]
+    },
 ]
 
 // Fin Home Page
@@ -508,6 +513,7 @@ export{
     textHero,
     carouselHome,
     distThaiProducts,
+    restThai,
     businessWheelHeaderText,
     thaiDelegationList2,
     campaign,
