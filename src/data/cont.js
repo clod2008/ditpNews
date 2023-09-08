@@ -212,39 +212,39 @@ const restThai =[
             },
         ]
     },
-    {
-        tag: 'resto',
-        img: logoKoLanta,
-        title: 'Koh Lanta',
-        titleEs: 'Koh Lanta',
-        subTitle: 'Thai cuisine and signature drinks',
-        subTitleEs: 'Cocina Tailandesa y tragos de autor',
-        body: 'Thai cuisine and signature drinks Koh Lanta is a restaurant located in Palermo Soho that serves Thai cuisine. It stands out for a wide variety of dishes that each time offer a different experience. As main, pad thai, based on rice noodles, tofu, eggs and bean sprouts, with prawns and dessert to crown the tasting of banana, coconut and honey donuts.',
-        bodyEs: 'Cocina Tailandesa y tragos de autor Koh Lanta es un restaurante situado en Palermo Soho que sirve cocina tailandesa. Destaca por una gran variedad de platos que en cada ocasión ofrecen una experiencia diferente. Como principal, pad thai, a base de fideos de arroz, tofu, huevos y brotes de judías, con gambas y postre para coronar la degustación de plátano, coco y rosquillas de miel.',
-        contact: [
+    // {
+    //     tag: 'resto',
+    //     img: logoKoLanta,
+    //     title: 'Koh Lanta',
+    //     titleEs: 'Koh Lanta',
+    //     subTitle: 'Thai cuisine and signature drinks',
+    //     subTitleEs: 'Cocina Tailandesa y tragos de autor',
+    //     body: 'Thai cuisine and signature drinks Koh Lanta is a restaurant located in Palermo Soho that serves Thai cuisine. It stands out for a wide variety of dishes that each time offer a different experience. As main, pad thai, based on rice noodles, tofu, eggs and bean sprouts, with prawns and dessert to crown the tasting of banana, coconut and honey donuts.',
+    //     bodyEs: 'Cocina Tailandesa y tragos de autor Koh Lanta es un restaurante situado en Palermo Soho que sirve cocina tailandesa. Destaca por una gran variedad de platos que en cada ocasión ofrecen una experiencia diferente. Como principal, pad thai, a base de fideos de arroz, tofu, huevos y brotes de judías, con gambas y postre para coronar la degustación de plátano, coco y rosquillas de miel.',
+    //     contact: [
 
-            {
-                name: 'PALERMO SOHO, BUENOS AIRES',
-                address: 'Gorriti 4647, C1414BJI',
-                phone: ['+54 11 4831-0440', '+54 11 3855-45755'],
-                gTagId: 'kolantaClick',
-            }
+    //         {
+    //             name: 'PALERMO SOHO, BUENOS AIRES',
+    //             address: 'Gorriti 4647, C1414BJI',
+    //             phone: ['+54 11 4831-0440', '+54 11 3855-45755'],
+    //             gTagId: 'kolantaClick',
+    //         }
 
-        ],
-        socialMedia: [
-            {
-                net: 'Instagram',
-                faIcon: faInstagramSquare,
-                url: 'https://www.instagram.com/kohlantaresto/?hl=es/',
-            },
-            {
-                net: 'Faceboock',
-                faIcon: faFacebook,
-                url: 'https://www.facebook.com/Koh-Lanta-Resto-Bar-127094600708309/',
+    //     ],
+    //     socialMedia: [
+    //         {
+    //             net: 'Instagram',
+    //             faIcon: faInstagramSquare,
+    //             url: 'https://www.instagram.com/kohlantaresto/?hl=es/',
+    //         },
+    //         {
+    //             net: 'Faceboock',
+    //             faIcon: faFacebook,
+    //             url: 'https://www.facebook.com/Koh-Lanta-Resto-Bar-127094600708309/',
 
-            }
-        ]
-    },
+    //         }
+    //     ]
+    // },
 ]
 
 // Fin Home Page
