@@ -45,6 +45,7 @@ export { default as logoSheraton } from './img/si_logo_L.webp';
 // Campaigns img    
 export { default as paulianCocina } from './img/paulinaCocina.webp';
 export { default as gordoCocina } from './img/gordoCocina.webp';
+export { default as gladysOlazar } from './img/gladysOlazar.webp';
     
 //Videos
 export { default as carouselBMvideo } from './videos/ReseumenBMwFormat.webm';

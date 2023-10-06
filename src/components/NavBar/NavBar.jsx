@@ -1,7 +1,7 @@
 
 import { useContext } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { Button, Col, Container, Form, Image, Nav, NavDropdown, Navbar, Offcanvas, Row } from 'react-bootstrap'
+import {  NavLink } from 'react-router-dom'
+import {  Container, Image, Nav, Navbar, Offcanvas,} from 'react-bootstrap'
 import TagManager from 'react-gtm-module'
 
 import { LangContext } from '../../context/langContex'

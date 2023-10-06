@@ -1,6 +1,6 @@
 import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faWhatsapp, faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons"
 
-import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard, siamProduce, paulianCocina, gordoCocina } from "../assets"
+import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard, siamProduce, paulianCocina, gordoCocina, gladysOlazar } from "../assets"
 
 const paths ={
     home: `/home`,
@@ -445,32 +445,42 @@ const thaiDelegationList2 =[
 // Campaigns Page
 const campaign = [
     {
-        title: {En: 'Campaign 2020', Es: 'Campaña 2020'},
-        actor: 'Paulina Cocina',
-        img: paulianCocina,
-        decription: 
-        { 
-            En:`Paulina Cocina is an expert in the handling of digital tools and has managed to position herself as one of the authors most followed and valued by the management of their YouTube and Instagram profiles. It started as a game and today, many videos, posts and recipes later gathers 2 million followers. In their networks you can find all kinds of recipes, which anyone can do at home, tricks and tips to make you better and stop giving excuses when cooking and eating real food.`,
-            Es:`Paulina Cocina es una experta en el manejo de las herramientas digitales y ha conseguido posicionarse como una de las autoras más seguidas y valoradas por la gestión de sus perfiles de YouTube e Instagram. Empezó como un juego y hoy, muchos vídeos, posteos y recetas después reúne 2 millones de seguidores. En sus redes podrás encontrar recetas de todo tipo, que cualquiera puede hacer en su casa, trucos y consejos para que te salgan mejor y dejes de dar excusas a la hora de cocinar y comer comida de verdad.`
+        title: { En: 'Campaign 2023', Es: 'Campaña 2023' },
+        actor: 'Gladys Mabel Olazar',
+        img: gladysOlazar,
+        decription:
+        {
+            En: `   For 15 years we have shared popular cuisine at Cocineros
+                    Argentinos by making daily recipes to solve the menu for all
+                    homes in a practical and simple way. The chefs teach different
+                    proposals to turn the ingredients into spectacular dishes.
+                    Our community has more than 5.5 million followers who put
+                    each of the recipes into action, expanding their culinary skills.`,
+            Es: `   Desde hace 15 años en Cocineros Argentinos compartimos la cocina popular
+                    haciendo recetas diarias para resolver el menú de todos los hogares de una
+                    manera práctica y sencilla. Las y los cocineros enseñan propuestas diferentes para
+                    convertir los ingredientes en platos espectaculares.
+                    La comunidad total cuenta con más de 5.5 millones de seguidores que ponen en
+                    marcha cada una de las recetas expandiendo sus habilidades culinarias.`
         },
-        videos:[
+        videos: [
             {
-                icon: faYoutube,
-                title: { En: 'Meat with basil', Es:'Ternera con albahaca'},
-                iframeUrl: 'https://www.youtube.com/embed/Z9v0yU7Pt4Q?si=6tF_bZNpYEKdRWsi',
-                socialNet: 'youTube',
+                icon: faInstagram,
+                title: { En: 'Mango Sticky Rice', Es: 'Mango Sticky Rice' },
+                iframeUrl: 'Cw8jvLnvBwD',
+                socialNet: 'ig',
             },
             {
-                icon: faYoutube,
-                title: { En: 'Marinated pork skewers', Es:'Pinchos de cerdo marinados'},
-                iframeUrl: 'https://www.youtube.com/embed/-aQifTROFBg?si=9_L8jAh8d_bQ9Q3D',
-                socialNet: 'youTube',
+                icon: faInstagram,
+                title: { En: 'Fried Rice With Prawns', Es: 'Arroz frito con langostinos' },
+                iframeUrl: 'CxMQrNtusS1',
+                socialNet: 'ig',
             },
             {
-                icon: faYoutube,
-                title: { En: 'Pad Thai Step by step', Es:'Pad Thai PASO A PASO'},
-                iframeUrl: 'https://www.youtube.com/embed/OcV2agmtTk4?si=-b9gUQ2K7NEkyE33',
-                socialNet: 'youTube',
+                icon: faInstagram,
+                title: { En: 'PAD THAI', Es: 'PAD THAI' },
+                iframeUrl: 'Cx5oKIFuZcp',
+                socialNet: 'ig',
             },
         ]
     },
@@ -498,9 +508,40 @@ const campaign = [
             },
             {
                 icon: faInstagram,
-                title: { En: 'Thai Food 03', Es:'Arroz salteado con ananá'},
+                title: { En: 'Stir-fried rice with pineapple', Es:'Arroz salteado con ananá'},
                 iframeUrl: 'Ci72-C2AXMt',
                 socialNet: 'ig',
+            },
+        ]
+    },
+
+    {
+        title: {En: 'Campaign 2020', Es: 'Campaña 2020'},
+        actor: 'Paulina Cocina',
+        img: paulianCocina,
+        decription: 
+        { 
+            En:`Paulina Cocina is an expert in the handling of digital tools and has managed to position herself as one of the authors most followed and valued by the management of their YouTube and Instagram profiles. It started as a game and today, many videos, posts and recipes later gathers 2 million followers. In their networks you can find all kinds of recipes, which anyone can do at home, tricks and tips to make you better and stop giving excuses when cooking and eating real food.`,
+            Es:`Paulina Cocina es una experta en el manejo de las herramientas digitales y ha conseguido posicionarse como una de las autoras más seguidas y valoradas por la gestión de sus perfiles de YouTube e Instagram. Empezó como un juego y hoy, muchos vídeos, posteos y recetas después reúne 2 millones de seguidores. En sus redes podrás encontrar recetas de todo tipo, que cualquiera puede hacer en su casa, trucos y consejos para que te salgan mejor y dejes de dar excusas a la hora de cocinar y comer comida de verdad.`
+        },
+        videos:[
+            {
+                icon: faYoutube,
+                title: { En: 'Meat with basil', Es:'Ternera con albahaca'},
+                iframeUrl: 'https://www.youtube.com/embed/Z9v0yU7Pt4Q?si=6tF_bZNpYEKdRWsi',
+                socialNet: 'youTube',
+            },
+            {
+                icon: faYoutube,
+                title: { En: 'Marinated pork skewers', Es:'Pinchos de cerdo marinados'},
+                iframeUrl: 'https://www.youtube.com/embed/-aQifTROFBg?si=9_L8jAh8d_bQ9Q3D',
+                socialNet: 'youTube',
+            },
+            {
+                icon: faYoutube,
+                title: { En: 'Pad Thai Step by step', Es:'Pad Thai PASO A PASO'},
+                iframeUrl: 'https://www.youtube.com/embed/OcV2agmtTk4?si=-b9gUQ2K7NEkyE33',
+                socialNet: 'youTube',
             },
         ]
     },
