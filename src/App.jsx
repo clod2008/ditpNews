@@ -14,6 +14,7 @@ import { ConstructionPage } from './pages/ConstructionPage';
 import { HeroVideoPage } from './pages/HeroVideoPage';
 import { Campaigns } from './pages/Campaigns';
 import TagManager from 'react-gtm-module';
+import { PdfContainer } from './components/PdfContainer/PdfContainer';
 
 
 const tagManagerArgs = {
@@ -44,6 +45,7 @@ function App() {
         <Route path={paths.foodPage} element={<FoodPage />} />
         <Route path={paths.heroVideoPage} element={<HeroVideoPage />} />
         <Route path={paths.home} element={<Home />}/>
+        <Route path='/report' element={ <PdfContainer />} />
 
         <Route path="/*" element={ <Navigate  to={paths.home} replace />} />
       </Routes>

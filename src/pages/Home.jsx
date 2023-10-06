@@ -4,6 +4,7 @@ import { CarouselFullWith } from '../components/CarouselFullWith/CarouselFullWit
 
 import { SectionTitle } from '../components/SectionTitle/SectionTitle'
 import { CardGrid } from '../components/CardGrid/CardGrid'
+import { PdfContainer } from '../components/PdfContainer/PdfContainer'
 
 
 
@@ -28,6 +29,7 @@ export const Home = () => {
         subTitleEn='Gastronomic establishments that have the support of the DITP in Argentina'
       />
       <CardGrid data={restThai} rows={2}/>
+      {/* <PdfContainer /> */}
     </>
   )
 }

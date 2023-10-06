@@ -50,4 +50,5 @@ export { default as gladysOlazar } from './img/gladysOlazar.webp';
 //Videos
 export { default as carouselBMvideo } from './videos/ReseumenBMwFormat.webm';
 export { default as carouselBMvideo500x500 } from './videos/ResumenBM500x500.webm';
+
     
