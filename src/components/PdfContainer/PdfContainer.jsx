@@ -1,25 +1,11 @@
 
-import { Col, Container } from 'react-bootstrap';
-import { Document, Page } from 'react-pdf';
-import { finalReport } from '../../assets';
-
-
-
-
-
-
+import { Col, Container, Row } from 'react-bootstrap';
 
 export const PdfContainer = () => {
-    
-    
-  
 
   return (
-    <Container>
-
-      <iframe src='https://ditp.com.ar/finalReport2023.pdf' width='100%'/>
-    </Container>
-
-
+    <Row>
+      <iframe src='https://ditp.com.ar/finalReport2023.pdf' width='100%' border='none' style={{minHeight: '80vh'}} title='Final Report'/>
+    </Row>
   )
 }
