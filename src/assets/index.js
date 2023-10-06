@@ -51,4 +51,8 @@ export { default as gladysOlazar } from './img/gladysOlazar.webp';
 export { default as carouselBMvideo } from './videos/ReseumenBMwFormat.webm';
 export { default as carouselBMvideo500x500 } from './videos/ResumenBM500x500.webm';
 
+//PDF
+export { default as finalReport } from './pdf/finalReport2023.pdf';
+
+
     
