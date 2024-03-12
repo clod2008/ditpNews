@@ -2,20 +2,21 @@ import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faWhatsa
 
 import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard, siamProduce, paulianCocina, gordoCocina, gladysOlazar } from "../assets"
 
-const paths ={
+const paths = {
     home: `/home`,
-    bussinesWeel: `business`,    
+    bussinesWeel: `business`,
     credentials: `credentials`,
     foodPage: `food`,
     constructionPage: `construction`,
     autoPartsPage: `autoparts`,
     heroVideoPage: `herovideo`,
-    campaigns: `campaigns` 
+    campaigns: `campaigns`,
+    business2024: `bm2024`,
 }
 
 // Home Page
 
-const navBarData =[
+const navBarData = [
     {
         text: `Home`,
         textEs: `Inicio`,
@@ -33,14 +34,14 @@ const navBarData =[
     },
 ]
 
-const textHero=[
+const textHero = [
     {
         text: `International Trade Promotion Department, Ministry of Commerce, Thailand`,
         textEs: `Departamento de Promoción del Comercio Internacional, Ministerio de Comercio, Tailandia`
     },
 ]
 
-const carouselHome=[
+const carouselHome = [
     // {
     //     text: {
     //         body: `We invite you to our next business roundtable. Expand your network of business contacts and establish successful business relationships with the best suppliers in the market. Register now so you don't miss this unique opportunity.`,
@@ -60,7 +61,7 @@ const carouselHome=[
     {
         text: {
             body: `The Ministry of Commerce builds confidence in the safety of Thai food for buyers and consumers around the world`,
-            title:`The Ministry of Commerce`,
+            title: `The Ministry of Commerce`,
         },
         textEs: {
             body: `El Ministerio de Comercio genera confianza en cuanto a la seguridad de la comida tailandesa para compradores y consumidores de todo el mundo`,
@@ -77,7 +78,7 @@ const carouselHome=[
     {
         text: {
             body: `Hom Mali from Thailand won the World's Best Rice Award for the second year in a row. Trade Minister "Jurin" expects Thailand to export 6 million tons of rice this year`,
-            title:`Jurin`,
+            title: `Jurin`,
         },
         textEs: {
             body: `Hom Mali de Tailandia ganó el premio al mejor arroz del mundo por segundo año consecutivo. El ministro de Comercio "Jurin" espera que Tailandia exporte 6 millones de toneladas de arroz este año`,
@@ -104,17 +105,17 @@ const distThaiProducts = [
         body: 'East Asia: in this market you will find all kinds of fresh products such as vegetables (pak choi, nira, yam potatoes, chili peppers, and turnips) and exotic fruits. In addition, a wide variety of mushrooms, ginger and aromatic herbs in bundles (green and purple basil, thyme, chives, mint, coriander, curly and common parsley, sage, rosemary, bay leaf, lemongrass).',
         bodyEs: 'Asia Oriental: en este mercado vas a encontrar todo tipo de productos frescos como verduras (pak choi, nira, papa ñame, ajíes chili, y nabos) y frutas exóticas. Además, una gran variedad de hongos, jengibre y hierbas aromáticas en ataditos (albahaca verde y morada, tomillo, ciboulette, menta, cilantro, perejil crespo y común, salvia, romero, laurel, lemongrass).',
         contact: [
-            
+
             {
                 name: 'BARRIO CHINO DE BUENOS AIRES',
                 address: 'Mendoza 1661, C1428DJO',
-                phone: ['+54 9 11 4706-3980',' +54 9 11 4785-8155'],
+                phone: ['+54 9 11 4706-3980', ' +54 9 11 4785-8155'],
                 url: 'https://asiaoriental.mercadoshops.com.ar/tailandia',
                 gTagId: 'asiaOrientalClick',
-            }   
-            
+            }
+
         ],
-        socialMedia:[
+        socialMedia: [
             {
                 net: 'Instagram',
                 faIcon: faInstagramSquare,
@@ -124,13 +125,13 @@ const distThaiProducts = [
                 net: 'Faceboock',
                 faIcon: faFacebook,
                 url: 'https://www.facebook.com/asiaorientalbsas/',
-                
+
             },
             {
                 net: 'WhatsApp',
                 faIcon: faWhatsappSquare,
                 url: 'https://wa.me/541160104368',
-                
+
             },
         ]
     },
@@ -173,11 +174,11 @@ const distThaiProducts = [
         ]
     },
 
-    
+
 
 ]
 
-const restThai =[
+const restThai = [
     {
         tag: 'resto',
         img: logoKhaosan,
@@ -251,72 +252,72 @@ const restThai =[
 
 // Business Wheel
 
-const businessWheelHeaderText ={
+const businessWheelHeaderText = {
     en: `We invite you to our next business roundtable. Expand your network of business contacts and establish successful business relationships with the best suppliers in the market. Register now so you don't miss this unique opportunity.`,
     es: `Los invitamos a nuestra próxima rueda de negocios. Amplíen su red de contactos comerciales y establezcan relaciones de negocios exitosas con los mejores proveedores del mercado. Regístrense ahora para no perder esta oportunidad única.`
 }
 
 // nombre de los rubros
-const rubros={
-    autoParts:{
-        en:'Auto Parts',
-        es:'Auto Partes',
+const rubros = {
+    autoParts: {
+        en: 'Auto Parts',
+        es: 'Auto Partes',
     },
-    construction:{
-        en:'Construction',
-        es:'Construcción',
+    construction: {
+        en: 'Construction',
+        es: 'Construcción',
     },
-    foodAndBeverage:{
-        en:'Food & Beverage',
-        es:'Alimentos y bebidas',
+    foodAndBeverage: {
+        en: 'Food & Beverage',
+        es: 'Alimentos y bebidas',
     }
 }
 
-const thaiDelegationList2 =[
+const thaiDelegationList2 = [
     //Auto Parts
-    { 
+    {
         sector: `${rubros.autoParts.en}`,
         sectorEs: `${rubros.autoParts.es}`,
         brand: ['ACV RICH COMPANY LIMITED'],
         logo: acv,
         url: 'http://www.acvrich.com'
     },
-    { 
+    {
         sector: `${rubros.autoParts.en}`,
         sectorEs: `${rubros.autoParts.es}`,
         brand: ['CJ MANUFACTURING COMPANY LIMITED'],
         logo: cjGroup,
         url: 'https://www.cjmanufacturing.co.th'
     },
-    { 
+    {
         sector: `${rubros.autoParts.en}`,
         sectorEs: `${rubros.autoParts.es}`,
         brand: ['ADVANCE AUTO SUPPLY COMPANY LIMITED'],
         logo: aas,
         url: 'https://www.advance-autosupply.com'
     },
-    { 
+    {
         sector: `${rubros.autoParts.en}`,
         sectorEs: `${rubros.autoParts.es}`,
         brand: ['EXPLORAR'],
         logo: explorar,
         url: 'https://www.explorershox.com'
     },
-    { 
+    {
         sector: `${rubros.autoParts.en}`,
         sectorEs: `${rubros.autoParts.es}`,
         brand: ['KAWAMA'],
         logo: plolawat,
         url: 'https://www.polawatengine.co.th'
     },
-    { 
+    {
         sector: `${rubros.autoParts.en}`,
         sectorEs: `${rubros.autoParts.es}`,
         brand: ['PC'],
         logo: pcProducts,
         url: 'https://www.pcproductsinter.com'
     },
-    { 
+    {
         sector: `${rubros.autoParts.en}`,
         sectorEs: `${rubros.autoParts.es}`,
         brand: ['SOLEX'],
@@ -325,28 +326,28 @@ const thaiDelegationList2 =[
     },
     // End of Auto Parts
     // Construction
-    { 
+    {
         sector: `${rubros.construction.en}`,
         sectorEs: `${rubros.construction.es}`,
         brand: ['CARPETS INTERNATIONAL THAILAND PUBLIC COMPANY LIMITED'],
         logo: carpets,
         url: 'https://www.carpetsinter.com',
     },
-    { 
+    {
         sector: `${rubros.construction.en}`,
         sectorEs: `${rubros.construction.es}`,
         brand: ['BOSNY'],
         logo: bosny,
         url: 'https://www.bosny.com'
     },
-    { 
+    {
         sector: `${rubros.construction.en}`,
         sectorEs: `${rubros.construction.es}`,
         brand: ['MUANGTHONG'],
         logo: muangthong,
         url: 'https://www.mtaluminium.com/'
     },
-    { 
+    {
         sector: `${rubros.construction.en}`,
         sectorEs: `${rubros.construction.es}`,
         brand: ['TCP'],
@@ -355,14 +356,14 @@ const thaiDelegationList2 =[
     },
     // End of Construction
     // Food
-    { 
+    {
         sector: `${rubros.foodAndBeverage.en}`,
         sectorEs: `${rubros.foodAndBeverage.es}`,
         brand: ['NUT WALKER', 'SUNKIST', `NATURE'S SENSATION`, 'HERILAGE'],
         logo: heirtage,
         url: 'https://www.heritagethailand.com/corp/'
     },
-    { 
+    {
         sector: `${rubros.foodAndBeverage.en}`,
         sectorEs: `${rubros.foodAndBeverage.es}`,
         brand: ['THAI CHOICE'],
@@ -390,7 +391,7 @@ const thaiDelegationList2 =[
     //     logo: vegaNatural,
     //     url: 'http://www.vega-natural.com/'
     // },
-    { 
+    {
         sector: `${rubros.foodAndBeverage.en}`,
         sectorEs: `${rubros.foodAndBeverage.es}`,
         brand: ['THAI DANCER'],
@@ -404,21 +405,21 @@ const thaiDelegationList2 =[
     //     logo: goldenGrain,
     //     url: 'https://www.goldengrain.co.th/EN/home.html'
     // },
-    { 
+    {
         sector: `${rubros.foodAndBeverage.en}`,
         sectorEs: `${rubros.foodAndBeverage.es}`,
         brand: [`Jim's coffee`, 'Lady anna', 'Panwa', 'Panwa C'],
         logo: jimGroup,
         url: 'https://www.jimsgroup.co.th/'
     },
-    { 
+    {
         sector: `${rubros.foodAndBeverage.en}`,
         sectorEs: `${rubros.foodAndBeverage.es}`,
         brand: ['TSY'],
         logo: tsy,
         url: 'https://www.thaishingye.com/'
     },
-    { 
+    {
         sector: `${rubros.foodAndBeverage.en}`,
         sectorEs: `${rubros.foodAndBeverage.es}`,
         brand: ['A&P Orchard Since 1959'],
@@ -485,30 +486,30 @@ const campaign = [
         ]
     },
     {
-        title: {En: 'Campaign 2022', Es: 'Campaña 2022'},
+        title: { En: 'Campaign 2022', Es: 'Campaña 2022' },
         actor: 'El Gordo Cocina',
         img: gordoCocina,
-        decription: 
-        { 
-            En:`She always liked to cook. Guided by his desire and the insistence of his friends, in June 2015 he opened an account on the social network dedicated to pleasure and image "to share what he did". From 10,000, followers were growing and, after a year, he left his position in marketing a multinational to dedicate himself every day to cooking, photographing and publishing the final product.`,
-            Es:`Según cuenta, siempre le gustó cocinar. Guiado por su deseo y la insistencia de sus amigos, en junio de 2015 abrió una cuenta en la red social dedicada al placer y a la imagen "para compartir lo que hacía". De a 10.000, los seguidores aumentaban y, al cabo de un año, dejó su puesto en marketing de una multinacional para dedicarse todos los días a cocinar, fotografiarlo y publicar el producto final.`
+        decription:
+        {
+            En: `She always liked to cook. Guided by his desire and the insistence of his friends, in June 2015 he opened an account on the social network dedicated to pleasure and image "to share what he did". From 10,000, followers were growing and, after a year, he left his position in marketing a multinational to dedicate himself every day to cooking, photographing and publishing the final product.`,
+            Es: `Según cuenta, siempre le gustó cocinar. Guiado por su deseo y la insistencia de sus amigos, en junio de 2015 abrió una cuenta en la red social dedicada al placer y a la imagen "para compartir lo que hacía". De a 10.000, los seguidores aumentaban y, al cabo de un año, dejó su puesto en marketing de una multinacional para dedicarse todos los días a cocinar, fotografiarlo y publicar el producto final.`
         },
-        videos:[
+        videos: [
             {
                 icon: faInstagram,
-                title: {En: 'Pumpkin Curry', Es:'Curry de calabaza'},
+                title: { En: 'Pumpkin Curry', Es: 'Curry de calabaza' },
                 iframeUrl: 'CidocC5AliB',
                 socialNet: 'ig',
             },
             {
                 icon: faInstagram,
-                title:{En: 'Pad Thai', Es:'Pad Thai'},
+                title: { En: 'Pad Thai', Es: 'Pad Thai' },
                 iframeUrl: 'CivyndPAWgP',
                 socialNet: 'ig',
             },
             {
                 icon: faInstagram,
-                title: { En: 'Stir-fried rice with pineapple', Es:'Arroz salteado con ananá'},
+                title: { En: 'Stir-fried rice with pineapple', Es: 'Arroz salteado con ananá' },
                 iframeUrl: 'Ci72-C2AXMt',
                 socialNet: 'ig',
             },
@@ -516,30 +517,30 @@ const campaign = [
     },
 
     {
-        title: {En: 'Campaign 2020', Es: 'Campaña 2020'},
+        title: { En: 'Campaign 2020', Es: 'Campaña 2020' },
         actor: 'Paulina Cocina',
         img: paulianCocina,
-        decription: 
-        { 
-            En:`Paulina Cocina is an expert in the handling of digital tools and has managed to position herself as one of the authors most followed and valued by the management of their YouTube and Instagram profiles. It started as a game and today, many videos, posts and recipes later gathers 2 million followers. In their networks you can find all kinds of recipes, which anyone can do at home, tricks and tips to make you better and stop giving excuses when cooking and eating real food.`,
-            Es:`Paulina Cocina es una experta en el manejo de las herramientas digitales y ha conseguido posicionarse como una de las autoras más seguidas y valoradas por la gestión de sus perfiles de YouTube e Instagram. Empezó como un juego y hoy, muchos vídeos, posteos y recetas después reúne 2 millones de seguidores. En sus redes podrás encontrar recetas de todo tipo, que cualquiera puede hacer en su casa, trucos y consejos para que te salgan mejor y dejes de dar excusas a la hora de cocinar y comer comida de verdad.`
+        decription:
+        {
+            En: `Paulina Cocina is an expert in the handling of digital tools and has managed to position herself as one of the authors most followed and valued by the management of their YouTube and Instagram profiles. It started as a game and today, many videos, posts and recipes later gathers 2 million followers. In their networks you can find all kinds of recipes, which anyone can do at home, tricks and tips to make you better and stop giving excuses when cooking and eating real food.`,
+            Es: `Paulina Cocina es una experta en el manejo de las herramientas digitales y ha conseguido posicionarse como una de las autoras más seguidas y valoradas por la gestión de sus perfiles de YouTube e Instagram. Empezó como un juego y hoy, muchos vídeos, posteos y recetas después reúne 2 millones de seguidores. En sus redes podrás encontrar recetas de todo tipo, que cualquiera puede hacer en su casa, trucos y consejos para que te salgan mejor y dejes de dar excusas a la hora de cocinar y comer comida de verdad.`
         },
-        videos:[
+        videos: [
             {
                 icon: faYoutube,
-                title: { En: 'Meat with basil', Es:'Ternera con albahaca'},
+                title: { En: 'Meat with basil', Es: 'Ternera con albahaca' },
                 iframeUrl: 'https://www.youtube.com/embed/Z9v0yU7Pt4Q?si=6tF_bZNpYEKdRWsi',
                 socialNet: 'youTube',
             },
             {
                 icon: faYoutube,
-                title: { En: 'Marinated pork skewers', Es:'Pinchos de cerdo marinados'},
+                title: { En: 'Marinated pork skewers', Es: 'Pinchos de cerdo marinados' },
                 iframeUrl: 'https://www.youtube.com/embed/-aQifTROFBg?si=9_L8jAh8d_bQ9Q3D',
                 socialNet: 'youTube',
             },
             {
                 icon: faYoutube,
-                title: { En: 'Pad Thai Step by step', Es:'Pad Thai PASO A PASO'},
+                title: { En: 'Pad Thai Step by step', Es: 'Pad Thai PASO A PASO' },
                 iframeUrl: 'https://www.youtube.com/embed/OcV2agmtTk4?si=-b9gUQ2K7NEkyE33',
                 socialNet: 'youTube',
             },
@@ -548,7 +549,44 @@ const campaign = [
 ]
 // end of Campaigns Page
 
-export{
+// BM 2024
+
+const chatRooms = {
+    room01: {
+        name: { es: 'Mesa01', en: 'Table01' },
+        url: 'https://calendar.app.google/2Dk1Gex2ikzY9QT79',
+    },
+    room02: {
+        name: { es: 'Mesa02', en: 'Table02' },
+        url: 'https://calendar.app.google/yoqZXXZT1Lmok9nv9',
+    },
+}
+
+const bm2024Enterprice = [
+    {
+        sector: `${rubros.autoParts.en}`,
+        sectorEs: `${rubros.autoParts.es}`,
+        brand: ['ACV RICH COMPANY LIMITED'],
+        logo: acv,
+        url: 'http://www.acvrich.com',
+        charRoomNombre: chatRooms.room01.name.es,
+        charRoomName: chatRooms.room01.name.en,
+        chatRoomUrl: chatRooms.room01.url
+    },
+    {
+        sector: `${rubros.construction.en}`,
+        sectorEs: `${rubros.construction.es}`,
+        brand: ['BOSNY'],
+        logo: bosny,
+        url: 'https://www.bosny.com',
+        charRoomNombre: chatRooms.room02.name.es,
+        charRoomName: chatRooms.room02.name.en,
+        chatRoomUrl: chatRooms.room02.url
+    },
+]
+// Emd of MB 2024
+
+export {
     paths,
     navBarData,
     textHero,
@@ -558,4 +596,5 @@ export{
     businessWheelHeaderText,
     thaiDelegationList2,
     campaign,
+    bm2024Enterprice,
 }
