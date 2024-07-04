@@ -4,6 +4,7 @@ import {
   kickBoxing01,
   kickboxingLogo,
   mmaLogo,
+  muayThaiFestLogo,
   muayThaiLogo,
   thaiFestVideoHero,
 } from "../assets";
@@ -23,6 +24,15 @@ export const FestivalMuayThai2024 = () => {
             muted='muted'
             type='mp4'
           />
+        </Col>
+        <Col className={`${styles.overVideo}`}>
+          <Row className={`h-100 align-items-center`}>
+            <Col></Col>
+            <Col xs={7} lg={5} xl={5} xxl={3} className={``}>
+              <Image src={muayThaiFestLogo} fluid />
+            </Col>
+            <Col></Col>
+          </Row>
         </Col>
       </Row>
       <Row>

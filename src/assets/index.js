@@ -9,6 +9,7 @@ export { default as muayThaiLogo } from './svg/Muay Thai Logo.svg';
 export { default as boxeoLogo } from './svg/Boxeo Logo.svg';
 export { default as kickboxingLogo } from './svg/Kick Boxing Logo.svg';
 export { default as mmaLogo } from './svg/MMA Logo.svg';
+export { default as muayThaiFestLogo } from './svg/logoMuayThaiFest.svg';
 
 // Img
 export { default as logoTTC } from './img/new-logo-2.webp';
