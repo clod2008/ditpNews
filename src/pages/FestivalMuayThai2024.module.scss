@@ -1,0 +1,44 @@
+$frameHeigth: 60vh;
+
+.festivalMuayThai {
+  background-color: #f9f9f9;
+  margin: 0px;
+  padding: 0px;
+}
+
+.heroVideoBanner {
+  min-width: $frameHeigth;
+  height: $frameHeigth;
+  max-height: $frameHeigth;
+  position: relative;
+  overflow: hidden;
+}
+
+.videoContainer {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.subTitle {
+  text-align: center;
+  margin: 4em 0 2em 0;
+  img {
+    height: 7em;
+  }
+}
+
+.homeImage {
+  padding: 0px;
+  position: relative;
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+  }
+}

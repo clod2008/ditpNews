@@ -16,6 +16,7 @@ import { Campaigns } from "./pages/Campaigns";
 import TagManager from "react-gtm-module";
 import { PdfContainer } from "./components/PdfContainer/PdfContainer";
 import { BusinessM2024 } from "./pages/BusinessM2024";
+import { FestivalMuayThai2024 } from "./pages/FestivalMuayThai2024";
 
 const tagManagerArgs = {
   gtmId: `${process.env.REACT_APP_TAG_ID}`,
@@ -31,7 +32,7 @@ TagManager.dataLayer({
 
 function App() {
   return (
-    <Container fluid>
+    <Container fluid style={{ paddingRight: "0px", paddingLeft: "0px" }}>
       <NavBar navData={navBarData} brand={ditpIsoLogo} expand={"md"} />
       <Routes>
         <Route path={paths.autoPartsPage} element={<AutoPartsPage />} />
@@ -43,6 +44,10 @@ function App() {
         <Route path={paths.heroVideoPage} element={<HeroVideoPage />} />
         <Route path={paths.home} element={<Home />} />
         <Route path={paths.business2024} element={<BusinessM2024 />} />
+        <Route
+          path={paths.festivalMuayThai2024}
+          element={<FestivalMuayThai2024 />}
+        />
         <Route path='/report' element={<PdfContainer />} />
 
         <Route path='/*' element={<Navigate to={paths.home} replace />} />

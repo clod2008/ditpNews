@@ -12,6 +12,7 @@ const paths = {
     heroVideoPage: `herovideo`,
     campaigns: `campaigns`,
     business2024: `bm2024`,
+    festivalMuayThai2024: `festival-muay-thai-2024`
 }
 
 // Home Page
@@ -21,6 +22,11 @@ const navBarData = [
         text: `Home`,
         textEs: `Inicio`,
         link: `${paths.home}`,
+    },
+    {
+        text: `Festival Muay Thai 2024`,
+        textEs: `Festival Muay Thai 2024`,
+        link: `${paths.festivalMuayThai2024}`,
     },
     {
         text: `Business Matching 2023`,
