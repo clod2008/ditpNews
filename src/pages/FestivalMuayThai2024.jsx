@@ -1,6 +1,7 @@
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import {
   boxeoLogo,
+  grunge01,
   kickBoxing01,
   kickboxingLogo,
   mmaLogo,
@@ -14,6 +15,7 @@ import styles from "./FestivalMuayThai2024.module.scss";
 import { SectionHeader } from "../components/SectionHeader/SectionHeader";
 import { boxingSport2024 } from "../data/cont";
 import { Sellers } from "../components/Sellers/Sellers";
+import { Grunge01 } from "../assets/svg/Grunge01";
 
 export const FestivalMuayThai2024 = () => {
   return (
@@ -36,6 +38,9 @@ export const FestivalMuayThai2024 = () => {
             </Col>
             <Col></Col>
           </Row>
+        </Col>
+        <Col className={`${styles.overlayVideo}`}>
+          <Image src={grunge01} />
         </Col>
       </Row>
       <Row>

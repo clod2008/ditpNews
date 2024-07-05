@@ -30,12 +30,27 @@ $frameHeigth: 60vh;
   height: 100%;
   justify-content: center;
   align-items: center;
-  // img {
-  //   height: 33%;
-  //   border: 1px solid yellowgreen;
-  // }
+  z-index: 10;
 }
+.overlayVideo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 5;
+  padding: 0;
+  overflow: hidden; // Asegura que el contenido sobrante se recorte
 
+  img {
+    position: absolute;
+    height: 100%; // Establece la altura en 50% del contenedor
+    width: 100%; // Permite que el ancho sea proporcional
+    object-fit: cover;
+    bottom: 0;
+  }
+}
 .subTitle {
   text-align: center;
   margin: 4em 0 2em 0;
