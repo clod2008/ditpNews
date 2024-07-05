@@ -11,6 +11,9 @@ import {
 import { VideoContainer } from "../components/VideoContainer/VideoContainer";
 
 import styles from "./FestivalMuayThai2024.module.scss";
+import { SectionHeader } from "../components/SectionHeader/SectionHeader";
+import { boxingSport2024 } from "../data/cont";
+import { Sellers } from "../components/Sellers/Sellers";
 
 export const FestivalMuayThai2024 = () => {
   return (
@@ -92,6 +95,16 @@ export const FestivalMuayThai2024 = () => {
                 </Row>
               </Col>
             </Row>
+          </Container>
+        </Container>
+      </Row>
+      <SectionHeader
+        text={`Descubre las empresas y sus innovadores artículos para entrenamiento en deportes de combate`}
+      />
+      <Row>
+        <Container fluid className={`my-5`}>
+          <Container>
+            <Sellers sellers={boxingSport2024} />
           </Container>
         </Container>
       </Row>

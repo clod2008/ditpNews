@@ -1,0 +1,8 @@
+@import "../../scss/color.scss";
+
+.sectionHeader {
+  background-color: $blueDark-hex;
+  min-height: 6em;
+  color: $whiteCool-hex;
+  text-align: center;
+}

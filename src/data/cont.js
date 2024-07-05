@@ -1,6 +1,6 @@
-import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faWhatsapp, faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons"
+import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons"
 
-import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeBM, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard, siamProduce, paulianCocina, gordoCocina, gladysOlazar } from "../assets"
+import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard, siamProduce, paulianCocina, gordoCocina, gladysOlazar, fairtexLogo, rajaBoxingLogo, krudamMuayThaiSchoolLogo, muayThaiInstituteLogo, keatkhamtornGymLogo, topKingBoxingLogo, thaiBattleboxingLogo } from "../assets"
 
 const paths = {
     home: `/home`,
@@ -276,6 +276,10 @@ const rubros = {
     foodAndBeverage: {
         en: 'Food & Beverage',
         es: 'Alimentos y bebidas',
+    },
+    boxing: {
+        en: 'Boxing',
+        es: 'Boxing',
     }
 }
 
@@ -592,6 +596,66 @@ const bm2024Enterprice = [
 ]
 // Emd of MB 2024
 
+// Festival Muay Thai 2024 BM
+const boxingSport2024 = [
+    {
+        sector: `${rubros.boxing.en}`,
+        sectorEs: `${rubros.boxing.es}`,
+        brand: ['Fairtex'],
+        logo: fairtexLogo,
+        url: 'https://www.fairtex.com/',
+        shop: 'https://www.fairtex.com/collections/all',
+    },
+    {
+        sector: `${rubros.boxing.en}`,
+        sectorEs: `${rubros.boxing.es}`,
+        brand: ['Raja Boxing'],
+        logo: rajaBoxingLogo,
+        url: 'https://www.rajaboxing.com/',
+        shop: 'https://www.rajaboxing.com/shop/',
+    },
+    {
+        sector: `${rubros.boxing.en}`,
+        sectorEs: `${rubros.boxing.es}`,
+        brand: ['Krudam Muay Thai School'],
+        logo: krudamMuayThaiSchoolLogo,
+        url: 'https://krudamgym.com',
+        shop: 'https://krudamgym.com/shop/',
+    },
+    {
+        sector: `${rubros.boxing.en}`,
+        sectorEs: `${rubros.boxing.es}`,
+        brand: ['Muay Thai Institute'],
+        logo: muayThaiInstituteLogo,
+        url: 'https://www.muaythai-institute.com/',
+        shop: 'https://www.muaythai-institute.com/products',
+    },
+    {
+        sector: `${rubros.boxing.en}`,
+        sectorEs: `${rubros.boxing.es}`,
+        brand: ['KEATKHAMTORN GYM'],
+        logo: keatkhamtornGymLogo,
+        url: 'https://www.keatkhamtorngym.com/',
+    },
+    {
+        sector: `${rubros.boxing.en}`,
+        sectorEs: `${rubros.boxing.es}`,
+        brand: ['TOP KING BOXING'],
+        logo: topKingBoxingLogo,
+        url: 'https://www.topkingboxing.com/',
+        shop: 'https://www.topkingboxing.com/category',
+    },
+    {
+        sector: `${rubros.boxing.en}`,
+        sectorEs: `${rubros.boxing.es}`,
+        brand: ['Thai Battle boxing'],
+        logo: thaiBattleboxingLogo,
+        url: 'http://www.thaibattleboxing.com/',
+        shop: 'http://www.thaibattleboxing.com/shop/',
+    },
+]
+
+
 export {
     paths,
     navBarData,
@@ -603,4 +667,5 @@ export {
     thaiDelegationList2,
     campaign,
     bm2024Enterprice,
+    boxingSport2024,
 }

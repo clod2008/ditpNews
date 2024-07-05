@@ -61,5 +61,14 @@ export { default as thaiFestVideoHero } from './videos/thaiFesVideoHero.mp4';
 //PDF
 export { default as finalReport } from './pdf/finalReport2023.pdf';
 
+// Boxing Logos
+export { default as fairtexLogo } from './img/boxingLogos/fairtex-logo.avif';
+export { default as rajaBoxingLogo } from './img/boxingLogos/gold-logo.png';
+export { default as krudamMuayThaiSchoolLogo } from './img/boxingLogos/Asset-3.svg';
+export { default as muayThaiInstituteLogo } from './img/boxingLogos/432658_285a2699ce2f412390c75e992680a6b7.gif';
+export { default as keatkhamtornGymLogo } from './img/boxingLogos/logokt.webp';
+export { default as topKingBoxingLogo } from './img/boxingLogos/LOGO_TKB_2011_en.webp';
+export { default as thaiBattleboxingLogo } from './img/boxingLogos/new_logo.png';
+
 
 
