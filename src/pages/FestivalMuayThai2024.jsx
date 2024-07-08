@@ -1,5 +1,6 @@
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import {
+  borderWhite,
   boxeoLogo,
   grunge01,
   kickBoxing01,
@@ -33,7 +34,7 @@ export const FestivalMuayThai2024 = () => {
         <Col className={`${styles.overVideo}`}>
           <Row className={`h-100 align-items-center`}>
             <Col></Col>
-            <Col xs={7} lg={5} xl={5} xxl={3} className={``}>
+            <Col xs={9} lg={5} xl={5} xxl={3} className={``}>
               <Image src={muayThaiFestLogo} fluid />
             </Col>
             <Col></Col>
@@ -41,6 +42,9 @@ export const FestivalMuayThai2024 = () => {
         </Col>
         <Col className={`${styles.overlayVideo}`}>
           <Image src={grunge01} />
+        </Col>
+        <Col className={`${styles.overlayVideoBorder}`}>
+          <Image src={borderWhite} />
         </Col>
       </Row>
       <Row>

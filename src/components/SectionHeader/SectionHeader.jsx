@@ -7,7 +7,7 @@ export const SectionHeader = ({ text }) => {
     <Row className={`${styles.sectionHeader} align-items-center `}>
       <Container fluid>
         <Container>
-          <h3>{text}</h3>
+          <h3 className='py-3'>{text}</h3>
         </Container>
       </Container>
     </Row>

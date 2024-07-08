@@ -11,6 +11,7 @@ export { default as kickboxingLogo } from './svg/Kick Boxing Logo.svg';
 export { default as mmaLogo } from './svg/MMA Logo.svg';
 export { default as muayThaiFestLogo } from './svg/logoMuayThaiFest.svg';
 export { default as grunge01 } from './svg/grunge01.svg';
+export { default as borderWhite } from './svg/borderWhite.svg';
 
 // Img
 export { default as logoTTC } from './img/new-logo-2.webp';
