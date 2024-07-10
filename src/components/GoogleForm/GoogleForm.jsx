@@ -16,7 +16,6 @@ export const GoogleForm = ({
       if (containerRef.current) {
         const containerWidth =
           containerRef.current.getBoundingClientRect().width;
-        console.log("Container width:", containerWidth);
         setWidth(containerWidth);
       }
     };
@@ -34,7 +33,7 @@ export const GoogleForm = ({
   }, []);
 
   useEffect(() => {
-    console.log("Width state updated:", width);
+    // console.log("Width state updated:", width);
   }, [width]);
 
   return (

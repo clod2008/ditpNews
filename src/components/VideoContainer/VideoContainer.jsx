@@ -42,9 +42,9 @@ export const VideoContainer = ({
 VideoContainer.propTypes = {
   src: PropTypes.string.isRequired,
   controls: PropTypes.bool,
-  autoplay: PropTypes.bool,
+  autoplay: PropTypes.string,
   loop: PropTypes.bool,
-  muted: PropTypes.bool,
+  muted: PropTypes.string,
   poster: PropTypes.string,
   width: PropTypes.number,
   height: PropTypes.number,

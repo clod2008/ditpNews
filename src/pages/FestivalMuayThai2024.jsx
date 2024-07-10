@@ -21,9 +21,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { GoogleForm } from "../components/GoogleForm/GoogleForm";
 import useScrollTo from "../hooks/useScrollTo";
+import { useEffect, useState } from "react";
+import useWindowWidth from "../hooks/useWindowWidth";
 
 export const FestivalMuayThai2024 = () => {
   const scrollTo = useScrollTo();
+
+  const windowWidth = useWindowWidth();
+
+  const [formHeight, setFormHeight] = useState(1210);
+
+  console.log(windowWidth);
+
+  useEffect(() => {
+    if (windowWidth < 768) {
+      setFormHeight(1350);
+    }
+    if (windowWidth < 365) {
+      setFormHeight(1400);
+    }
+  }, [windowWidth]);
 
   return (
     <section className={`${styles.festivalMuayThai}`}>
@@ -166,7 +183,7 @@ export const FestivalMuayThai2024 = () => {
               <Col>
                 <GoogleForm
                   src='https://docs.google.com/forms/d/e/1FAIpQLSdWkZ5DlEjJpC_Q_iZgFU3HZ1k8s_m5iNWebcbzzZR8_CqxMQ/viewform?embedded=true'
-                  height='1210'
+                  height={formHeight}
                   marginheight='0'
                   marginwidth='0'
                   title='Contactos Festuval Muay Thai 2024'
