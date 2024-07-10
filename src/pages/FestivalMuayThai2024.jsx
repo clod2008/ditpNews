@@ -31,8 +31,6 @@ export const FestivalMuayThai2024 = () => {
 
   const [formHeight, setFormHeight] = useState(1210);
 
-  console.log(windowWidth);
-
   useEffect(() => {
     if (windowWidth < 768) {
       setFormHeight(1350);
