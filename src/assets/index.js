@@ -12,6 +12,7 @@ export { default as mmaLogo } from './svg/MMA Logo.svg';
 export { default as muayThaiFestLogo } from './svg/logoMuayThaiFest.svg';
 export { default as grunge01 } from './svg/grunge01.svg';
 export { default as borderWhite } from './svg/borderWhite.svg';
+export { default as flag } from './svg/flag.svg';
 
 // Img
 export { default as logoTTC } from './img/new-logo-2.webp';
@@ -71,6 +72,8 @@ export { default as muayThaiInstituteLogo } from './img/boxingLogos/432658_285a2
 export { default as keatkhamtornGymLogo } from './img/boxingLogos/logokt.webp';
 export { default as topKingBoxingLogo } from './img/boxingLogos/LOGO_TKB_2011_en.webp';
 export { default as thaiBattleboxingLogo } from './img/boxingLogos/new_logo.png';
+export { default as nowMuayThaiLogo } from './img/boxingLogos/NowMuayThaiLogo-red.png';
+export { default as buakawGalleryLogo } from './img/boxingLogos/buakawgallery_light.webp';
 
 
 

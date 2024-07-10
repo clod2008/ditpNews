@@ -54,7 +54,7 @@ export const Sellers = ({ sellers }) => {
                 <Col className={`my-2`}>
                   <FontAwesomeIcon icon={faShoppingBag} size='1x' />
                   <a href={data.shop} rel='noreferrer' target='_blank'>
-                    {data.shop}
+                    Shop
                   </a>
                 </Col>
               )}

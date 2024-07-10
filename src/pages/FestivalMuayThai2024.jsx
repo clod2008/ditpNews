@@ -2,6 +2,7 @@ import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import {
   borderWhite,
   boxeoLogo,
+  flag,
   grunge01,
   kickBoxing01,
   kickboxingLogo,
@@ -59,6 +60,9 @@ export const FestivalMuayThai2024 = () => {
               <Col md={12} lg={10}>
                 <Row>
                   <Col md={12} lg={7} className='mb-5'>
+                    <Row className={`${styles.flag}`}>
+                      <Image src={flag} fluid />
+                    </Row>
                     <h1>
                       El <i>Department of International Trade Promotion</i> de
                       Tailandia invita a descubrir la excelencia en indumentaria
@@ -66,24 +70,24 @@ export const FestivalMuayThai2024 = () => {
                       Thai 2024 en Argentina
                     </h1>
                   </Col>
-                  <Col
-                    className={`${styles.cta01}`}
-                    lg={{ span: 4, offset: 1 }}>
-                    <Col className={`${styles.date}`}>
-                      <FontAwesomeIcon icon={faCalendar} shake size='2xl' />
-                      <h2>8 y 9 de agosto</h2>
-                      <span>Reuniones virtuales</span>
-                      <hr />
-                      <h2>30 de agosto</h2>
-                      <span>Jornada presencial</span>
-                      <br />
-                      <br />
+                  <Col className='p-2' lg={{ span: 4, offset: 1 }}>
+                    <Col className={`${styles.cta01}`}>
+                      <Col className={`${styles.date}`}>
+                        <FontAwesomeIcon icon={faCalendar} shake size='2xl' />
+                        <h2>8 y 9 de agosto</h2>
+                        <span>Reuniones virtuales</span>
+                        <hr />
+                        <h2>30 de agosto</h2>
+                        <span>Jornada presencial</span>
+                        <br />
+                        <br />
+                      </Col>
+                      <Button
+                        className='w-100'
+                        onClick={() => scrollTo("contactFormMuayThai")}>
+                        <span className=''>¡Registrate ahora!</span>
+                      </Button>
                     </Col>
-                    <Button
-                      className='w-100'
-                      onClick={() => scrollTo("contactFormMuayThai")}>
-                      <span className=''>¡Registrate ahora!</span>
-                    </Button>
                   </Col>
                 </Row>
                 <Col className={`${styles.subTitle}`}>
@@ -120,7 +124,7 @@ export const FestivalMuayThai2024 = () => {
                     </p>
 
                     <Button
-                      className='w-100 py-3'
+                      className={`w-100 py-3 ${styles.cta2}`}
                       onClick={() => scrollTo("contactFormMuayThai")}>
                       ¡Registrate ahora y asegurá tu lugar en este evento
                       exclusivo!
@@ -162,7 +166,7 @@ export const FestivalMuayThai2024 = () => {
               <Col>
                 <GoogleForm
                   src='https://docs.google.com/forms/d/e/1FAIpQLSdWkZ5DlEjJpC_Q_iZgFU3HZ1k8s_m5iNWebcbzzZR8_CqxMQ/viewform?embedded=true'
-                  height='1056'
+                  height='1210'
                   marginheight='0'
                   marginwidth='0'
                   title='Contactos Festuval Muay Thai 2024'
