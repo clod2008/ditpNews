@@ -100,7 +100,7 @@ export const FestivalMuayThai2024 = () => {
                       <Button
                         className='w-100'
                         onClick={() => scrollTo("contactFormMuayThai")}>
-                        <span className=''>¡Registrate ahora!</span>
+                        <span className=''>¡Regístrese ahora!</span>
                       </Button>
                     </Col>
                   </Col>
@@ -141,7 +141,7 @@ export const FestivalMuayThai2024 = () => {
                     <Button
                       className={`w-100 py-3 ${styles.cta2}`}
                       onClick={() => scrollTo("contactFormMuayThai")}>
-                      ¡Registrate ahora y asegurá tu lugar en este evento
+                      ¡Regístrese ahora y asegure su lugar en este evento
                       exclusivo!
                     </Button>
                   </Col>
