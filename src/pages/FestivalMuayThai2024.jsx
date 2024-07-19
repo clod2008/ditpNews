@@ -103,6 +103,13 @@ export const FestivalMuayThai2024 = () => {
                         <span className=''>¡Regístrese ahora!</span>
                       </Button>
                     </Col>
+                    <Row className={`justify-content-center mt-4`}>
+                      <Col>
+                        <p className={`text-center mt-2`}>
+                          <strong>Evento sin cargo</strong>
+                        </p>
+                      </Col>
+                    </Row>
                   </Col>
                 </Row>
                 <Col className={`${styles.subTitle}`}>
@@ -144,6 +151,13 @@ export const FestivalMuayThai2024 = () => {
                       ¡Regístrese ahora y asegure su lugar en este evento
                       exclusivo!
                     </Button>
+                    <Row className={`justify-content-center mt-1`}>
+                      <Col>
+                        <p className={`text-center mt-2`}>
+                          <strong>Evento sin cargo</strong>
+                        </p>
+                      </Col>
+                    </Row>
                   </Col>
                   <Col
                     md={{ span: 6, offset: 1 }}
