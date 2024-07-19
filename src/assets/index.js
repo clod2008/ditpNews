@@ -17,7 +17,7 @@ export { default as flag } from './svg/flag.svg';
 // Img
 export { default as logoTTC } from './img/new-logo-2.webp';
 export { default as noPic450x450 } from './img/noPicture450x450.webp';
-export { default as bannerHomeBM } from './img/thaiArg450Banner.webp';
+export { default as bannerHomeBM } from './img/festivalMT24Banner.webp';
 export { default as bannerHomeTradeMinister } from './img/minister450Banner.webp';
 export { default as bannerHomeJurin } from './img/news02.webp';
 export { default as logoAsiaOriental } from './img/logoAsia.webp';
@@ -57,8 +57,8 @@ export { default as gordoCocina } from './img/gordoCocina.webp';
 export { default as gladysOlazar } from './img/gladysOlazar.webp';
 
 //Videos
-export { default as carouselBMvideo } from './videos/ReseumenBMwFormat.webm';
-export { default as carouselBMvideo500x500 } from './videos/ResumenBM500x500.webm';
+export { default as carouselBMvideo } from './videos/FestivalMT2024-banner-desck.webm';
+export { default as carouselBMvideo500x500 } from './videos/FestivalMT2024-banner-500.webm';
 export { default as thaiFestVideoHero } from './videos/thaiFesVideoHero.mp4';
 
 //PDF
