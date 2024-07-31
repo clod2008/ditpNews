@@ -74,6 +74,7 @@ export { default as topKingBoxingLogo } from './img/boxingLogos/LOGO_TKB_2011_en
 export { default as thaiBattleboxingLogo } from './img/boxingLogos/new_logo.png';
 export { default as nowMuayThaiLogo } from './img/boxingLogos/NowMuayThaiLogo-red.png';
 export { default as buakawGalleryLogo } from './img/boxingLogos/buakawgallery_light.webp';
+export { default as tuffSportLogo } from './img/boxingLogos/tuff-logo_500x@2x.webp';
 
 
 

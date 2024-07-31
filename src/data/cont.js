@@ -1,6 +1,6 @@
 import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons"
 
-import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard, siamProduce, paulianCocina, gordoCocina, gladysOlazar, fairtexLogo, rajaBoxingLogo, krudamMuayThaiSchoolLogo, muayThaiInstituteLogo, keatkhamtornGymLogo, topKingBoxingLogo, thaiBattleboxingLogo, nowMuayThaiLogo, buakawGalleryLogo } from "../assets"
+import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard, siamProduce, paulianCocina, gordoCocina, gladysOlazar, fairtexLogo, rajaBoxingLogo, krudamMuayThaiSchoolLogo, muayThaiInstituteLogo, keatkhamtornGymLogo, topKingBoxingLogo, thaiBattleboxingLogo, nowMuayThaiLogo, buakawGalleryLogo, tuffSportLogo } from "../assets"
 
 const paths = {
     home: `/home`,
@@ -652,6 +652,13 @@ const boxingSport2024 = [
     //     logo: keatkhamtornGymLogo,
     //     url: 'https://www.keatkhamtorngym.com/',
     // },
+    {
+        sector: `${rubros.boxing.en}`,
+        sectorEs: `${rubros.boxing.es}`,
+        brand: ['Tuff Sport'],
+        logo: tuffSportLogo,
+        url: 'https://www.tuffsport.com/',
+    },
     {
         sector: `${rubros.boxing.en}`,
         sectorEs: `${rubros.boxing.es}`,
