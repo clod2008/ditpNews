@@ -23,6 +23,9 @@ import { GoogleForm } from "../components/GoogleForm/GoogleForm";
 import useScrollTo from "../hooks/useScrollTo";
 import { useEffect, useState } from "react";
 import useWindowWidth from "../hooks/useWindowWidth";
+import { GoogleMap } from "../components/GoogleMap/GoogleMap";
+import { isMobile } from "react-device-detect";
+import { Link } from "react-router-dom";
 
 export const FestivalMuayThai2024 = () => {
   const scrollTo = useScrollTo();
@@ -30,6 +33,10 @@ export const FestivalMuayThai2024 = () => {
   const windowWidth = useWindowWidth();
 
   const [formHeight, setFormHeight] = useState(1210);
+
+  const handleGoogleMap = (url) => {
+    window.open(url, "_blank");
+  };
 
   useEffect(() => {
     if (windowWidth < 768) {
@@ -191,6 +198,37 @@ export const FestivalMuayThai2024 = () => {
                     <br />
                   </Col>
                 </Col>
+                <Col
+                  className='mt-5 mb-2'
+                  style={{
+                    overflow: "hidden",
+                    borderRadius: "18px",
+                  }}>
+                  {isMobile ? (
+                    <Link
+                      to='#'
+                      onClick={() => {
+                        handleGoogleMap(
+                          "https://www.google.com/maps/place/RA%C3%8DZ/@-34.6193882,-58.363959,17z/data=!3m1!4b1!4m6!3m5!1s0x95a33570e0d35341:0x1af1f5891236c754!8m2!3d-34.6193926!4d-58.3613841!16s%2Fg%2F11tdmqcp5f?entry=ttu"
+                        );
+                      }}>
+                      Ver en GoogleMap (Mobile)
+                    </Link>
+                  ) : (
+                    <GoogleMap
+                      src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.3977275096827!2d-58.36395902350295!3d-34.619388158327304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a33570e0d35341%3A0x1af1f5891236c754!2zUkHDjVo!5e0!3m2!1ses-419!2sar!4v1723388983935!5m2!1ses-419!2sar'
+                      height={formHeight / 2}
+                      marginheight='0'
+                      marginwidth='0'
+                      title='Contactos Festuval Muay Thai 2024'
+                    />
+                  )}
+                </Col>
+                <p>
+                  <strong>
+                    Juana Manso 1770, C1107 Cdad. Autónoma de Buenos Aires
+                  </strong>
+                </p>
               </Col>
               <Col>
                 <GoogleForm
