@@ -1,4 +1,4 @@
-import { noPic450x450, plolawat, acv, skPolymer, adbSealant, advanceAutoSupply, cjManufacturing, seiKenheiMark, perfectRubberParts, proPartDistributor, vpsEquipment, jungle4x4, odAndLeo, sahamitrPressureContainer, mccIndustrian, nokEquipment } from "../assets";
+import { noPic450x450, plolawat, acv, skPolymer, adbSealant, advanceAutoSupply, cjManufacturing, seiKenheiMark, perfectRubberParts, proPartDistributor, vpsEquipment, jungle4x4, odAndLeo, sahamitrPressureContainer, mccIndustrian, nokEquipment, xPertTechinal, luckyFlame, spr, innovekAsia, mrWheel } from "../assets";
 
 const thaiDelegationList2025Industry = [
   // Automotive / Auto Parts and Accessories
@@ -157,7 +157,7 @@ const thaiDelegationList2025Industry = [
     sector: "Electronics / Electrical Products and Parts",
     sectorEs: "Electrónica / Productos y Partes Eléctricas",
     brand: ["X-PER TECHNIA"],
-    logo: noPic450x450,
+    logo: xPertTechinal,
     url: "https://www.xperasia.com",
     catalogUrl: "https://drive.google.com/file/d/1l-uojBR09fP_g-PerJm008ef9jaIIYXl/view?usp=sharing",
     description: "Air curtain, mist cooling, evaporative air cooler, air curtain for cold room & trucks, stainless steel 316L, air partition, automatic air curtain, mist cooling fan unit, HEPA filter air purifier.",
@@ -168,7 +168,7 @@ const thaiDelegationList2025Industry = [
     sector: "Construction materials / Building materials",
     sectorEs: "Materiales de construcción",
     brand: ["LUCKY FLAME"],
-    logo: noPic450x450,
+    logo: luckyFlame,
     url: "https://www.luckyflame.co.th",
     catalogUrl: "https://drive.google.com/file/d/1oUly2gv3VCszqaciGXEEu4dl_1n_eiau/view?usp=sharing",
     description: "Gas cooker, gas regulator.",
@@ -178,7 +178,7 @@ const thaiDelegationList2025Industry = [
     sector: "Construction materials / Building materials",
     sectorEs: "Materiales de construcción",
     brand: ["SPR"],
-    logo: noPic450x450,
+    logo: spr,
     url: "https://www.suparich.co.th/th",
     catalogUrl: "https://drive.google.com/file/d/1v6QEv10fjsuELQAFZ8yj4bbAa5TZ0DGI/view?usp=sharing",
     description: "Steel door, fire proof steel door, roll up fire resistant doors, blast resistant doors, prefabricated toilet partitions.",
@@ -189,7 +189,7 @@ const thaiDelegationList2025Industry = [
     sector: "Machinery / Mechanical equipment",
     sectorEs: "Maquinaria / Equipos mecánicos",
     brand: ["INNOVEK ASIA"],
-    logo: noPic450x450,
+    logo: innovekAsia,
     url: "https://www.innovek.co.th",
     catalogUrl: "https://drive.google.com/file/d/1XuT7tbdIFMgu5BArdbW4dp8PRdWgca-i/view?usp=sharing",
     description: "Cooling tower: one-stop service cooling tower with energy saving and zero emissions.",
@@ -199,7 +199,7 @@ const thaiDelegationList2025Industry = [
     sector: "Machinery / Mechanical equipment",
     sectorEs: "Maquinaria / Equipos mecánicos",
     brand: ["MR.WHEEL"],
-    logo: noPic450x450,
+    logo: mrWheel,
     url: "https://www.thanedproducts.com/",
     catalogUrl: "https://drive.google.com/file/d/1HwUDZFhdDQpbwTn9yDgqijN46KlrOig_/view?usp=sharing",
     description: "Industry casters and wheels for automotive, food, textile, construction. Nylon/polyurethane casters, scaffold wheels.",

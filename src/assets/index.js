@@ -92,5 +92,35 @@ export { default as sahamitrPressureContainer } from './img/autopartsLogos2025/s
 export { default as seiKenheiMark } from './img/autopartsLogos2025/sei_kenhei_mark_1x.webp';
 export { default as vpsEquipment } from './img/autopartsLogos2025/v_p_s_equipment_1x.webp';
 
+// Electronics 2025 logos
+export { default as xPertTechinal } from './img/electronicsLogos2025/x_per_technia_.webp';
 
+// Construction 2025 logos
+export { default as luckyFlame } from './img/constructionsLogos2025/lucky_flame.webp';
+export { default as spr } from './img/constructionsLogos2025/spr.webp';
 
+// Machinery 2025 logos
+export { default as innovekAsia } from './img/machineryLogos2025/innovek_asia_.webp';
+export { default as mrWheel } from './img/machineryLogos2025/mr_wheel.webp';
+
+// Food 2025 logos
+export { default as kellyAndCompanionCo } from './img/foodLogos2025/kelly_and_companion_co.webp';
+export { default as itailCorporationPublicCompany } from './img/foodLogos2025/itail_corporation_public_company.webp';
+export { default as bangSueChiaMengRiceMill } from './img/foodLogos2025/bang_sue_chia_meng_rice_mill.webp';
+export { default as asianFoodNetwork } from './img/foodLogos2025/asian_food_network.webp';
+export { default as taanThai } from './img/foodLogos2025/taan_thai.webp';
+export { default as krsSpicyFoodCompany } from './img/foodLogos2025/k_r_s_spicy_food_company.webp';
+export { default as brihtTimeIntertrade } from './img/foodLogos2025/briht_time_intertrade.webp';
+export { default as worldFoodsInternational } from './img/foodLogos2025/world_foods_international_.webp';
+export { default as royalPlusPublicCompany } from './img/foodLogos2025/royal_plus_public_company.webp';
+export { default as tT } from './img/foodLogos2025/t_t.webp';
+export { default as thaiCoco } from './img/foodLogos2025/thai_coco.webp';
+export { default as takerngPineappleIndustrial } from './img/foodLogos2025/takerng_pineapple_industrial_.webp';
+export { default as onGreenProduces } from './img/foodLogos2025/on_green_produces_.webp';
+export { default as starCannery } from './img/foodLogos2025/star_cannery.webp';
+export { default as pgsFoods } from './img/foodLogos2025/pgs_foods.webp';
+export { default as fruittara } from './img/foodLogos2025/fruittara.webp';
+export { default as natureBestFood } from './img/foodLogos2025/nature_best_food.webp';
+export { default as venaSukum } from './img/foodLogos2025/vena_sukum.webp';
+export { default as buono } from './img/foodLogos2025/buono.webp';
+export { default as vfoods } from './img/foodLogos2025/vfoods.webp';
