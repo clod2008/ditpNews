@@ -12,7 +12,8 @@ const paths = {
     heroVideoPage: `herovideo`,
     campaigns: `campaigns`,
     business2024: `bm2024`,
-    festivalMuayThai2024: `festival-muay-thai-2024`
+    festivalMuayThai2024: `festival-muay-thai-2024`,
+    bbm2025: `bbm2025`, // nueva ruta para BBM 2025
 }
 
 // Home Page
@@ -29,9 +30,20 @@ const navBarData = [
         link: `${paths.festivalMuayThai2024}`,
     },
     {
-        text: `Business Matching 2023`,
-        textEs: `Ronda de negocios 2023`,
-        link: `${paths.bussinesWeel}`,
+        text: `Business Meetings`, // inglés
+        textEs: `Rondas de Negocios`,
+        dropdown: [
+            {
+                text: `BBM 2023`,
+                textEs: `BBM 2023`,
+                link: `${paths.bussinesWeel}`,
+            },
+            {
+                text: `BBM 2025`,
+                textEs: `BBM 2025`,
+                link: `${paths.bbm2025}`,
+            },
+        ],
     },
     {
         text: `Campaigns`,

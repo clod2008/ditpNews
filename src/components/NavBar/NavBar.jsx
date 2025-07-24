@@ -1,7 +1,7 @@
 
 import { useContext } from 'react'
 import {  NavLink } from 'react-router-dom'
-import {  Container, Image, Nav, Navbar, Offcanvas,} from 'react-bootstrap'
+import {  Container, Image, Nav, Navbar, Offcanvas, NavDropdown } from 'react-bootstrap'
 import TagManager from 'react-gtm-module'
 
 import { LangContext } from '../../context/langContex'
@@ -49,23 +49,43 @@ export const NavBar = ( {navData, brand, expand} ) => {
 
             <Nav className={`justify-content-end flex-grow-1 pe-3 ${styles.customOffCanvas}`}>
                 {navData.map((item, id ) => 
-                    <div
-                        key={id}
-                        className={styles.customNavLink}
+                    item.dropdown ? (
+                        <NavDropdown
+                            key={id}
+                            title={langSelected === 'en' ? item.text : item.textEs}
+                            id={`nav-dropdown-${id}`}
+                            className={styles.customNavLink}
                         >
-                        <NavLink
-                            to={item.link}
-                            className={({isActive }) => isActive ? styles.navActive : '' }
-                            onClick={()=> handleClick(item.text, item.textEs)}  
+                            {item.dropdown.map((subItem, subId) => (
+                                <NavDropdown.Item
+                                    key={subId}
+                                    as={NavLink}
+                                    to={subItem.link}
+                                    className={({isActive }) => isActive ? styles.navActive : '' }
+                                    onClick={()=> handleClick(subItem.text, subItem.textEs)}
+                                >
+                                    {langSelected === 'en' ? subItem.text : subItem.textEs}
+                                </NavDropdown.Item>
+                            ))}
+                        </NavDropdown>
+                    ) : (
+                        <div
+                            key={id}
+                            className={styles.customNavLink}
                         >
-                             { langSelected ==='en' ? item.text : item.textEs }
-                        </NavLink>
-                    </div>
+                            <NavLink
+                                to={item.link}
+                                className={({isActive }) => isActive ? styles.navActive : '' }
+                                onClick={()=> handleClick(item.text, item.textEs)}  
+                            >
+                                { langSelected ==='en' ? item.text : item.textEs }
+                            </NavLink>
+                        </div>
+                    )
                 )}
-                    <Nav.Link 
-                    >  
-                        <SwitchButton label={langSelected} id={'lang'}/>
-                    </Nav.Link>
+                <Nav.Link>  
+                    <SwitchButton label={langSelected} id={'lang'}/>
+                </Nav.Link>
             </Nav>
 
 

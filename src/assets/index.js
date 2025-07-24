@@ -13,6 +13,7 @@ export { default as muayThaiFestLogo } from './svg/logoMuayThaiFest.svg';
 export { default as grunge01 } from './svg/grunge01.svg';
 export { default as borderWhite } from './svg/borderWhite.svg';
 export { default as flag } from './svg/flag.svg';
+export { default as faena } from './svg/logoFaena.svg';
 
 // Img
 export { default as logoTTC } from './img/new-logo-2.webp';
@@ -75,6 +76,21 @@ export { default as thaiBattleboxingLogo } from './img/boxingLogos/new_logo.png'
 export { default as nowMuayThaiLogo } from './img/boxingLogos/NowMuayThaiLogo-red.png';
 export { default as buakawGalleryLogo } from './img/boxingLogos/buakawgallery_light.webp';
 export { default as tuffSportLogo } from './img/boxingLogos/tuff-logo_500x@2x.webp';
+
+// Autoparts 2025 logos
+export { default as adbSealant } from './img/autopartsLogos2025/adb_sealant_1x.webp';
+export { default as advanceAutoSupply } from './img/autopartsLogos2025/advance_auto_supply_1x.webp';
+export { default as cjManufacturing } from './img/autopartsLogos2025/cj_manufacturing_1x.webp';
+export { default as jungle4x4 } from './img/autopartsLogos2025/jungle4x4_1x.webp';
+export { default as mccIndustrian } from './img/autopartsLogos2025/m_c_c_industrian_1x.webp';
+export { default as nokEquipment } from './img/autopartsLogos2025/n_o_k_equipment_1x.webp';
+export { default as odAndLeo } from './img/autopartsLogos2025/od_and_leo_1x.webp';
+export { default as perfectRubberParts } from './img/autopartsLogos2025/perfect_rubber_parts_1x.webp';
+export { default as proPartDistributor } from './img/autopartsLogos2025/pro_part_distributor_1x.webp';
+export { default as skPolymer } from './img/autopartsLogos2025/s_k_polymer_1x.webp';
+export { default as sahamitrPressureContainer } from './img/autopartsLogos2025/sahamitr_pressure_container__1x.webp';
+export { default as seiKenheiMark } from './img/autopartsLogos2025/sei_kenhei_mark_1x.webp';
+export { default as vpsEquipment } from './img/autopartsLogos2025/v_p_s_equipment_1x.webp';
 
 
 

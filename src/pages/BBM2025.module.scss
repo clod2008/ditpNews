@@ -1,0 +1,160 @@
+$frameHeigth: 60vh;
+
+.festivalMuayThai {
+  background-color: #f9f9f9;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  h1 {
+    font-size: 28px;
+  }
+  button {
+    border-radius: 500px;
+  }
+}
+
+.flag {
+  display: flex;
+
+  justify-items: center;
+  // margin: 0px;
+  img {
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+  }
+}
+
+.heroVideoBanner {
+  min-height: $frameHeigth;
+  max-height: $frameHeigth;
+  height: $frameHeigth;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin: 0px;
+  background-color: #f9f9f9;
+}
+
+.videoContainer {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+  width: 100vw;
+  position: absolute;
+}
+
+.overVideo {
+  position: absolute;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.overlayVideo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 5;
+  padding: 0;
+  overflow: hidden; // Asegura que el contenido sobrante se recorte
+
+  img {
+    position: absolute;
+    height: 100%; // Establece la altura en 50% del contenedor
+    width: 100%; // Permite que el ancho sea proporcional
+    object-fit: cover;
+    bottom: 0;
+  }
+}
+.overlayVideoBorder {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  // align-items: flex-end;
+  z-index: 6;
+  padding: 0px;
+  overflow: hidden;
+  border-bottom: 2px solid #f9f9f9;
+
+  img {
+    position: absolute;
+    display: flex;
+    // position: absolute;
+    // height: 100%;
+    min-height: 20% !important;
+    width: 100%; // Permite que el ancho sea proporcional
+    object-fit: cover;
+    bottom: 0px;
+  }
+}
+
+.cta01 {
+  border: 4px solid black;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2em 2em 0 2em;
+
+  button {
+    display: flex;
+    margin-bottom: -30px;
+    font-size: 20px;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
+    height: 54px;
+  }
+  svg {
+    height: 60px;
+    margin-bottom: 1em;
+  }
+}
+
+.cta2 {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 0 42px 0 42px;
+}
+
+
+.subTitle {
+  text-align: center;
+  margin: 4em 0 2em 0;
+  img {
+    height: 7em;
+  }
+}
+
+.homeImage {
+  padding: 0px;
+  position: relative;
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.date {
+    text-align: center;
+    h2 {
+      font-size: 28px;
+    }
+    span {
+      font-size: 20px;
+    }
+  }
+  

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import {
   Card,
+  CardBody,
   Col,
   Container,
   Image,
@@ -10,7 +11,7 @@ import {
   ToggleButtonGroup,
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faGlobe, faFilePdf } from "@fortawesome/free-solid-svg-icons";
 
 import { LangSelector } from "../LangSelector";
 import { LangContext } from "../../context/langContex";
@@ -58,6 +59,8 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0 }) => {
 
   const buttonsSelectorWidth = 100 / sectors.length;
 
+  console.log(lisExpFiltred)
+
   return (
     <Row className={styles.wrapper}>
       <Container fluid>
@@ -103,7 +106,7 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0 }) => {
                     {langSelected === "en" ? data.sector : data.sectorEs}
                   </Card.Header>
 
-                  <Col className={styles.cardContainer}>
+                  <Col className={`${styles.cardContainer} `}>
                     <h5>
                       <LangSelector esText='Marcas' enText='Brands' />
                     </h5>
@@ -112,6 +115,16 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0 }) => {
                         <li key={id}>{data}</li>
                       ))}
                     </Card.Title>
+                    {
+                      data.description && (
+                        <CardBody>
+                          <p>
+                            <LangSelector enText={data.description} esText={data.descriptionEs} />
+                          </p>
+                        
+                        </CardBody>
+                      )
+                    }
                     <Row
                       className='justify-content-center h-100'
                       // style={{ backgroundColor: 'red'}}
@@ -123,6 +136,7 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0 }) => {
                         alt={`logo of ${data.brand}`}
                       />
                     </Row>
+
                   </Col>
 
                   <Card.Footer className={styles.footer}>
@@ -130,6 +144,17 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0 }) => {
                     <a href={data.url} rel='noreferrer' target='_blank'>
                       {data.url}
                     </a>
+                    {
+                      data.catalogUrl && (
+                        <Col>
+                          <br />
+                          <FontAwesomeIcon icon={faFilePdf} size='1x' />
+                          <a href={data.catalogUrl} rel='noreferrer' target='_blank'>
+                            Ver catálogo
+                          </a>
+                        </Col>
+                      )
+                    }
                   </Card.Footer>
                 </Card>
               </Col>

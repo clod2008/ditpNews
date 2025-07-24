@@ -18,6 +18,7 @@
      3. Antes de fusionar cambios de `dev` a `main`, realiza un `git pull origin main` estando en `dev` y resuelve cualquier conflicto.
      4. Sube los cambios a remoto después de resolver conflictos (`git push origin dev`).
      5. Solo fusiona a `main` cuando `dev` esté completamente probada y sincronizada.
+     6. **Después de fusionar `dev` a `main`, vuelve a hacer `checkout` a `dev` para seguir trabajando y minimizar errores.**
 
 3. **Estructura de Código:**
    - Mantener la estructura de carpetas y archivos organizada.
