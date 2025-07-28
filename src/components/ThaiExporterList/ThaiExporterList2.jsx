@@ -4,8 +4,6 @@ import {
   CardBody,
   Col,
   Container,
-  Image,
-  Nav,
   Row,
   ToggleButton,
   ToggleButtonGroup,
@@ -15,11 +13,8 @@ import { faGlobe, faFilePdf } from "@fortawesome/free-solid-svg-icons";
 
 import { LangSelector } from "../LangSelector";
 import { LangContext } from "../../context/langContex";
-import { SectionTitle } from "../SectionTitle/SectionTitle";
-import { logoBM } from "../../assets";
 
 import styles from "./ThaiExporterList2.module.scss";
-import GoogleSchedulingButton from "../GoogleSchedulingButton/GoogleSchedulingButton ";
 
 export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueId = "default" }) => {
   //reducer
@@ -41,30 +36,44 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
   const [activeSector, setActiveSector] = useState(
     sectorInicial && sectors.find(s => s.sector === sectorInicial)
       ? sectorInicial
-      : sectors[initialBtn]?.sector || ""
+      : sectors[initialBtn]?.sector || sectors[0]?.sector || ""
   );
 
   const filtrarPorSector = (array, sector) => {
+    console.log('filtrarPorSector - array length:', array.length);
+    console.log('filtrarPorSector - sector:', sector);
+    
     const listaFiltrada = array.filter((obj) => {
       return obj.sector === sector;
     });
+    
+    console.log('listaFiltrada length:', listaFiltrada.length);
+    console.log('listaFiltrada:', listaFiltrada);
+    
     setLisExpFiltred(listaFiltrada);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (sectorInicial && sectors.find(s => s.sector === sectorInicial)) {
       filtrarPorSector(list, sectorInicial);
       setActiveSector(sectorInicial);
-    } else {
+    } else if (sectors[initialBtn]) {
       filtrarPorSector(list, sectors[initialBtn].sector);
       setActiveSector(sectors[initialBtn].sector);
+    } else if (sectors.length > 0) {
+      filtrarPorSector(list, sectors[0].sector);
+      setActiveSector(sectors[0].sector);
     }
   }, [list, initialBtn, sectorInicial]);
 
-  const handleClick = (e) => {
-    const sector = e.target.value;
-    setActiveSector(sector);
-    filtrarPorSector(list, sector);
+  const handleClick = (sector) => {
+    console.log('handleClick sector:', sector);
+    
+    if (sector) {
+      setActiveSector(sector);
+      filtrarPorSector(list, sector);
+    }
   };
 
   const { langSelected } = useContext(LangContext);
@@ -83,6 +92,7 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
                 type='radio'
                 name={`options-${uniqueId}`}
                 value={activeSector}
+                onChange={handleClick}
                 className='mb-3'>
                 {Array.from(sectors).map((data, id) => (
                   <ToggleButton
@@ -92,7 +102,6 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
                     value={data.sector}
                     id={`${data.sector}-${uniqueId}`}
                     name={`${data.sector}-${uniqueId}`}
-                    onClick={handleClick}
                     checked={activeSector === data.sector}
                   >
                     <LangSelector enText={data.sector} esText={data.sectorEs} />
