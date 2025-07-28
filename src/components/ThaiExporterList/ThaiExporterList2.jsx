@@ -21,7 +21,7 @@ import { logoBM } from "../../assets";
 import styles from "./ThaiExporterList2.module.scss";
 import GoogleSchedulingButton from "../GoogleSchedulingButton/GoogleSchedulingButton ";
 
-export const ThaiExporterList2 = ({ list, initialBtn = 0 }) => {
+export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueId = "default" }) => {
   //reducer
   const sectors = list.reduce((acumulador, valorActual) => {
     const index = acumulador.findIndex(
@@ -33,11 +33,16 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0 }) => {
         sectorEs: valorActual.sectorEs,
       });
     }
+    
     return acumulador;
   }, []);
 
   const [lisExpFiltred, setLisExpFiltred] = useState([]);
-  // const [listTitle, setlistTitle] = useState(sectors[0].sector);
+  const [activeSector, setActiveSector] = useState(
+    sectorInicial && sectors.find(s => s.sector === sectorInicial)
+      ? sectorInicial
+      : sectors[initialBtn]?.sector || ""
+  );
 
   const filtrarPorSector = (array, sector) => {
     const listaFiltrada = array.filter((obj) => {
@@ -47,41 +52,37 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0 }) => {
   };
 
   useEffect(() => {
-    filtrarPorSector(list, sectors[initialBtn].sector);
-  }, []);
+    if (sectorInicial && sectors.find(s => s.sector === sectorInicial)) {
+      filtrarPorSector(list, sectorInicial);
+      setActiveSector(sectorInicial);
+    } else {
+      filtrarPorSector(list, sectors[initialBtn].sector);
+      setActiveSector(sectors[initialBtn].sector);
+    }
+  }, [list, initialBtn, sectorInicial]);
 
   const handleClick = (e) => {
-    filtrarPorSector(list, e.target.htmlFor);
-    // setlistTitle(e.target.htmlFor)
+    const sector = e.target.value;
+    setActiveSector(sector);
+    filtrarPorSector(list, sector);
   };
 
   const { langSelected } = useContext(LangContext);
 
   const buttonsSelectorWidth = 100 / sectors.length;
 
-  console.log(lisExpFiltred)
+
 
   return (
     <Row className={styles.wrapper}>
       <Container fluid>
         <Container>
-          <Row className='justify-content-center mt-5 mb-5'>
-            <Col md={3}>
-              <Image src={logoBM} fluid className={styles.logo} />
-            </Col>
-            <Col>
-              <SectionTitle
-                titleEn='Firms attending the business conference'
-                titleEs='Lista de la delegación tailandesa'
-              />
-            </Col>
-          </Row>
           <Row>
             <>
               <ToggleButtonGroup
                 type='radio'
-                name='options'
-                defaultValue={sectors[initialBtn].sector}
+                name={`options-${uniqueId}`}
+                value={activeSector}
                 className='mb-3'>
                 {Array.from(sectors).map((data, id) => (
                   <ToggleButton
@@ -89,9 +90,11 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0 }) => {
                     className={styles.selector}
                     style={{ width: `${buttonsSelectorWidth}%` }}
                     value={data.sector}
-                    id={data.sector}
-                    name={data.sector}
-                    onClick={handleClick}>
+                    id={`${data.sector}-${uniqueId}`}
+                    name={`${data.sector}-${uniqueId}`}
+                    onClick={handleClick}
+                    checked={activeSector === data.sector}
+                  >
                     <LangSelector enText={data.sector} esText={data.sectorEs} />
                   </ToggleButton>
                 ))}

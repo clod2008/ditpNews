@@ -34,10 +34,12 @@ export const GoogleForm = ({
 
   useEffect(() => {
     // console.log("Width state updated:", width);
+    console.log("[GoogleForm] width actualizado:", width);
   }, [width]);
 
   return (
     <Row ref={containerRef}>
+      {console.log("[GoogleForm] Render iframe width:", width)}
       <iframe
         src={src}
         width={width}

@@ -5,7 +5,7 @@ import { BussinesWeel } from "./pages/BussinesWeel";
 import { NavBar } from "./components/NavBar/NavBar";
 import { navBarData, paths } from "./data/cont";
 import { ditpIsoLogo } from "./assets";
-import { Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import { FooterPage } from "./components/Footer/Footer";
 import { Credenciales } from "./pages/Credenciales";
 import { AutoPartsPage } from "./pages/AutoPartsPage";
@@ -33,29 +33,34 @@ TagManager.dataLayer({
 
 function App() {
   return (
-    <Container fluid style={{ paddingRight: "0px", paddingLeft: "0px" }}>
-      <NavBar navData={navBarData} brand={ditpIsoLogo} expand={"md"} />
-      <Routes>
-        <Route path={paths.autoPartsPage} element={<AutoPartsPage />} />
-        <Route path={paths.bussinesWeel} element={<BussinesWeel />} />
-        <Route path={paths.campaigns} element={<Campaigns />} />
-        <Route path={paths.constructionPage} element={<ConstructionPage />} />
-        <Route path={paths.credentials} element={<Credenciales />} />
-        <Route path={paths.foodPage} element={<FoodPage />} />
-        <Route path={paths.heroVideoPage} element={<HeroVideoPage />} />
-        <Route path={paths.home} element={<Home />} />
-        <Route path={paths.business2024} element={<BusinessM2024 />} />
-        <Route
-          path={paths.festivalMuayThai2024}
-          element={<FestivalMuayThai2024 />}
-        />
-        <Route path={paths.bbm2025} element={<BBM2025 />} />
-        <Route path='/report' element={<PdfContainer />} />
+    <Container fluid style={{ paddingRight: "0px !important", paddingLeft: "0px !important", margin: "0px !important" }}>
+      <Row>
+        <NavBar navData={navBarData} brand={ditpIsoLogo} expand={"md"} />
+      </Row>
+      <Row noGutters>
+        <Routes>
+          <Route path={paths.autoPartsPage} element={<AutoPartsPage />} />
+          <Route path={paths.bussinesWeel} element={<BussinesWeel />} />
+          <Route path={paths.campaigns} element={<Campaigns />} />
+          <Route path={paths.constructionPage} element={<ConstructionPage />} />
+          <Route path={paths.credentials} element={<Credenciales />} />
+          <Route path={paths.foodPage} element={<FoodPage />} />
+          <Route path={paths.heroVideoPage} element={<HeroVideoPage />} />
+          <Route path={paths.home} element={<Home />} />
+          <Route path={paths.business2024} element={<BusinessM2024 />} />
+          <Route
+            path={paths.festivalMuayThai2024}
+            element={<FestivalMuayThai2024 />}
+          />
+          <Route path={paths.bbm2025} element={<BBM2025 />} />
+          <Route path='/report' element={<PdfContainer />} />
 
-        <Route path='/*' element={<Navigate to={paths.home} replace />} />
-      </Routes>
-      <FooterPage />
-    </Container>
+          <Route path='/*' element={<Navigate to={paths.home} replace />} />
+        </Routes>
+      </Row>
+        <FooterPage />
+
+      </Container>
   );
 }
 

@@ -14,6 +14,7 @@ export { default as grunge01 } from './svg/grunge01.svg';
 export { default as borderWhite } from './svg/borderWhite.svg';
 export { default as flag } from './svg/flag.svg';
 export { default as faena } from './svg/logoFaena.svg';
+export { default as bbm25LogoPrimary } from './svg/bbm2025LogoPrimary.svg';
 
 // Img
 export { default as logoTTC } from './img/new-logo-2.webp';
@@ -61,6 +62,8 @@ export { default as gladysOlazar } from './img/gladysOlazar.webp';
 export { default as carouselBMvideo } from './videos/FestivalMT2024-banner-desck.webm';
 export { default as carouselBMvideo500x500 } from './videos/FestivalMT2024-banner-500.webm';
 export { default as thaiFestVideoHero } from './videos/thaiFesVideoHero.mp4';
+export { default as logosFood} from './videos//Render 2.webm'
+export { default as thai360 } from './videos/thai360.webm';
 
 //PDF
 export { default as finalReport } from './pdf/finalReport2023.pdf';

@@ -6,16 +6,37 @@
 
 }
 
-.selector{
-    height: 3em;
-    @media (max-width: 575.98px) { 
-        height: 5em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-        
-     }
+.selector {
+  height: 4em;
+  background: #f5f5f5;
+  color: #222;
+  border: 1px solid #e0e0e0;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  &:hover {
+    background: #e0eaff;
+    color: #0d6efd;
+    box-shadow: 0 2px 8px rgba(13,110,253,0.08);
+    z-index: 2;
+  }
+  &.active,
+  &[aria-pressed="true"],
+  &[checked] {
+    background: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+    box-shadow: 0 2px 12px rgba(13,110,253,0.18);
+    z-index: 3;
+  }
+  @media (max-width: 575.98px) {
+    height: 5em;
+    font-size: 14px;
+  }
 }
 
 .cardStyle{

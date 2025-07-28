@@ -105,6 +105,7 @@ export const FestivalMuayThai2024 = () => {
                         <br />
                       </Col>
                       <Button
+                        
                         className='w-100'
                         onClick={() => scrollTo("contactFormMuayThai")}>
                         <span className=''>¡Regístrese ahora!</span>
