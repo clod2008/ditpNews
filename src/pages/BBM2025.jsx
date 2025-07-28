@@ -2,7 +2,8 @@ import { Row, Col, Container, Image, Button, Accordion } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import useScrollTo from "../hooks/useScrollTo";
-import { bbm25LogoPrimary, faena, logosFood, thai360, thaiFestVideoHero } from '../assets';
+import { bbm25LogoPrimary, logosFood, thai360, thaiFestVideoHero } from '../assets';
+import faena from '../assets/svg/logoFaena.svg';
 import { LottieConatiner } from '../components/LottieContainer/LottieConatiner';
 import bbm25Logo from '../assets/lotties/bbm25Logo.json'
 import styles from './BBM2025.module.scss'
