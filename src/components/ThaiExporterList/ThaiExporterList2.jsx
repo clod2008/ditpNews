@@ -16,6 +16,8 @@ import { LangContext } from "../../context/langContex";
 
 import styles from "./ThaiExporterList2.module.scss";
 
+
+
 export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueId = "default" }) => {
   //reducer
   const sectors = list.reduce((acumulador, valorActual) => {
@@ -31,6 +33,35 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
     
     return acumulador;
   }, []);
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [is1024, setIs1024] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    const checkLg = () => {
+      setIs1024(window.innerWidth <= 1024);
+    };
+    
+    checkLg();
+    window.addEventListener('resize', checkLg);
+    
+    return () => window.removeEventListener('resize', checkLg);
+  }, []);
+
+  console.log('isMobile:', isMobile);
+  console.log('is1024:', is1024);
+
 
   const [lisExpFiltred, setLisExpFiltred] = useState([]);
   const [activeSector, setActiveSector] = useState(
@@ -76,6 +107,8 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
     }
   };
 
+
+
   const { langSelected } = useContext(LangContext);
 
   const buttonsSelectorWidth = 100 / sectors.length;
@@ -93,7 +126,7 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
                 name={`options-${uniqueId}`}
                 value={activeSector}
                 onChange={handleClick}
-                className='mb-3'>
+                className={`${styles.toggleButtonGroup}`}>
                 {Array.from(sectors).map((data, id) => (
                   <ToggleButton
                     key={id}
@@ -128,13 +161,19 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
                       ))}
                     </Card.Title>
                     {
-                      data.description && (
-                        <CardBody>
-                          <p>
-                            <LangSelector enText={data.description} esText={data.descriptionEs} />
-                          </p>
-                        
-                        </CardBody>
+                      !is1024 && (
+                        <>
+                          {
+                            data.description && (
+                              <CardBody>
+                                <p>
+                                  <LangSelector enText={data.description} esText={data.descriptionEs} />
+                                </p>
+                              
+                              </CardBody>
+                            )
+                          }
+                        </>
                       )
                     }
                     <Row
