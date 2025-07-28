@@ -39,6 +39,22 @@
   }
 }
 
+.toggleButtonGroup{
+    margin-bottom: 1em;
+    margin-top: 1em;
+    @media (max-width: 1024.98px) {
+        margin-bottom: 1em;
+        margin-top: 1em;
+        label{
+            font-size: 10px;
+            padding-top: 2em;
+            padding-bottom: 2em;
+        }
+        height: unset;
+        max-height: unset;
+    }
+}
+
 .cardStyle{
     position: relative;
     transform: scale(1);
@@ -55,16 +71,12 @@
         }
     }
     :hover{
-        // box-shadow: -2px -1px 43px 6px rgba(0,0,0,0.37);
-        // -webkit-box-shadow: -2px -1px 43px 6px rgba(0,0,0,0.37);
-        // -moz-box-shadow: -2px -1px 43px 6px rgba(0,0,0,0.37);
-        // z-index: 5 !important;
-        // transform: scale(1.02);
+
         transition: all 0.5s ease;
         transform: 
             perspective(30em)
             rotateX(5deg);
-            // rotateY(-5deg);
+
         z-index: 5;
           box-shadow:
         rgba(22, 31, 39, 0.42) 0px 60px 123px -25px,
@@ -80,7 +92,7 @@
     margin-top: 3em;
     margin-bottom: 2em;
     bottom: 15%;
-    // outline: 1px solid red;
+
 }
 .cardContainer{
     background-color: white;

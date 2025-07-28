@@ -56,6 +56,25 @@ $frameHeigth: 60vh;
     color: #f9f9f9;
     font-weight: 800;    
   }
+  @media (max-width: 470.98px) {
+    min-height: 70vh;
+    max-height: unset;
+    height: unset;
+
+    padding-top: 2em;
+    padding-bottom: 2em;
+    
+    h1 {
+      font-size: 36px;
+    }
+    p {
+      font-size: 18px;
+    }
+    h2 {
+      font-size: 24px;
+    }
+
+  }
   
 }
 
