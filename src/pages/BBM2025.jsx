@@ -125,7 +125,7 @@ export const BBM2025 = () => {
             <Col className={`${styles.heroVideoBannerText} `} >
               <h1>Impulsá tu Negocio con Innovación Tailandesa</h1>
               <p><span>Buenos Aires Business Matching 2025</span> <br />
-                Un evento exclusivo organizado por DITP (Departamento de Promoción de Comercio Internacional, Ministerio de Comercio de Tailandia),<br/>con el apoyo de <a href="https://www.thaiselect.com/" target="_blank" rel="noopener noreferrer">Thai Select</a></p>
+                Un evento exclusivo organizado por DITP (Departamento de Promoción de Comercio Internacional, Ministerio de Comercio de Tailandia), con el apoyo de <a href="https://www.thaiselect.com/" target="_blank" rel="noopener noreferrer">Thai Select</a></p>
               <h2>¡Una oportunidad única para expandir tus horizontes comerciales!</h2>
               {/* <h1>¿Es usted un empresario, jefe de compra o importador buscando expandir su negocio?</h1>
               <h2>Únase a nuestro exclusivo evento Buenos Aires Business Matching 2025 en el lujoso Hotel Faena.</h2> */}
