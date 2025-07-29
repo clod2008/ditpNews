@@ -217,7 +217,7 @@ export const BBM2025 = () => {
                     </h3>
                   </Col>
                 </Row>
-                <Row className={`my-1`}>
+                <Row className={`my-1`} id='firmsAttending'>
                   <Accordion activeKey={activeAccordion} alwaysOpen
                     style={{ paddingLeft: '0px', paddingRight: '0px' }}
                   >
