@@ -34,6 +34,7 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
     return acumulador;
   }, []);
 
+  // eslint-disable-next-line no-unused-vars
   const [isMobile, setIsMobile] = useState(false);
   const [is1024, setIs1024] = useState(false);
 

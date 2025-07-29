@@ -26,7 +26,7 @@ import VideoContainerMultiVideo from '../components/VideoContainer/VideoContaine
 
 export const BBM2025 = () => {
   const scrollTo = useScrollTo();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const location = useLocation();
   const [formHeight, setFormHeight] = useState(1210);
   const [videoSync, setVideoSync] = useState(logosFood);
@@ -43,34 +43,41 @@ export const BBM2025 = () => {
     }
   }, [windowWidth]);
 
-  // Mapear acordeon param a eventKey
-  const paramToKey = {
-    food: '0',
-    industry: '1',
-  };
-  const keyToParam = {
-    '0': 'food',
-    '1': 'industry',
-  };
+
 
   // Estado local sincronizado con la URL
-  const initialKey = paramToKey[searchParams.get('acordeon')] || '0';
-  const [activeAccordion, setActiveAccordion] = useState(initialKey);
+  const getInitialKey = () => {
+    if (searchParams.get('food') !== null) return '0';
+    if (searchParams.get('industry') !== null) return '1';
+    return '0'; // default
+  };
+  const [activeAccordion, setActiveAccordion] = useState(getInitialKey());
 
 
   // Sincronizar con la URL al cambiar el acordeón
   const handleAccordionChange = (key) => {
+    console.log('handleAccordionChange called with key:', key);
     setActiveAccordion(key);
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set('acordeon', keyToParam[key] || 'food');
-    setSearchParams(newParams, { replace: true });
+    
+    // Limpiar parámetros anteriores y agregar el nuevo
+    if (key === '0') {
+      window.history.replaceState(null, '', '?food');
+      console.log('Setting URL to ?food');
+    } else if (key === '1') {
+      window.history.replaceState(null, '', '?industry');
+      console.log('Setting URL to ?industry');
+    }
   };
 
   // Si cambia la URL (ej: navegación), actualizar el acordeón abierto
   useEffect(() => {
-    const param = searchParams.get('acordeon');
-    if (paramToKey[param] && paramToKey[param] !== activeAccordion) {
-      setActiveAccordion(paramToKey[param]);
+    const foodParam = searchParams.get('food');
+    const industryParam = searchParams.get('industry');
+    
+    if (foodParam !== null && activeAccordion !== '0') {
+      setActiveAccordion('0');
+    } else if (industryParam !== null && activeAccordion !== '1') {
+      setActiveAccordion('1');
     }
     // eslint-disable-next-line
   }, [location.search]);
@@ -211,31 +218,31 @@ export const BBM2025 = () => {
                   </Col>
                 </Row>
                 <Row className={`my-1`}>
-                  <Accordion activeKey={activeAccordion} onSelect={handleAccordionChange} alwaysOpen
+                  <Accordion activeKey={activeAccordion} alwaysOpen
                     style={{ paddingLeft: '0px', paddingRight: '0px' }}
                   >
                     <Accordion.Item eventKey='0'>
-                      <Accordion.Header>Alimentos y Bebidas</Accordion.Header>
+                      <Accordion.Header onClick={() => handleAccordionChange('0')}>
+                        Alimentos y Bebidas
+                      </Accordion.Header>
                       <Accordion.Body>
                         <ThaiExporterList2
                           list={thaiDelegationList2025Food}
                           initialBtn={0}
                           uniqueId="food"
-                          // sectorInicial={searchParams.get('acordeon') === 'food' ? sectorsFood[0].sector : undefined}
-                          // sectorInicial="Snack"
                           queryKey="tabFood"
                         />
                       </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey='1'>
-                      <Accordion.Header>Industria y Autopartes</Accordion.Header>
+                      <Accordion.Header onClick={() => handleAccordionChange('1')}>
+                        Industria y Autopartes
+                      </Accordion.Header>
                       <Accordion.Body>
                         <ThaiExporterList2
                           list={thaiDelegationList2025Industry}
                           initialBtn={0}
                           uniqueId="industry"
-                          // sectorInicial={searchParams.get('acordeon') === 'industry' ? thaiDelegationList2025Industry[0].sector : undefined}
-                          // sectorInicial={searchParams.get('acordeon') === 'industry' ? thaiDelegationList2025Industry[0].sector : undefined}
                           queryKey="tabIndustry"
                         />
                       </Accordion.Body>
