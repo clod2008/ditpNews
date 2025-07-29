@@ -62,7 +62,7 @@ export { default as gladysOlazar } from './img/gladysOlazar.webp';
 export { default as carouselBMvideo } from './videos/FestivalMT2024-banner-desck.webm';
 export { default as carouselBMvideo500x500 } from './videos/FestivalMT2024-banner-500.webm';
 export { default as thaiFestVideoHero } from './videos/thaiFesVideoHero.mp4';
-export { default as logosFood} from './videos//Render 2.webm'
+export { default as logosFood} from './videos/Render 2.webm'
 export { default as thai360 } from './videos/thai360.webm';
 
 //PDF
