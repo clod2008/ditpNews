@@ -37,7 +37,7 @@ function App() {
       <Row>
         <NavBar navData={navBarData} brand={ditpIsoLogo} expand={"md"} />
       </Row>
-      <Row noGutters>
+      <Row>
         <Routes>
           <Route path={paths.autoPartsPage} element={<AutoPartsPage />} />
           <Route path={paths.bussinesWeel} element={<BussinesWeel />} />

@@ -59,8 +59,7 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
     return () => window.removeEventListener('resize', checkLg);
   }, []);
 
-  console.log('isMobile:', isMobile);
-  console.log('is1024:', is1024);
+
 
 
   const [lisExpFiltred, setLisExpFiltred] = useState([]);
@@ -71,15 +70,9 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
   );
 
   const filtrarPorSector = (array, sector) => {
-    console.log('filtrarPorSector - array length:', array.length);
-    console.log('filtrarPorSector - sector:', sector);
-    
     const listaFiltrada = array.filter((obj) => {
       return obj.sector === sector;
     });
-    
-    console.log('listaFiltrada length:', listaFiltrada.length);
-    console.log('listaFiltrada:', listaFiltrada);
     
     setLisExpFiltred(listaFiltrada);
   };
@@ -96,11 +89,10 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
       filtrarPorSector(list, sectors[0].sector);
       setActiveSector(sectors[0].sector);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list, initialBtn, sectorInicial]);
 
   const handleClick = (sector) => {
-    console.log('handleClick sector:', sector);
-    
     if (sector) {
       setActiveSector(sector);
       filtrarPorSector(list, sector);

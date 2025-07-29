@@ -2,15 +2,13 @@ import { Row, Col, Container, Image, Button, Accordion } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import useScrollTo from "../hooks/useScrollTo";
-import { bbm25LogoPrimary, logosFood, thai360, thaiFestVideoHero, faena } from '../assets';
+import { bbm25LogoPrimary, logosFood, thai360, faena, logosIndustry } from '../assets';
 import { LottieConatiner } from '../components/LottieContainer/LottieConatiner';
 import bbm25Logo from '../assets/lotties/bbm25Logo.json'
 import styles from './BBM2025.module.scss'
 import { ThaiExporterList2 } from '../components/ThaiExporterList/ThaiExporterList2';
 import { thaiDelegationList2025Food } from '../data/thaiListExportes2025Food';
 import { thaiDelegationList2025Industry } from '../data/thaiListExportes2025Industry';
-import { SectionTitle } from '../components/SectionTitle/SectionTitle';
-import { logoBM } from '../assets';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { GoogleForm } from '../components/GoogleForm/GoogleForm';
@@ -21,7 +19,8 @@ import { Link } from "react-router-dom";
 import { LangSelector } from '../components/LangSelector';
 import VideoContainer from '../components/VideoContainer/VideoContainer';
 import VideoContainerMultiVideo from '../components/VideoContainer/VideoContainerMultiVideo';
-import { FestivalMuayThai2024 } from './FestivalMuayThai2024';
+
+
 
 // Eliminada la importación de styles
 
@@ -30,6 +29,8 @@ export const BBM2025 = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const [formHeight, setFormHeight] = useState(1210);
+  const [videoSync, setVideoSync] = useState(logosFood);
+  const [videoKey, setVideoKey] = useState(0);
 
   const windowWidth = useWindowWidth();
 
@@ -56,6 +57,7 @@ export const BBM2025 = () => {
   const initialKey = paramToKey[searchParams.get('acordeon')] || '0';
   const [activeAccordion, setActiveAccordion] = useState(initialKey);
 
+
   // Sincronizar con la URL al cambiar el acordeón
   const handleAccordionChange = (key) => {
     setActiveAccordion(key);
@@ -74,6 +76,7 @@ export const BBM2025 = () => {
   }, [location.search]);
 
   // Calcular sectores únicos para food
+  // eslint-disable-next-line no-unused-vars
   const sectorsFood = thaiDelegationList2025Food.reduce((acum, val) => {
     if (!acum.find(s => s.sector === val.sector)) {
       acum.push({ sector: val.sector, sectorEs: val.sectorEs });
@@ -85,9 +88,31 @@ export const BBM2025 = () => {
     window.open(url, "_blank");
   };
 
+  useEffect(() => {
+    if (activeAccordion === '0') {
+      setVideoSync(logosFood);
+      setVideoKey(prev => prev + 1);
+    } else if (activeAccordion === '1') {
+      setVideoSync(logosIndustry);
+      setVideoKey(prev => prev + 1);
+    }
+  }, [activeAccordion]);
+
+
+
+  // Función para obtener el nombre del archivo del video
+  const getVideoFileName = (videoSrc) => {
+    if (videoSrc === logosFood) return 'logosFood';
+    if (videoSrc === logosIndustry) return 'logosIndustry';
+    return 'unknown';
+  };
+
+
+
+
   return (
     <section className={`${styles.bbm25}`}>
-      <Row className={`${styles.heroVideoBanner}`} noGutters>
+      <Row className={`${styles.heroVideoBanner}`} >
         <Container fluid className={`${styles.heroVideoBannerTextContainer}`}>
           <Container className='h-100 d-flex align-items-center' >
             <Col className={`${styles.heroVideoBannerText} `} >
@@ -102,7 +127,8 @@ export const BBM2025 = () => {
         </Container>
         <Col className={`${styles.videoContainer}`}>
           <VideoContainer
-            src={logosFood}
+            key={`${getVideoFileName(videoSync)}-${videoKey}`} // Forzar re-renderizado cuando cambie el video
+            src={videoSync}
             loop={true}
             autoplay='autoplay'
             muted='muted'
