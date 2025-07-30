@@ -106,7 +106,21 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
 
   const buttonsSelectorWidth = 100 / sectors.length;
 
+  // useEffect para mantener el estado filtrado y verificar el filtro seleccionado
+  useEffect(() => {
+    console.log("=== ESTADO DEL FILTRO ===");
+    console.log("Sector activo:", activeSector);
+    console.log("Lista filtrada:", lisExpFiltred);
+    console.log("Cantidad de elementos filtrados:", lisExpFiltred.length);
+    console.log("Descripciones disponibles:", lisExpFiltred.map(item => ({
+      brand: item.brand,
+      description: item.description,
+      descriptionEs: item.descriptionEs
+    })));
+  }, [activeSector, lisExpFiltred]);
 
+  console.log("lisExpFiltred", lisExpFiltred);
+  console.log("descriptionEs:", lisExpFiltred.map(item => item.descriptionEs));
 
   return (
     <Row className={styles.wrapper}>
@@ -120,7 +134,7 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
                 value={activeSector}
                 onChange={handleClick}
                 className={`${styles.toggleButtonGroup}`}>
-                {Array.from(sectors).map((data, id) => (
+                {sectors.map((data, id) => (
                   <ToggleButton
                     key={id}
                     className={styles.selector}
@@ -137,72 +151,76 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
             </>
           </Row>
           <Row xs={1} md={3} className='g-4 mb-5'>
-            {Array.from(lisExpFiltred).map((data, id) => (
-              <Col key={id} className={styles.cardStyle}>
-                <Card className={`h-100`}>
-                  <Card.Header>
-                    {langSelected === "en" ? data.sector : data.sectorEs}
-                  </Card.Header>
+            {lisExpFiltred.map((data, id) => {
+              
+              return (
+                <Col key={id} className={styles.cardStyle}>
+                  <Card className={`h-100`}>
+                    <Card.Header>
+                      {langSelected === "en" ? data.sector : data.sectorEs}
+                    </Card.Header>
 
-                  <Col className={`${styles.cardContainer} `}>
-                    <h5>
-                      <LangSelector esText='Marcas' enText='Brands' />
-                    </h5>
-                    <Card.Title className={styles.brandTitle}>
-                      {Array.from(data.brand).map((data, id) => (
-                        <li key={id}>{data}</li>
-                      ))}
-                    </Card.Title>
-                    {
-                      !is1024 && (
-                        <>
-                          {
-                            data.description && (
-                              <CardBody>
-                                <p>
-                                  <LangSelector enText={data.description} esText={data.descriptionEs} />
-                                </p>
-                              
-                              </CardBody>
-                            )
-                          }
-                        </>
-                      )
-                    }
-                    <Row
-                      className='justify-content-center h-100'
-                      // style={{ backgroundColor: 'red'}}
-                    >
-                      <Card.Img
-                        variant='top'
-                        className={styles.exporterLogo}
-                        src={data.logo}
-                        alt={`logo of ${data.brand}`}
-                      />
-                    </Row>
+                    <Col className={`${styles.cardContainer} `}>
+                      <h5>
+                        <LangSelector esText='Marcas' enText='Brands' />
+                      </h5>
+                      <Card.Title className={styles.brandTitle}>
+                        {Array.from(data.brand).map((brandItem, brandId) => (
+                          <li key={brandId}>{brandItem}</li>
+                        ))}
+                      </Card.Title>
+                      {
+                        !is1024 && (
+                          <>
+                            {
+                              data.description && (
+                                <CardBody>
+                                  <p>
+                                    {/* <LangSelector enText={data.description} esText={data.descriptionEs} /> */}
+                                    {data.descriptionEs}
+                                  </p>
+                                
+                                </CardBody>
+                              )
+                            }
+                          </>
+                        )
+                      }
+                      <Row
+                        className='justify-content-center h-100'
+                        // style={{ backgroundColor: 'red'}}
+                      >
+                        <Card.Img
+                          variant='top'
+                          className={styles.exporterLogo}
+                          src={data.logo}
+                          alt={`logo of ${data.brand}`}
+                        />
+                      </Row>
 
-                  </Col>
+                    </Col>
 
-                  <Card.Footer className={styles.footer}>
-                    <FontAwesomeIcon icon={faGlobe} size='1x' />
-                    <a href={data.url} rel='noreferrer' target='_blank'>
-                      {data.url}
-                    </a>
-                    {
-                      data.catalogUrl && (
-                        <Col>
-                          <br />
-                          <FontAwesomeIcon icon={faFilePdf} size='1x' />
-                          <a href={data.catalogUrl} rel='noreferrer' target='_blank'>
-                            Ver catálogo
-                          </a>
-                        </Col>
-                      )
-                    }
-                  </Card.Footer>
-                </Card>
-              </Col>
-            ))}
+                    <Card.Footer className={styles.footer}>
+                      <FontAwesomeIcon icon={faGlobe} size='1x' />
+                      <a href={data.url} rel='noreferrer' target='_blank'>
+                        {data.url}
+                      </a>
+                      {
+                        data.catalogUrl && (
+                          <Col>
+                            <br />
+                            <FontAwesomeIcon icon={faFilePdf} size='1x' />
+                            <a href={data.catalogUrl} rel='noreferrer' target='_blank'>
+                              Ver catálogo
+                            </a>
+                          </Col>
+                        )
+                      }
+                    </Card.Footer>
+                  </Card>
+                </Col>
+              );
+            })}
           </Row>
         </Container>
       </Container>
