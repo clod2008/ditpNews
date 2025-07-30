@@ -106,22 +106,6 @@ export const ThaiExporterList2 = ({ list, initialBtn = 0, sectorInicial, uniqueI
 
   const buttonsSelectorWidth = 100 / sectors.length;
 
-  // useEffect para mantener el estado filtrado y verificar el filtro seleccionado
-  useEffect(() => {
-    console.log("=== ESTADO DEL FILTRO ===");
-    console.log("Sector activo:", activeSector);
-    console.log("Lista filtrada:", lisExpFiltred);
-    console.log("Cantidad de elementos filtrados:", lisExpFiltred.length);
-    console.log("Descripciones disponibles:", lisExpFiltred.map(item => ({
-      brand: item.brand,
-      description: item.description,
-      descriptionEs: item.descriptionEs
-    })));
-  }, [activeSector, lisExpFiltred]);
-
-  console.log("lisExpFiltred", lisExpFiltred);
-  console.log("descriptionEs:", lisExpFiltred.map(item => item.descriptionEs));
-
   return (
     <Row className={styles.wrapper}>
       <Container fluid>

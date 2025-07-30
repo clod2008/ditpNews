@@ -49,7 +49,7 @@ export const BBM2025 = () => {
   const getInitialKey = () => {
     if (searchParams.get('food') !== null) return '0';
     if (searchParams.get('industry') !== null) return '1';
-    return '0'; // default
+    return null; // default - acordeón cerrado
   };
   const [activeAccordion, setActiveAccordion] = useState(getInitialKey());
 
@@ -57,15 +57,25 @@ export const BBM2025 = () => {
   // Sincronizar con la URL al cambiar el acordeón
   const handleAccordionChange = (key) => {
     console.log('handleAccordionChange called with key:', key);
-    setActiveAccordion(key);
     
-    // Limpiar parámetros anteriores y agregar el nuevo
-    if (key === '0') {
-      window.history.replaceState(null, '', '?food');
-      console.log('Setting URL to ?food');
-    } else if (key === '1') {
-      window.history.replaceState(null, '', '?industry');
-      console.log('Setting URL to ?industry');
+    // Si se hace click en el mismo item que está abierto, cerrarlo
+    if (activeAccordion === key) {
+      setActiveAccordion(null);
+      // Limpiar parámetros de la URL
+      window.history.replaceState(null, '', window.location.pathname);
+      console.log('Closing accordion, clearing URL');
+    } else {
+      // Abrir el nuevo item
+      setActiveAccordion(key);
+      
+      // Limpiar parámetros anteriores y agregar el nuevo
+      if (key === '0') {
+        window.history.replaceState(null, '', '?food');
+        console.log('Setting URL to ?food');
+      } else if (key === '1') {
+        window.history.replaceState(null, '', '?industry');
+        console.log('Setting URL to ?industry');
+      }
     }
   };
 
@@ -78,6 +88,9 @@ export const BBM2025 = () => {
       setActiveAccordion('0');
     } else if (industryParam !== null && activeAccordion !== '1') {
       setActiveAccordion('1');
+    } else if (foodParam === null && industryParam === null && activeAccordion !== null) {
+      // Si no hay parámetros, cerrar el acordeón
+      setActiveAccordion(null);
     }
     // eslint-disable-next-line
   }, [location.search]);
@@ -218,7 +231,7 @@ export const BBM2025 = () => {
                   </Col>
                 </Row>
                 <Row className={`my-1`} id='firmsAttending'>
-                  <Accordion activeKey={activeAccordion} alwaysOpen
+                  <Accordion activeKey={activeAccordion}
                     style={{ paddingLeft: '0px', paddingRight: '0px' }}
                   >
                     <Accordion.Item eventKey='0'>
