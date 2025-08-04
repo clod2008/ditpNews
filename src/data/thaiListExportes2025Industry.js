@@ -153,16 +153,16 @@ const thaiDelegationList2025Industry = [
     descriptionEs: "Tomas de fuerza y cajas auxiliares para camiones y vehículos comerciales."
   },
   // Electronics / Electrical Products and Parts
-  {
-    sector: "Electronics / Electrical Products and Parts",
-    sectorEs: "Electrónica / Productos y Partes Eléctricas",
-    brand: ["X-PER TECHNIA"],
-    logo: xPertTechinal,
-    url: "https://www.xperasia.com",
-    catalogUrl: "https://drive.google.com/file/d/1l-uojBR09fP_g-PerJm008ef9jaIIYXl/view?usp=sharing",
-    description: "Air curtain, mist cooling, evaporative air cooler, air curtain for cold room & trucks, stainless steel 316L, air partition, automatic air curtain, mist cooling fan unit, HEPA filter air purifier.",
-    descriptionEs: "Cortinas de aire, enfriadores evaporativos, ventiladores industriales, purificadores de aire HEPA."
-  },
+  // {
+  //   sector: "Electronics / Electrical Products and Parts",
+  //   sectorEs: "Electrónica / Productos y Partes Eléctricas",
+  //   brand: ["X-PER TECHNIA"],
+  //   logo: xPertTechinal,
+  //   url: "https://www.xperasia.com",
+  //   catalogUrl: "https://drive.google.com/file/d/1l-uojBR09fP_g-PerJm008ef9jaIIYXl/view?usp=sharing",
+  //   description: "Air curtain, mist cooling, evaporative air cooler, air curtain for cold room & trucks, stainless steel 316L, air partition, automatic air curtain, mist cooling fan unit, HEPA filter air purifier.",
+  //   descriptionEs: "Cortinas de aire, enfriadores evaporativos, ventiladores industriales, purificadores de aire HEPA."
+  // },
   // Construction materials / Building materials
   {
     sector: "Construction materials / Building materials",
