@@ -15,6 +15,7 @@ export { default as borderWhite } from './svg/borderWhite.svg';
 export { default as flag } from './svg/flag.svg';
 export { default as faena } from './svg/logoFaena.svg';
 export { default as bbm25LogoPrimary } from './svg/bbm2025LogoPrimary.svg';
+export { default as whatsAppFloatButton } from './svg/boton-whatsapp.svg';
 
 // Img
 export { default as logoTTC } from './img/new-logo-2.webp';

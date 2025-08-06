@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import { LangSelector } from '../components/LangSelector';
 import VideoContainer from '../components/VideoContainer/VideoContainer';
 import VideoContainerMultiVideo from '../components/VideoContainer/VideoContainerMultiVideo';
+import { WhatsAppButtonFloat } from '../components/WhatsAppFloatBtn/WhatsAppFloatBtn';
 
 
 
@@ -132,6 +133,9 @@ export const BBM2025 = () => {
 
   return (
     <section className={`${styles.bbm25}`}>
+      <WhatsAppButtonFloat message={`Hola,
+                                      Me gustaría recibir más información sobre el Buenos Aires Business Matching 2025
+                                      Empresa: `} />
       <Row className={`${styles.heroVideoBanner}`} >
         <Container fluid className={`${styles.heroVideoBannerTextContainer}`}>
           <Container className='h-100 d-flex align-items-center' >
