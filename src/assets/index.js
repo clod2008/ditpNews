@@ -129,3 +129,4 @@ export { default as natureBestFood } from './img/foodLogos2025/nature_best_food.
 export { default as venaSukum } from './img/foodLogos2025/vena_sukum.webp';
 export { default as buono } from './img/foodLogos2025/buono.webp';
 export { default as vfoods } from './img/foodLogos2025/vfoods.webp';
+export { default as anusornMahachai } from './img/foodLogos2025/anusorn_mahachai.webp';

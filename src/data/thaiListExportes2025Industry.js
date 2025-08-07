@@ -142,16 +142,16 @@ const thaiDelegationList2025Industry = [
     description: "4x4 accessories, rocker bullbar.",
     descriptionEs: "Accesorios 4x4, defensas y barras antivuelco."
   },
-  {
-    sector: "Automotive / Auto Parts and Accessories",
-    sectorEs: "Automotriz / Autopartes y Accesorios",
-    brand: ["N.O.K."],
-    logo: nokEquipment,
-    url: "",
-    catalogUrl: "https://drive.google.com/file/d/1YUduQJZBD5tsUKbJVtBXC_8JaTNqnmzn/view?usp=sharing",
-    description: "Power take off (P.T.O.), auxiliary gearbox for trucks and commercial vehicles.",
-    descriptionEs: "Tomas de fuerza y cajas auxiliares para camiones y vehículos comerciales."
-  },
+  // {
+  //   sector: "Automotive / Auto Parts and Accessories",
+  //   sectorEs: "Automotriz / Autopartes y Accesorios",
+  //   brand: ["N.O.K."],
+  //   logo: nokEquipment,
+  //   url: "",
+  //   catalogUrl: "https://drive.google.com/file/d/1YUduQJZBD5tsUKbJVtBXC_8JaTNqnmzn/view?usp=sharing",
+  //   description: "Power take off (P.T.O.), auxiliary gearbox for trucks and commercial vehicles.",
+  //   descriptionEs: "Tomas de fuerza y cajas auxiliares para camiones y vehículos comerciales."
+  // },
   // Electronics / Electrical Products and Parts
   // {
   //   sector: "Electronics / Electrical Products and Parts",
@@ -196,8 +196,8 @@ const thaiDelegationList2025Industry = [
     descriptionEs: "Torres de enfriamiento industriales, eficiencia energética y cero emisiones."
   },
   {
-    sector: "Machinery / Mechanical equipment",
-    sectorEs: "Maquinaria / Equipos mecánicos",
+    sector: "Construction materials / Building materials",
+    sectorEs: "Materiales de construcción",
     brand: ["MR.WHEEL"],
     logo: mrWheel,
     url: "https://www.thanedproducts.com/",

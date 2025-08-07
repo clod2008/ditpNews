@@ -1,4 +1,4 @@
-import { noPic450x450, fooSpacialize, monty, heirtage, jimGroup, vfoods, buono, vegaNatural, venaSukum, natureBestFood, fruittara, pgsFoods, starCannery, onGreenProduces, takerngPineappleIndustrial, thaiCoco, tT, royalPlusPublicCompany, worldFoodsInternational, brihtTimeIntertrade, krsSpicyFoodCompany, taanThai, asianFoodNetwork, bangSueChiaMengRiceMill, itailCorporationPublicCompany, keatkhamtornGymLogo, kellyAndCompanionCo } from "../assets";
+import { noPic450x450, fooSpacialize, monty, heirtage, jimGroup, vfoods, buono, vegaNatural, venaSukum, natureBestFood, fruittara, pgsFoods, starCannery, onGreenProduces, takerngPineappleIndustrial, thaiCoco, tT, royalPlusPublicCompany, worldFoodsInternational, brihtTimeIntertrade, krsSpicyFoodCompany, taanThai, asianFoodNetwork, bangSueChiaMengRiceMill, itailCorporationPublicCompany, keatkhamtornGymLogo, kellyAndCompanionCo, anusornMahachai } from "../assets";
 
 const thaiDelegationList2025Food = [
   // Snack
@@ -92,6 +92,16 @@ const thaiDelegationList2025Food = [
     catalogUrl: "https://drive.google.com/file/d/16ExcC6zJys5SFrCZM81_6cyEhMqPGzdt/view?usp=sharing",
     description: "Canned Pineapple, Canned Coconut Water",
     descriptionEs: "Ananá y agua de coco enlatados, frescura y sabor tropical."
+  },
+  {
+    sector: "Canned Food",
+    sectorEs: "Conservas",
+    brand: ["Hichef", "Maha"],
+    logo: anusornMahachai,
+    url: "www.anusorngroup.co.th",
+    catalogUrl: "https://docs.google.com/presentation/d/1ADGbJT5L_Ik601ntH4VNRy6YbkkvBcqC/edit?usp=sharing&ouid=115501148737643093781&rtpof=true&sd=true",
+    description: "Suimi, Canned product,crab stick,fismeal",
+    descriptionEs: "Suimi, productos enlatados, palitos de cangrejo, comida lista para comer."
   },
   // Drink
   {
