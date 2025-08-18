@@ -323,6 +323,38 @@ Empresa: `} />
           </Container>
         </Container>
       </Row>
+      <Container>
+        <Row className='justify-content-center'>
+          <Col md={8} className='text-center my-5'>
+          <Col>
+            Consultas: 
+            <strong> 
+              <a 
+                href="mailto:thaib2b@ttc-ba.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className='text-decoration-none'
+                style={{color: 'var(--primary)'}}
+              >
+              thaib2b@ttc-ba.com</a></strong>
+          </Col>
+            <br/>
+            Para más información sobre las actividades del DITP y oportunidades en comercio internacional, visita<br/>
+            <strong>
+              <a 
+                href="https://www.ditp.go.th/en" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className='text-decoration-none'
+                style={{color: 'var(--primary)'}}
+              >
+                https://www.ditp.go.th/en
+              </a>
+            </strong>
+          </Col>
+
+        </Row>
+      </Container>
     </section>
   )
 }
