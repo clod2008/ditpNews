@@ -307,14 +307,15 @@ Empresa: `} />
                       )}
                     </Col>
                   </Col>
-                  <Col >
-                    <GoogleForm
+                  <Col className='text-center p-5'>
+                    {/* <GoogleForm
                       src='https://forms.gle/YeZsEbyqnz6sFYFR6'
                       height={formHeight}
                       marginheight='0'
                       marginwidth='0'
                       title='Contactos Festuval Muay Thai 2024'
-                    />
+                    /> */}
+                    <h3>Ya no quedan espacios disponibles para las reuniones. Por favor comuníquese con nosotros para ingresar a la lista de espera</h3>
                   </Col>
 
                 </Row>
