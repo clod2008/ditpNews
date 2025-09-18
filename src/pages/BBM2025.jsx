@@ -134,9 +134,9 @@ export const BBM2025 = () => {
   return (
     <section className={`${styles.bbm25}`}>
       {/* No arreglar el tabulador */}
-      <WhatsAppButtonFloat message={`Hola,
+      {/* <WhatsAppButtonFloat message={`Hola,
 Me gustaría recibir más información sobre el Buenos Aires Business Matching 2025
-Empresa: `} />
+Empresa: `} /> */}
       {/* No arreglar el tabulador */}
       <Row className={`${styles.heroVideoBanner}`} >
         <Container fluid className={`${styles.heroVideoBannerTextContainer}`}>
