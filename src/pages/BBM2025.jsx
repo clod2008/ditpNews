@@ -11,15 +11,12 @@ import { thaiDelegationList2025Food } from '../data/thaiListExportes2025Food';
 import { thaiDelegationList2025Industry } from '../data/thaiListExportes2025Industry';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { GoogleForm } from '../components/GoogleForm/GoogleForm';
 import useWindowWidth from '../hooks/useWindowWidth';
 import { GoogleMap } from "../components/GoogleMap/GoogleMap";
 import { isMobile } from "react-device-detect";
 import { Link } from "react-router-dom";
 import { LangSelector } from '../components/LangSelector';
 import VideoContainer from '../components/VideoContainer/VideoContainer';
-import VideoContainerMultiVideo from '../components/VideoContainer/VideoContainerMultiVideo';
-import { WhatsAppButtonFloat } from '../components/WhatsAppFloatBtn/WhatsAppFloatBtn';
 
 
 
@@ -155,15 +152,6 @@ Empresa: `} /> */}
           <VideoContainer
             key={`${getVideoFileName(videoSync)}-${videoKey}`} // Forzar re-renderizado cuando cambie el video
             src={videoSync}
-            loop={true}
-            autoplay='autoplay'
-            muted='muted'
-            type='webm'
-          />
-        </Col>
-        <Col className={`${styles.videoContainerMultiVideo}`}>
-          <VideoContainerMultiVideo
-            src={thai360}
             loop={true}
             autoplay='autoplay'
             muted='muted'

@@ -1,4 +1,4 @@
-import { noPic450x450, fooSpacialize, monty, heirtage, jimGroup, vfoods, buono, vegaNatural, venaSukum, natureBestFood, fruittara, pgsFoods, starCannery, onGreenProduces, takerngPineappleIndustrial, thaiCoco, tT, royalPlusPublicCompany, worldFoodsInternational, brihtTimeIntertrade, krsSpicyFoodCompany, taanThai, asianFoodNetwork, bangSueChiaMengRiceMill, itailCorporationPublicCompany, keatkhamtornGymLogo, kellyAndCompanionCo, anusornMahachai } from "../assets";
+import { fooSpacialize, monty, heirtage, jimGroup, vfoods, buono, venaSukum, natureBestFood, fruittara, pgsFoods, starCannery, onGreenProduces, takerngPineappleIndustrial, thaiCoco, tT, royalPlusPublicCompany, worldFoodsInternational, brihtTimeIntertrade, krsSpicyFoodCompany, taanThai, asianFoodNetwork, bangSueChiaMengRiceMill, itailCorporationPublicCompany, kellyAndCompanionCo, anusornMahachai } from "../assets";
 
 const thaiDelegationList2025Food = [
   // Snack

@@ -7,18 +7,11 @@ export const Credenciales = () => {
     "https://docs.google.com/spreadsheets/d/1YUk6cmgyPyyBgK9ip6OAeEUe1NrlvqcjmPeKlJnK7f8/gviz/tq?tqx=out:json&gid=416464308";
   // const url = 'https://spreadsheets.google.com/feeds/cells/1YUk6cmgyPyyBgK9ip6OAeEUe1NrlvqcjmPeKlJnK7f8/1/public/full?alt=json'
   const acreditados = async (url) => {
-    // console.log(url)
-    const resp = await fetch(url);
-
-    // console.log(resp)
+    await fetch(url);
   };
 
   acreditados(url);
 
-  const url2 = `
-
-  
-  `;
 
   return (
     <>
