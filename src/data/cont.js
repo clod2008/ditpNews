@@ -1,6 +1,6 @@
 import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons"
 
-import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, smileHart, vegaNatural, thaiPresidentFood, fooSpacialize, goldenGrain, jimGroup, tsy, pcProducts, ayPOrchard, siamProduce, paulianCocina, gordoCocina, gladysOlazar, fairtexLogo, rajaBoxingLogo, krudamMuayThaiSchoolLogo, muayThaiInstituteLogo, keatkhamtornGymLogo, topKingBoxingLogo, thaiBattleboxingLogo, nowMuayThaiLogo, buakawGalleryLogo, tuffSportLogo } from "../assets"
+import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, thaiPresidentFood, fooSpacialize, jimGroup, tsy, pcProducts, ayPOrchard, paulianCocina, gordoCocina, gladysOlazar, rajaBoxingLogo, topKingBoxingLogo, nowMuayThaiLogo, buakawGalleryLogo, tuffSportLogo } from "../assets"
 
 const paths = {
     home: `/home`,
