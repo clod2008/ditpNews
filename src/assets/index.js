@@ -58,6 +58,7 @@ export { default as siamProduce } from './img/delgationBrand/delegationBrand__00
 export { default as paulianCocina } from './img/paulinaCocina.webp';
 export { default as gordoCocina } from './img/gordoCocina.webp';
 export { default as gladysOlazar } from './img/gladysOlazar.webp';
+export { default as danaButtigliero } from './img/danaButtigliero.webp';
 
 //Videos
 export { default as carouselBMvideo } from './videos/FestivalMT2024-banner-desck.webm';

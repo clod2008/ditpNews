@@ -1,6 +1,6 @@
 import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons"
 
-import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, thaiPresidentFood, fooSpacialize, jimGroup, tsy, pcProducts, ayPOrchard, paulianCocina, gordoCocina, gladysOlazar, rajaBoxingLogo, topKingBoxingLogo, nowMuayThaiLogo, buakawGalleryLogo, tuffSportLogo } from "../assets"
+import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, thaiPresidentFood, fooSpacialize, jimGroup, tsy, pcProducts, ayPOrchard, paulianCocina, gordoCocina, gladysOlazar, rajaBoxingLogo, topKingBoxingLogo, nowMuayThaiLogo, buakawGalleryLogo, tuffSportLogo, danaButtigliero } from "../assets"
 
 const paths = {
     home: `/home`,
@@ -467,6 +467,36 @@ const thaiDelegationList2 = [
 // Fin Business Wheel
 // Campaigns Page
 const campaign = [
+    {
+        title: { En: 'Campaign 2025', Es: 'Campaña 2025' },
+        actor: 'Dana Buttigliero',
+        img: danaButtigliero,
+        decription:
+        {
+            En: `   Creator of Sabores del Conurbano (Flavors from the Conurbano) (@saboresdelconurbano) dominates social media with simple, homemade recipes full of flavor that reclaim the identity of the Buenos Aires conurbano. What started as sharing home-cooked dishes has transformed into a viral proposition: her videos and posts on TikTok and Instagram bring traditional foods and practical tips that anyone can replicate, inviting people to celebrate everyday flavors and cook with pride. Her approachable tone and popular focus have made her one of the culinary references of the region, with recognition beyond her community.`,
+            Es: `   Creadora de Sabores del Conurbano (@saboresdelconurbano), domina las redes con recetas sencillas, caseras y llenas de sabor que recuperan la identidad del conurbano bonaerense. Lo que empezó como compartir platos de casa se transformó en una propuesta viral: sus videos y posteos en TikTok e Instagram acercan comidas tradicionales y consejos prácticos que cualquiera puede replicar, invitando a celebrar sabores cotidianos y a cocinar con orgullo. Su tono cercano y su enfoque popular la convirtieron en una de las referentes gastronómicas de la región, con reconocimiento más allá de su comunidad.`
+        },
+        videos: [
+            {
+                icon: faInstagram,
+                title: { En: 'CURRY VERDE', Es: 'CURRY VERDE' },
+                iframeUrl: 'DMQf4PqxKDs',
+                socialNet: 'ig',
+            },
+            {
+                icon: faInstagram,
+                title: { En: 'CHICKEN RICE', Es: 'CHICKEN RICE' },
+                iframeUrl: 'DMgTIi8xefA',
+                socialNet: 'ig',
+            },
+            {
+                icon: faInstagram,
+                title: { En: 'Pad Kra Pao', Es: 'Pad Kra Pao' },
+                iframeUrl: 'DMtNzUZRXiq',
+                socialNet: 'ig',
+            },
+        ]
+    },
     {
         title: { En: 'Campaign 2023', Es: 'Campaña 2023' },
         actor: 'Gladys Mabel Olazar',
