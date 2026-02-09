@@ -8,20 +8,23 @@ export const VideoContainer = ({
   loop,
   muted,
   poster,
-  width,
-  height,
+  width = '100%',
+  height = '100%',
   type = "mp4", // Default to "video/mp4" if no type is provided
+  left = '50%',
+  top = '50%',
   zIndex = 0,
 }) => {
   const videoStyles = {
     position: "absolute",
-    top: "50%",
-    left: "50%",
-    width: "100%",
-    height: "100%",
+    top,
+    left,
+    width: width,
+    height: height,
     objectFit: "cover",
     transform: "translate(-50%, -50%)",
     zIndex: zIndex,
+    
   };
   return (
     <video
@@ -33,6 +36,7 @@ export const VideoContainer = ({
       width={width}
       height={height}
       style={videoStyles}>
+       
       <source src={src} type={`video/${type}`} />
       Your browser does not support the video tag.
     </video>
@@ -46,9 +50,12 @@ VideoContainer.propTypes = {
   loop: PropTypes.bool,
   muted: PropTypes.string,
   poster: PropTypes.string,
-  width: PropTypes.number,
-  height: PropTypes.number,
+  width: PropTypes.string,
+  height: PropTypes.string,
   type: PropTypes.string,
+  left: PropTypes.string,
+  top: PropTypes.string,
+  zIndex: PropTypes.number,
 };
 
 export default VideoContainer;

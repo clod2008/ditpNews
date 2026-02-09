@@ -2,7 +2,7 @@ import { Row, Col, Container, Image, Button, Accordion } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import useScrollTo from "../hooks/useScrollTo";
-import { bbm25LogoPrimary, logosFood, faena, logosIndustry } from '../assets';
+import { bbm25LogoPrimary, logosFood, faena, logosIndustry, thai360 } from '../assets';
 import { LottieConatiner } from '../components/LottieContainer/LottieConatiner';
 import bbm25Logo from '../assets/lotties/bbm25Logo.json'
 import styles from './BBM2025.module.scss'
@@ -55,7 +55,7 @@ export const BBM2025 = () => {
   // Sincronizar con la URL al cambiar el acordeón
   const handleAccordionChange = (key) => {
     console.log('handleAccordionChange called with key:', key);
-    
+
     // Si se hace click en el mismo item que está abierto, cerrarlo
     if (activeAccordion === key) {
       setActiveAccordion(null);
@@ -65,7 +65,7 @@ export const BBM2025 = () => {
     } else {
       // Abrir el nuevo item
       setActiveAccordion(key);
-      
+
       // Limpiar parámetros anteriores y agregar el nuevo
       if (key === '0') {
         window.history.replaceState(null, '', '?food');
@@ -81,7 +81,7 @@ export const BBM2025 = () => {
   useEffect(() => {
     const foodParam = searchParams.get('food');
     const industryParam = searchParams.get('industry');
-    
+
     if (foodParam !== null && activeAccordion !== '0') {
       setActiveAccordion('0');
     } else if (industryParam !== null && activeAccordion !== '1') {
@@ -126,6 +126,7 @@ export const BBM2025 = () => {
   };
 
 
+  console.log(isMobile)
 
 
   return (
@@ -149,14 +150,55 @@ Empresa: `} /> */}
           </Container>
         </Container>
         <Col className={`${styles.videoContainer}`}>
-          <VideoContainer
-            key={`${getVideoFileName(videoSync)}-${videoKey}`} // Forzar re-renderizado cuando cambie el video
-            src={videoSync}
-            loop={true}
-            autoplay='autoplay'
-            muted='muted'
-            type='webm'
-          />
+          {isMobile
+            ? (
+              <>
+                <VideoContainer
+                  key={`${getVideoFileName(videoSync)}-${videoKey}`} // Forzar re-renderizado cuando cambie el video
+                  src={videoSync}
+                  loop={true}
+                  autoplay='autoplay'
+                  muted='muted'
+                  type='webm'
+                  zIndex={50}
+                  left='90%'
+                  width='200%'
+                />
+                <VideoContainer
+                  key={`${getVideoFileName(videoSync)}-${videoKey}`} // Forzar re-renderizado cuando cambie el video
+                  src={thai360}
+                  loop={true}
+                  autoplay='autoplay'
+                  muted='muted'
+                  type='webm'
+                  zIndex={5}
+                />
+              </>
+            )
+            : (
+              <>
+                <VideoContainer
+                  key={`${getVideoFileName(videoSync)}-${videoKey}`} // Forzar re-renderizado cuando cambie el video
+                  src={videoSync}
+                  loop={true}
+                  autoplay='autoplay'
+                  muted='muted'
+                  type='webm'
+                  zIndex={50}
+
+                />
+                <VideoContainer
+                  key={`${getVideoFileName(videoSync)}-${videoKey}`} // Forzar re-renderizado cuando cambie el video
+                  src={thai360}
+                  loop={true}
+                  autoplay='autoplay'
+                  muted='muted'
+                  type='webm'
+                  zIndex={5}
+                />
+              </>
+            )
+          }
         </Col>
       </Row>
 
@@ -315,27 +357,27 @@ Empresa: `} /> */}
       <Container>
         <Row className='justify-content-center'>
           <Col md={8} className='text-center my-5'>
-          <Col>
-            Consultas: 
-            <strong> 
-              <a 
-                href="mailto:thaib2b@ttc-ba.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className='text-decoration-none'
-                style={{color: 'var(--primary)'}}
-              >
-              thaib2b@ttc-ba.com</a></strong>
-          </Col>
-            <br/>
-            Para más información sobre las actividades del DITP y oportunidades en comercio internacional, visita<br/>
+            <Col>
+              Consultas:
+              <strong>
+                <a
+                  href="mailto:thaib2b@ttc-ba.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className='text-decoration-none'
+                  style={{ color: 'var(--primary)' }}
+                >
+                  thaib2b@ttc-ba.com</a></strong>
+            </Col>
+            <br />
+            Para más información sobre las actividades del DITP y oportunidades en comercio internacional, visita<br />
             <strong>
-              <a 
-                href="https://www.ditp.go.th/en" 
-                target="_blank" 
+              <a
+                href="https://www.ditp.go.th/en"
+                target="_blank"
                 rel="noopener noreferrer"
                 className='text-decoration-none'
-                style={{color: 'var(--primary)'}}
+                style={{ color: 'var(--primary)' }}
               >
                 https://www.ditp.go.th/en
               </a>
