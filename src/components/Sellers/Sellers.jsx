@@ -3,7 +3,6 @@ import { Card, Col, Image, Row } from "react-bootstrap";
 import styles from "./Sellers.module.scss";
 import { useContext } from "react";
 import { LangContext } from "../../context/langContex";
-import { LangSelector } from "../LangSelector";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 

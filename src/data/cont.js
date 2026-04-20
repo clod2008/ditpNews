@@ -1,6 +1,10 @@
 import { faFacebook, faInstagramSquare, faLinkedinIn, faWhatsappSquare, faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons"
 
+<<<<<<< HEAD
 import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoKoLanta, logoNewGarden, monty, ctyFarm, noPic450x450, thaiPresidentFood, fooSpacialize, jimGroup, tsy, pcProducts, ayPOrchard, paulianCocina, gordoCocina, gladysOlazar, rajaBoxingLogo, topKingBoxingLogo, nowMuayThaiLogo, buakawGalleryLogo, tuffSportLogo, danaButtigliero } from "../assets"
+=======
+import { tcp, muangthong, solex, plolawat, aas, acv, bannerHomeJurin, bannerHomeTradeMinister, bosny, carpets, cjGroup, explorar, heirtage, logoAsiaOriental, logoKhaosan, logoNewGarden, monty, thaiPresidentFood, fooSpacialize, jimGroup, tsy, pcProducts, ayPOrchard, paulianCocina, gordoCocina, gladysOlazar, rajaBoxingLogo, topKingBoxingLogo, nowMuayThaiLogo, buakawGalleryLogo, tuffSportLogo } from "../assets"
+>>>>>>> dev
 
 const paths = {
     home: `/home`,

@@ -17,6 +17,10 @@ import { isMobile } from "react-device-detect";
 import { Link } from "react-router-dom";
 import { LangSelector } from '../components/LangSelector';
 import VideoContainer from '../components/VideoContainer/VideoContainer';
+<<<<<<< HEAD
+=======
+import VideoContainerMultiVideo from '../components/VideoContainer/VideoContainerMultiVideo';
+>>>>>>> dev
 
 
 
