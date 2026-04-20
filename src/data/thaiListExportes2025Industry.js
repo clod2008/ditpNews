@@ -1,4 +1,4 @@
-import { noPic450x450, plolawat, acv, skPolymer, adbSealant, advanceAutoSupply, cjManufacturing, seiKenheiMark, perfectRubberParts, proPartDistributor, vpsEquipment, jungle4x4, odAndLeo, sahamitrPressureContainer, mccIndustrian, nokEquipment, xPertTechinal, luckyFlame, spr, innovekAsia, mrWheel } from "../assets";
+import { plolawat, acv, skPolymer, adbSealant, advanceAutoSupply, cjManufacturing, seiKenheiMark, perfectRubberParts, proPartDistributor, vpsEquipment, jungle4x4, odAndLeo, sahamitrPressureContainer, mccIndustrian, luckyFlame, spr, innovekAsia, mrWheel } from "../assets";
 
 const thaiDelegationList2025Industry = [
   // Automotive / Auto Parts and Accessories
