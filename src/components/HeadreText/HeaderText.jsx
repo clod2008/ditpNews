@@ -9,7 +9,7 @@ export const HeaderText = ({text}) => {
 
 
 
-    const [divH, setDivH] = useState(300);
+    const [, setDivH] = useState(300);
 
     // const formAddress = 'https://docs.google.com/forms/d/e/1FAIpQLSd6K-h0KiE5D3-5dQKYNL_Vifd9PAu40QhhYZXKkUkpWq4RMg/viewform?embedded=true'
   

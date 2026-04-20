@@ -4,7 +4,6 @@ import { CarouselFullWith } from '../components/CarouselFullWith/CarouselFullWit
 
 import { SectionTitle } from '../components/SectionTitle/SectionTitle'
 import { CardGrid } from '../components/CardGrid/CardGrid'
-import { PdfContainer } from '../components/PdfContainer/PdfContainer'
 import { Container } from 'react-bootstrap'
 
 

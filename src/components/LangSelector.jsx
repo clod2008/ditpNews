@@ -11,7 +11,7 @@ export const LangSelector = ({enText, esText}) => {
   
   useEffect(() => {
      langSelected === 'en' ?(settextSelected(enText)) : settextSelected(esText)
-   }, [useContext(LangContext)]);
+   }, [langSelected, enText, esText]);
 
 
   return (

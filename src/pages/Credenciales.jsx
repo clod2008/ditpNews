@@ -8,17 +8,13 @@ export const Credenciales = () => {
   // const url = 'https://spreadsheets.google.com/feeds/cells/1YUk6cmgyPyyBgK9ip6OAeEUe1NrlvqcjmPeKlJnK7f8/1/public/full?alt=json'
   const acreditados = async (url) => {
     // console.log(url)
-    const resp = await fetch(url);
+    await fetch(url);
 
     // console.log(resp)
   };
 
   acreditados(url);
 
-  const url2 = `
-
-  
-  `;
 
   return (
     <>
