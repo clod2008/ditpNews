@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,29 +11,132 @@
       theme: {
         extend: {
           colors: {
-            primary:   '#0F172A',
-            secondary: '#334155',
-            accent:    '#0369A1',
-            muted:     '#64748B',
+            /* ── Primarios de marca ── */
+            primary:    '#1B2E8C', // Thai Blue — navbar, badges, botones secundarios
+            'primary-dark': '#0D1B55', // Blue Dark — fondo navbar/footer, inicio degradado
+            secondary:  '#C1281C', // Thai Red — CTAs, sector tags, acentos
+            'secondary-dark': '#8C1C13', // Red Dark — hover sobre rojo
+            /* ── Acento ── */
+            accent:     '#C49A3C', // Gold — "X" logo, certificaciones, uso mínimo
+            /* ── Paradas del degradado hero ── */
+            purple:     '#6B2D9B', // Degradado 65%
+            magenta:    '#B81F6E', // Degradado 100%
+            /* ── Neutros ── */
+            editorial:  '#1A1A18', // Negro editorial — títulos sobre fondo claro
+            cream:      '#F8F5EF', // Warm Cream — fondo secciones de contenido
+            'photo-gray': '#EBEBEB', // Fondo cutout embajadores
+            /* ── Alias legacy (no remover — usado en markup existente) ── */
+            muted:      '#0D1B55',
           },
           fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
+            sans: ['Barlow', 'system-ui', 'sans-serif'],
+            condensed: ['Barlow Condensed', 'system-ui', 'sans-serif'],
           },
         }
       }
     }
   </script>
+  <style>
+    .bg-campaign-gradient {
+      background: linear-gradient(135deg, #0D1B55 0%, #1B2E8C 30%, #6B2D9B 65%, #B81F6E 100%);
+    }
+    .font-display {
+      font-family: 'Barlow Condensed', system-ui, sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+  </style>
+  <script>
+    /* ── Cloudinary helper ──────────────────────────────────────────
+       Uso:
+         CLD.img('embassador')                  → URL base optimizada
+         CLD.img('embassador', 'w_800,ar_3:4,c_fill')  → con transforms extra
+         CLD.srcset('embassador', [400,800,1200])       → array de strings para srcset
+         CLD.video('heroVideo')                 → URL de video optimizado
+         CLD.poster('heroVideo')                → frame de video como imagen
+    ──────────────────────────────────────────────────────────────── */
+    const CLD = (() => {
+      const BASE = 'https://res.cloudinary.com/apsis';
+      const FOLDER = 'DITP/next-level';
+      const IMG_OPT = 'f_auto,q_auto,dpr_auto';
+      const VID_OPT = 'f_auto,q_auto:best,vc_auto';
+
+      return {
+        img(name, extra = '') {
+          const t = extra ? `${IMG_OPT},${extra}` : IMG_OPT;
+          return `${BASE}/image/upload/${t}/${FOLDER}/${name}`;
+        },
+        srcset(name, widths = [400, 800, 1200, 1600], extra = '') {
+          return widths
+            .map(w => `${this.img(name, `w_${w}${extra ? ',' + extra : ''}`)} ${w}w`)
+            .join(', ');
+        },
+        video(name, extra = '') {
+          const t = extra ? `${VID_OPT},${extra}` : VID_OPT;
+          return `${BASE}/video/upload/${t}/${FOLDER}/${name}`;
+        },
+        poster(name) {
+          return `${BASE}/video/upload/${IMG_OPT},so_0/${FOLDER}/${name}.jpg`;
+        },
+      };
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <script>
+    /* Dev live-reload — solo activo en localhost, sin efecto en producción */
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+      (function () {
+        var ws = new WebSocket('ws://' + location.host + '/ws');
+        ws.onmessage = function (e) {
+          try {
+            var msg = JSON.parse(e.data);
+            if (msg.type === 'content-changed' || msg.type === 'static-changed') {
+              location.reload();
+            }
+          } catch (_) {}
+        };
+      })();
+    }
+  </script>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans antialiased">
+
+<body class="bg-cream text-editorial font-sans antialiased">
+
+  <!-- SVG Sprite — definir logos/iconos una vez, usar con <use href="#id"> -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="hidden" aria-hidden="true">
+    <symbol id="logo-ditp" viewBox="0 0 910 174">
+      <g clip-path="url(#clip-logo-ditp)">
+        <path d="M909.56 0L794.35 20.01L799.52 48.86L904.05 30.71L909.56 0Z" fill="#BB2030"/>
+        <path d="M801.91 62.07L726.94 75.1L732.44 44.39L796.75 33.22L801.91 62.07Z" fill="#BB2030"/>
+        <path d="M900.93 48.2L895.42 78.91L807.63 94.16L802.46 65.3L900.93 48.2Z" fill="#1B4696"/>
+        <path d="M810.03 107.37L718.31 123.3L723.81 92.6V92.59L804.86 78.51L810.03 107.37Z" fill="#1B4696"/>
+        <path d="M892.03 97.89L886.53 128.6L815.99 140.86L810.82 112.01L892.03 97.89Z" fill="#BB2030"/>
+        <path d="M714.91 142.28L709.42 172.99L818.39 154.07L813.22 125.22L714.91 142.28Z" fill="#BB2030"/>
+        <path d="M217.78 19.46V52.02H246.54V58.55L217.74 87.35L217.72 173.19H258.06L258.1 19.46H217.78Z" fill="#1B4696"/>
+        <path d="M158.1 37.4C154.98 34.8 151.46 32.51 147.88 30.73C146.39 29.8 144.79 29.09 143.27 28.41C139.17 26.53 134.67 24.97 129.96 23.79C124.39 22.27 118.27 21.24 111.85 20.74C107.6 20.28 102.69 20.06 96.85 20.06H0V53.27H28.76V60.05L0 88.83V173.51H96.84C102.68 173.51 107.59 173.29 111.8 172.84C120.82 171.99 128.99 170.27 135.91 167.79C139.68 166.73 143.31 165.24 147.73 162.92C151.76 160.72 155.15 158.46 158.07 156.02C160.02 154.42 161.58 152.86 163.32 151.12C166.91 147.19 169.88 142.57 172.41 136.97C173.59 134.28 174.8 131.36 175.68 128.17L175.77 127.7C178.11 119.72 179.41 110.95 179.75 100.82V96.86C179.75 84.46 178.36 74.09 175.5 65.15C171.99 53.23 166.12 43.88 158.1 37.39M139.1 101.17C139.1 115.5 135.26 125.63 127.56 131.37C127.02 131.82 126.42 132.21 125.81 132.61C125.35 132.91 124.89 133.22 124.61 133.43C120.7 135.78 116.23 137.45 110.93 138.54C105.62 139.7 99.66 140.29 93.2 140.29H40.31V53.29H93.2C99.65 53.29 105.62 53.88 110.95 55.05C117.63 56.45 123.27 58.79 127.72 62.02C129.9 63.58 131.69 65.46 133.03 67.66C137.05 73.18 139.1 81.06 139.1 91.1V101.17Z" fill="#1B4696"/>
+        <path d="M663.71 33.96L663.69 33.94C654.38 24.63 639.99 19.9 620.91 19.9H497.71V51.97L526.31 51.89V58.43L497.71 87.03V173.19H537.7V172.86H537.86V125.8H620.91C640.38 125.8 654.39 121.09 663.71 111.41C673.01 101.93 677.73 88.77 677.73 72.28C677.73 55.79 673.01 43.45 663.71 33.97M637.24 75.4C637.24 81.39 635.67 85.87 632.41 89.14C629.18 92.51 623.59 94.22 615.78 94.22H537.84V51.86L615.78 51.64C623.44 51.64 629 53.31 632.28 56.59C635.61 59.92 637.23 64.35 637.23 70.12V75.4H637.24Z" fill="#1B4696"/>
+        <path d="M287.62 19.46V52.84H373.59V59.35L357.49 75.45V173.23H397.97V52.84H468V19.46H287.62Z" fill="#1B4696"/>
+      </g>
+      <defs>
+        <clipPath id="clip-logo-ditp">
+          <rect width="909.56" height="173.51" fill="white"/>
+        </clipPath>
+      </defs>
+    </symbol>
+  </svg>
 
   <!-- Header -->
-  <header class="bg-primary text-white shadow-md">
+  <header class="bg-primary text-white shadow-md sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <span class="text-accent font-bold text-xl tracking-wide">DITP</span>
+      <div class="flex items-center gap-4">
+        <svg class="h-5 w-auto brightness-0 invert" aria-label="DITP Logo" role="img">
+          <use href="#logo-ditp"/>
+        </svg>
         <span class="text-slate-400 text-sm">Argentina</span>
       </div>
       <nav class="hidden md:flex gap-6 text-sm text-slate-300">
@@ -44,20 +148,45 @@
   </header>
 
   <!-- Hero -->
-  <section class="bg-gradient-to-br from-primary via-secondary to-accent text-white py-20 px-6">
-    <div class="max-w-4xl mx-auto text-center">
-      <p class="text-accent text-sm font-semibold uppercase tracking-widest mb-3">Departamento de Promoción Comercial Internacional de Tailandia</p>
-      <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+  <section class="relative min-h-[480px] md:min-h-[700px] flex items-center justify-center text-white ">
+
+    <!-- Fondo: video Cloudinary — f_auto,q_auto,vc_auto -->
+    <video
+      id="hero-video"
+      class="absolute inset-0 w-full h-full object-cover"
+      autoplay muted loop playsinline
+      poster=""><!-- poster se inyecta por JS abajo -->
+    </video>
+
+    <!-- Contenido -->
+    <div class="absolute bottom-0 translate-y-2/3 z-10 max-w-4xl mx-auto text-center px-20 py-10 bg-primary rounded-2xl ">
+      <p class="text-white/60 text-sm font-bold uppercase tracking-widest mb-3">
+        Departamento de Promoción Comercial Internacional de Tailandia
+      </p>
+      <h1 class="font-display text-5xl md:text-7xl leading-none mb-6">
         Next Level
       </h1>
-      <p class="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-8">
+      <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-8">
         Llevá tu negocio al próximo nivel con el apoyo del DITP en Argentina.
       </p>
-      <a href="#" class="inline-block bg-accent hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-full transition-colors shadow-lg">
+      <a href="#embajadores"
+        class="inline-block bg-white text-primary hover:bg-white/90 font-bold uppercase tracking-wide px-8 py-3 rounded-full transition-colors shadow-lg">
         Conocé más
       </a>
     </div>
   </section>
+
+  <script>
+    /* Inyectar video y poster via CLD helper para mantener el markup limpio */
+    (function () {
+      const v = document.getElementById('hero-video');
+      v.poster = CLD.poster('heroVideo');
+      const src = document.createElement('source');
+      src.src  = CLD.video('heroVideo');
+      src.type = 'video/mp4';
+      v.appendChild(src);
+    })();
+  </script>
 
   <!-- Cards Section -->
   <section class="py-16 px-6">
@@ -69,52 +198,83 @@
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
           <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
           <h3 class="font-semibold text-primary mb-2">Nombre del servicio</h3>
-          <p class="text-muted text-sm">Descripción breve del servicio o programa disponible para empresas participantes.</p>
+          <p class="text-muted text-sm">Descripción breve del servicio o programa disponible para empresas
+            participantes.</p>
         </div>
 
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
           <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           </div>
           <h3 class="font-semibold text-primary mb-2">Nombre del servicio</h3>
-          <p class="text-muted text-sm">Descripción breve del servicio o programa disponible para empresas participantes.</p>
+          <p class="text-muted text-sm">Descripción breve del servicio o programa disponible para empresas
+            participantes.</p>
         </div>
 
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
           <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
           <h3 class="font-semibold text-primary mb-2">Nombre del servicio</h3>
-          <p class="text-muted text-sm">Descripción breve del servicio o programa disponible para empresas participantes.</p>
+          <p class="text-muted text-sm">Descripción breve del servicio o programa disponible para empresas
+            participantes.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Banner -->
-  <section class="bg-accent py-14 px-6">
+  <!-- Embajadores -->
+  <section id="embajadores" class="bg-photo-gray py-16 px-6">
+    <div class="max-w-6xl mx-auto">
+      <p class="text-secondary text-xs font-bold uppercase tracking-widest text-center mb-2">Embajadores 2026</p>
+      <h2 class="font-display text-3xl md:text-4xl text-editorial text-center mb-10">Think Thailand: Next Level</h2>
+
+      <div class="flex justify-center">
+        <img
+          id="embassador-img"
+          alt="Embajadores Think Thailand Next Level 2026"
+          class="w-full max-w-4xl rounded-2xl object-cover"
+          sizes="(max-width: 768px) 100vw, 896px">
+        <!-- src y srcset se inyectan por JS abajo -->
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const img = document.getElementById('embassador-img');
+      img.src    = CLD.img('embassador', 'w_896,c_fill');
+      img.srcset = CLD.srcset('embassador', [400, 800, 1200, 1600], 'c_fill');
+    })();
+  </script>
+
+  <!-- CTA Banner — repite el degradado hero para coherencia visual (normativa §4) -->
+  <section class="bg-campaign-gradient py-14 px-6">
     <div class="max-w-3xl mx-auto text-center text-white">
-      <h2 class="text-2xl md:text-3xl font-bold mb-4">¿Listo para el próximo nivel?</h2>
-      <p class="text-blue-100 mb-8">Contactanos y un representante del DITP se comunicará con vos.</p>
-      <a href="mailto:info@ditp.go.th" class="inline-block bg-white text-accent font-semibold px-8 py-3 rounded-full hover:bg-slate-100 transition-colors shadow">
+      <h2 class="font-display text-3xl md:text-4xl mb-4">¿Listo para el próximo nivel?</h2>
+      <p class="text-white/70 mb-8">Contactanos y un representante del DITP se comunicará con vos.</p>
+      <a href="mailto:info@ditp.go.th"
+        class="inline-block bg-white text-primary font-bold uppercase tracking-wide px-8 py-3 rounded-full hover:bg-white/90 transition-colors shadow">
         Contactar ahora
       </a>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-primary text-slate-400 py-8 px-6 text-sm text
--center">
+  <!-- Footer — Blue Dark #0D1B55, consistente con el inicio del degradado (normativa §4) -->
+  <footer class="bg-primary-dark text-white/40 py-8 px-6 text-sm text-center">
     <p>© 2025 DITP — Department of International Trade Promotion · Thailand</p>
   </footer>
 
 </body>
+
 </html>

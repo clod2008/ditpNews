@@ -1,0 +1,13 @@
+{
+  "tailwindCSS.includeLanguages": {
+    "html": "html"
+  },
+  "tailwindCSS.files.exclude": [
+    "**/.git/**",
+    "**/node_modules/**",
+    "**/.hg/**"
+  ],
+  "editor.quickSuggestions": {
+    "strings": "on"
+  }
+}
