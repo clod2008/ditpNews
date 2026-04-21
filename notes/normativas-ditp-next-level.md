@@ -231,14 +231,19 @@ Integrante del equipo nacional de bádminton de Tailandia. Campeona mundial y m�
 
 ### Bie Thassapak Hsu · 毕书尽
 **Sector: Gastronomía · Food**  
-**Credenciales:** Cantante y actor tailandés · Mercado chino / entretenimiento asiático
+**Credenciales:** Cantante y actor tailandés · Mercado chino / entretenimiento asiático  
+**Nombre profesional en China:** 徐志贤 (Xú Zhì Xián)  
+**Artículo oficial DITP:** https://thinkthailand.ditp.go.th/articles3-en (15 marzo 2026)  
+**Título del artículo:** *"Bie Thassapak Showcases the Potential of Thai Food and Fruits — Blending Flavor, Innovation, and Sustainability under the THINK THAILAND: NEXT LEVEL Campaign to Expand into New Global Markets"*
+
+> ⚠️ **Regla de copy:** Bie NO es el embajador de Tailandia como país. Es una **figura de marca global** de la gastronomía tailandesa. Nunca escribir "embajador" solo — siempre "embajador de marca", "figura de marca global" o "vocero de marca".
 
 **Bio oficial (ES):**  
-Cantante y actor tailandés que ha logrado gran éxito en la industria del entretenimiento chino bajo el nombre 毕书尽. Actúa como puente cultural conectando la gastronomía tailandesa con consumidores internacionales. A través de una comunicación alineada con las tendencias alimentarias globales, refuerza la confianza en los productos alimentarios tailandeses que continúan evolucionando en calidad, innovación, creatividad y sustentabilidad. La foto del sitio oficial lo muestra con frutas y productos alimentarios tailandeses sobre fondo neutro.
+Cantante y actor tailandés referente en el mercado chino y asiático. Como figura de marca global de la gastronomía tailandesa, acerca a consumidores de todo el mundo productos que combinan innovación, sustentabilidad e identidad cultural tailandesa: plant-based, freeze-dried, bebidas funcionales y proteínas vegetales con estándares internacionales.
 
 **Especificaciones visuales de foto:**
 - Fondo: gris neutro claro `#EBEBEB`
-- Ratio: 3:4 portrait · con props de productos alimentarios
+- Ratio: 3:4 portrait · con props de productos alimentarios (frutas tailandesas)
 - Paleta: cálida, natural, luminosa
 - Sin overlay sobre el rostro
 - Caption: *"Gastronomía · DITP 2026"*
@@ -256,10 +261,23 @@ Cantante y actor tailandés que ha logrado gran éxito en la industria del entre
 | **SUNTREE** | Suntree Handmade Fabric Limited Partnership | Textiles Thai Puan tejidos a mano desde Sukhothai. Gender-inclusive, siluetas limpias. Colaboración directa con comunidades artesanas locales. | [suntreestyle.com](https://www.suntreestyle.com/) |
 | **mohhomphrae** | NAT CRAFT limited partnership | Índigo natural GI certificado de Phrae. Filosofía zero-waste, patchwork y bordado familiar. Folk fashion contemporáneo sustentable. | [mohhomphrae.com](http://www.mohhomphrae.com/) |
 
-### Sector Wellness y Food — Pendiente
+### Sector Food / Gastronomía — Argentina (fuente: artículo oficial 15 mar 2026)
 
-> ⚠️ El sitio oficial carga las secciones de Health & Wellness y Food por JavaScript al hacer scroll. No pudieron fetchearse automáticamente.  
-> **Acción requerida:** revisar manualmente en https://thinkthailand.ditp.go.th/home-en scrolleando hasta esas secciones para obtener nombres de marcas, imágenes y links.
+Fuente: https://thinkthailand.ditp.go.th/articles3-en
+
+| Marca | Descripción |
+|-------|-------------|
+| **Mantra** | Alternativas plant-based de mariscos. Fusión de tecnología alimentaria con tradición culinaria tailandesa. |
+| **CHIMMA** | Frutas y postres freeze-dried con salsa de crema de coco. |
+| **Coco Thumb** | Bebida de coco lista para consumir con diseño de packaging patentado. |
+| **MUDJAI** | Proteína vegetal de hongo split gill cultivado localmente. Alto contenido en beta-glucano, sin colesterol. |
+| **NIMNIM** | Fideos de clara de huevo para consumidores health-conscious. Sin exceso de carbohidratos, grasas ni conservantes. |
+| **Fruit King** | Fruta procesada premium con producción bajo estándares internacionales certificados. |
+| **De La Lita** | Snack saludable que equilibra nutrición y sabor. |
+
+### Sector Wellness — No activado en Argentina
+
+> Argentina activa únicamente el sector **Gastronomía / Food** en 2026. Los sectores Moda y Wellness del normativo global no aplican para esta landing.
 
 ---
 
