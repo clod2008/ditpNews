@@ -147,19 +147,21 @@
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="relative min-h-[480px] md:min-h-[700px] flex items-center justify-center text-white ">
-
-    <!-- Fondo: video Cloudinary — f_auto,q_auto,vc_auto -->
+  <!-- Hero — solo video, sin contenido interno -->
+  <section class="relative min-h-[500px] md:min-h-[650px]">
     <video
       id="hero-video"
       class="absolute inset-0 w-full h-full object-cover"
       autoplay muted loop playsinline
       poster=""><!-- poster se inyecta por JS abajo -->
     </video>
+  </section>
 
-    <!-- Contenido -->
-    <div class="absolute bottom-0 translate-y-2/3 z-10 max-w-4xl mx-auto text-center px-20 py-10 bg-primary rounded-2xl ">
+  <!-- Bloque hero-content: flota entre Hero y Cards con margen negativo.
+       El margen negativo tira el bloque HACIA ARRIBA sobre el video.
+       La sección Cards queda debajo de forma natural, sin padding especial. -->
+  <div class="relative z-10 -mt-32 md:-mt-36 px-6">
+    <div class="max-w-3xl mx-auto bg-primary rounded-2xl text-white text-center px-20 py-10 shadow-xl">
       <p class="text-white/60 text-sm font-bold uppercase tracking-widest mb-3">
         Departamento de Promoción Comercial Internacional de Tailandia
       </p>
@@ -174,7 +176,7 @@
         Conocé más
       </a>
     </div>
-  </section>
+  </div>
 
   <script>
     /* Inyectar video y poster via CLD helper para mantener el markup limpio */
