@@ -66,7 +66,10 @@ $ditpBlue: #0A459B;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  // justify-content: flex-start (no "center") a propósito: con contenido más
+  // alto que el viewport, centrar verticalmente en un contenedor con scroll
+  // deja la parte de arriba inalcanzable — bug clásico de flexbox+overflow.
+  justify-content: flex-start;
   gap: 20px;
   background-color: $ditpBlue;
   padding: 24px;
