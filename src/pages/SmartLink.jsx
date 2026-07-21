@@ -40,6 +40,151 @@ const QR_COLORS = {
 };
 const QR_TRANSPARENT_BG = "#ffffff00";
 
+// Rangos de fecha para el panel de estadísticas — presets en vez de un
+// calendario, más rápido de usar con el pulgar en celular.
+const DATE_RANGES = {
+  today: { label: "Hoy", days: 0 },
+  "7d": { label: "7 días", days: 7 },
+  "30d": { label: "30 días", days: 30 },
+  all: { label: "Todo", days: null },
+};
+
+// Panel de estadísticas: pega contra /api/scan-stats (misma protección que
+// el constructor, ?admin=CLAVE) y muestra el total de escaneos reales
+// (evento "scan", "fallback" no cuenta) agrupados por tipo.
+const ScanStats = () => {
+  const [range, setRange] = useState("7d");
+  const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  // "" = agregado de todos los códigos. Se resetea al cambiar de rango,
+  // porque un código puede no tener escaneos en el rango nuevo.
+  const [selectedCode, setSelectedCode] = useState("");
+
+  useEffect(() => {
+    const adminKey = process.env.REACT_APP_SMART_LINK_ADMIN_KEY;
+    if (!adminKey) return;
+
+    const params = new URLSearchParams({ admin: adminKey });
+    const { days } = DATE_RANGES[range];
+    if (days !== null) {
+      const from = new Date();
+      from.setDate(from.getDate() - days);
+      from.setHours(0, 0, 0, 0);
+      params.set("from", from.toISOString());
+    }
+
+    let cancelled = false;
+    setLoading(true);
+    setError(false);
+    setSelectedCode("");
+
+    fetch(`/api/scan-stats?${params.toString()}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (cancelled) return;
+        if (data.ok) setStats(data);
+        else setError(true);
+      })
+      .catch(() => {
+        if (!cancelled) setError(true);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [range]);
+
+  const selectedEntry = selectedCode
+    ? stats?.byCode.find((c) => `${c.type}:${c.code}` === selectedCode)
+    : null;
+  const displayTotal = selectedEntry ? selectedEntry.total : stats?.total;
+  const displayUnique = selectedEntry ? selectedEntry.uniqueTotal : stats?.uniqueTotal;
+
+  return (
+    <div className={styles.statsBlock}>
+      <h2 className={styles.statsTitle}>Escaneos</h2>
+
+      <div className={styles.statsRangeGroup}>
+        {Object.entries(DATE_RANGES).map(([key, { label }]) => (
+          <button
+            key={key}
+            type='button'
+            className={`${styles.statsRangeOption} ${
+              range === key ? styles.statsRangeOptionActive : ""
+            }`}
+            onClick={() => setRange(key)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {loading && <p className={styles.statsHint}>Cargando…</p>}
+      {error && !loading && (
+        <p className={styles.statsHint}>No se pudieron cargar los datos.</p>
+      )}
+
+      {stats && !loading && !error && (
+        <>
+          {stats.byCode.length > 0 && (
+            <select
+              className={styles.statsCodeSelect}
+              value={selectedCode}
+              onChange={(e) => setSelectedCode(e.target.value)}
+            >
+              <option value=''>Todos los códigos ({stats.byCode.length})</option>
+              {stats.byCode.map((c) => (
+                <option key={`${c.type}:${c.code}`} value={`${c.type}:${c.code}`}>
+                  {IG_TYPE_INFO[c.type]?.label || c.type} · {c.code} — {c.total}{" "}
+                  {c.total === 1 ? "escaneo" : "escaneos"}
+                </option>
+              ))}
+            </select>
+          )}
+
+          <div className={styles.statsHeadlineRow}>
+            <div className={styles.statsHeadline}>
+              <span className={styles.statsTotal}>{displayTotal}</span>
+              <span className={styles.statsTotalLabel}>Escaneos totales</span>
+            </div>
+            <div className={styles.statsHeadline}>
+              <span className={styles.statsTotal}>{displayUnique}</span>
+              <span className={styles.statsTotalLabel}>Usuarios únicos</span>
+            </div>
+          </div>
+
+          {selectedEntry ? (
+            selectedEntry.destination && (
+              <code className={styles.statsSelectedDestination}>
+                {selectedEntry.destination}
+              </code>
+            )
+          ) : (
+            <div className={styles.statsGrid}>
+              <div className={styles.statsCard}>
+                <span className={styles.statsCardValue}>{stats.byType.p}</span>
+                <span className={styles.statsCardLabel}>Posts</span>
+              </div>
+              <div className={styles.statsCard}>
+                <span className={styles.statsCardValue}>{stats.byType.reel}</span>
+                <span className={styles.statsCardLabel}>Reels</span>
+              </div>
+              <div className={styles.statsCard}>
+                <span className={styles.statsCardValue}>{stats.byType.profile}</span>
+                <span className={styles.statsCardLabel}>Perfiles</span>
+              </div>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
 // Constructor manual: se muestra en /smart-link cuando no viene type/code en
 // la URL, para armar y copiar el link una vez que el Reel/post/perfil ya existe.
 const SmartLinkBuilder = () => {
@@ -118,9 +263,7 @@ const SmartLinkBuilder = () => {
     <div className={styles.builder}>
       <img src={ditpIso} alt="DITP" className={styles.builderLogo} />
       <h1 className={styles.builderTitle}>Constructor de Smart Link a Instagram</h1>
-      <p className={styles.builderHint}>
-        Todavía no hay un posteo asignado a este link. Armá uno nuevo:
-      </p>
+      <ScanStats />
 
       <div className={styles.card}>
         <fieldset className={styles.radioGroup}>
@@ -292,6 +435,22 @@ const logScan = (payload) => {
   );
 };
 
+// "Usuario único" = primera vez que ESTE navegador escanea ESTE código en
+// particular — la marca es por type+code, no global, así que el mismo
+// dispositivo escaneando dos QR distintos cuenta como único en cada uno.
+// Devuelve null si localStorage no está disponible (modo privado estricto,
+// storage lleno, etc.) — en ese caso no se manda el dato, no se rompe nada.
+const isFirstScanForCode = (type, code) => {
+  try {
+    const key = `smartlink_seen_${type}_${code}`;
+    if (window.localStorage.getItem(key)) return false;
+    window.localStorage.setItem(key, "1");
+    return true;
+  } catch {
+    return null;
+  }
+};
+
 // Se muestra cuando no hay type/code Y tampoco el ?admin= correcto — no da
 // ninguna pista de que existe un constructor escondido detrás de esa clave.
 const NoTargetMessage = () => (
@@ -339,6 +498,7 @@ export const SmartLink = () => {
       platform,
       referrer: document.referrer || "",
       destination: webUrl,
+      firstScan: isFirstScanForCode(type, code),
     });
 
     if (isAndroid) {

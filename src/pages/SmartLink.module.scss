@@ -108,6 +108,151 @@ $ditpBlue: #0A459B;
   gap: 16px;
 }
 
+.statsBlock {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.statsTitle {
+  color: $ditpBlue;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.statsRangeGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.statsRangeOption {
+  flex: 1 1 auto;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid $ditpBlue;
+  border-radius: 8px;
+  background: #ffffff;
+  color: $ditpBlue;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 200ms, color 200ms;
+
+  &:hover {
+    background: #f1f2f5;
+  }
+}
+
+.statsRangeOptionActive {
+  background: $ditpBlue;
+  color: #ffffff;
+
+  &:hover {
+    background: $ditpBlue;
+  }
+}
+
+.statsHint {
+  color: #777777;
+  font-size: 0.85rem;
+  margin: 4px 0;
+}
+
+.statsHeadlineRow {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+}
+
+.statsHeadline {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.statsTotal {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: $ditpBlue;
+  line-height: 1;
+}
+
+.statsTotalLabel {
+  color: #777777;
+  font-size: 0.75rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.statsCodeSelect {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 10px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #333333;
+  font-size: 0.85rem;
+
+  &:focus {
+    outline: 2px solid $ditpBlue;
+    border-color: $ditpBlue;
+  }
+}
+
+.statsSelectedDestination {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  background: #f1f2f5;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.8rem;
+  color: $ditpBlue;
+  text-align: center;
+  word-break: break-all;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.statsCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: #f1f2f5;
+  border-radius: 8px;
+  padding: 12px 4px;
+}
+
+.statsCardValue {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: $ditpBlue;
+}
+
+.statsCardLabel {
+  font-size: 0.75rem;
+  color: #555555;
+}
+
 .radioGroup {
   display: flex;
   gap: 24px;
