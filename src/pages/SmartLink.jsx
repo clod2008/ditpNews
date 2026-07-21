@@ -244,6 +244,7 @@ const SmartLinkBuilder = () => {
 
             <div
               className={styles.qrPreview}
+              style={{ backgroundColor: qrColor === "white" ? "#000000" : "#ffffff" }}
               dangerouslySetInnerHTML={{ __html: qrSvg }}
             />
             <div className={styles.qrButtons}>
