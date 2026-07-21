@@ -12,66 +12,14 @@
 // Sin esas tres variables configuradas, responde 200 sin hacer nada — no
 // bloquea ni rompe el smart link.
 
-const crypto = require("crypto");
+const {
+  SHEETS_WRITE_SCOPE,
+  isAllowedOrigin,
+  getAccessToken,
+  getServiceAccountConfig,
+} = require("./_google-sheets-auth");
 
-const TOKEN_URL = "https://oauth2.googleapis.com/token";
-const SHEETS_SCOPE = "https://www.googleapis.com/auth/spreadsheets";
 const SHEET_RANGE = "Scans!A:G";
-// Producción + el alias fijo de la rama dev pueden escribir en el Sheet
-// (este último para poder probar en desarrollo) — cualquier otro origen
-// (curl directo, otro sitio, previews por deployment) queda afuera.
-const ALLOWED_ORIGINS = [
-  "https://www.ditp.com.ar",
-  "https://ditp.com.ar",
-  "https://ditp-news-git-dev-clod.vercel.app",
-];
-
-function isAllowedOrigin(req) {
-  const origin = req.headers.origin || "";
-  const referer = req.headers.referer || "";
-  return ALLOWED_ORIGINS.some(
-    (allowed) => origin.startsWith(allowed) || referer.startsWith(allowed)
-  );
-}
-
-function base64url(input) {
-  return Buffer.from(input)
-    .toString("base64")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
-}
-
-async function getAccessToken(email, privateKey) {
-  const now = Math.floor(Date.now() / 1000);
-  const header = base64url(JSON.stringify({ alg: "RS256", typ: "JWT" }));
-  const claims = base64url(
-    JSON.stringify({
-      iss: email,
-      scope: SHEETS_SCOPE,
-      aud: TOKEN_URL,
-      exp: now + 3600,
-      iat: now,
-    })
-  );
-  const unsigned = `${header}.${claims}`;
-  const signature = crypto.sign("RSA-SHA256", Buffer.from(unsigned), privateKey);
-  const jwt = `${unsigned}.${base64url(signature)}`;
-
-  const response = await fetch(TOKEN_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-      assertion: jwt,
-    }),
-  });
-  const data = await response.json();
-  if (!data.access_token) {
-    throw new Error(`No se pudo obtener access_token: ${JSON.stringify(data)}`);
-  }
-  return data.access_token;
-}
 
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
@@ -84,9 +32,7 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const privateKey = (process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY || "").replace(/\\n/g, "\n");
-  const sheetId = process.env.GOOGLE_SHEET_ID;
+  const { email, privateKey, sheetId } = getServiceAccountConfig();
 
   if (!email || !privateKey || !sheetId) {
     // No configurado todavía — no rompe el smart link, solo no registra.
@@ -98,7 +44,7 @@ module.exports = async function handler(req, res) {
     const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
     const { event, type, code, platform, referrer, destination } = body;
 
-    const accessToken = await getAccessToken(email, privateKey);
+    const accessToken = await getAccessToken(email, privateKey, SHEETS_WRITE_SCOPE);
     const row = [
       new Date().toISOString(),
       event || "",

@@ -40,6 +40,109 @@ const QR_COLORS = {
 };
 const QR_TRANSPARENT_BG = "#ffffff00";
 
+// Rangos de fecha para el panel de estadísticas — presets en vez de un
+// calendario, más rápido de usar con el pulgar en celular.
+const DATE_RANGES = {
+  today: { label: "Hoy", days: 0 },
+  "7d": { label: "7 días", days: 7 },
+  "30d": { label: "30 días", days: 30 },
+  all: { label: "Todo", days: null },
+};
+
+// Panel de estadísticas: pega contra /api/scan-stats (misma protección que
+// el constructor, ?admin=CLAVE) y muestra el total de escaneos reales
+// (evento "scan", "fallback" no cuenta) agrupados por tipo.
+const ScanStats = () => {
+  const [range, setRange] = useState("7d");
+  const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const adminKey = process.env.REACT_APP_SMART_LINK_ADMIN_KEY;
+    if (!adminKey) return;
+
+    const params = new URLSearchParams({ admin: adminKey });
+    const { days } = DATE_RANGES[range];
+    if (days !== null) {
+      const from = new Date();
+      from.setDate(from.getDate() - days);
+      from.setHours(0, 0, 0, 0);
+      params.set("from", from.toISOString());
+    }
+
+    let cancelled = false;
+    setLoading(true);
+    setError(false);
+
+    fetch(`/api/scan-stats?${params.toString()}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (cancelled) return;
+        if (data.ok) setStats(data);
+        else setError(true);
+      })
+      .catch(() => {
+        if (!cancelled) setError(true);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [range]);
+
+  return (
+    <div className={styles.statsBlock}>
+      <h2 className={styles.statsTitle}>Escaneos</h2>
+
+      <div className={styles.statsRangeGroup}>
+        {Object.entries(DATE_RANGES).map(([key, { label }]) => (
+          <button
+            key={key}
+            type='button'
+            className={`${styles.statsRangeOption} ${
+              range === key ? styles.statsRangeOptionActive : ""
+            }`}
+            onClick={() => setRange(key)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {loading && <p className={styles.statsHint}>Cargando…</p>}
+      {error && !loading && (
+        <p className={styles.statsHint}>No se pudieron cargar los datos.</p>
+      )}
+
+      {stats && !loading && !error && (
+        <>
+          <div className={styles.statsTotal}>{stats.total}</div>
+          <p className={styles.statsTotalLabel}>escaneos totales</p>
+
+          <div className={styles.statsGrid}>
+            <div className={styles.statsCard}>
+              <span className={styles.statsCardValue}>{stats.byType.p}</span>
+              <span className={styles.statsCardLabel}>Posts</span>
+            </div>
+            <div className={styles.statsCard}>
+              <span className={styles.statsCardValue}>{stats.byType.reel}</span>
+              <span className={styles.statsCardLabel}>Reels</span>
+            </div>
+            <div className={styles.statsCard}>
+              <span className={styles.statsCardValue}>{stats.byType.profile}</span>
+              <span className={styles.statsCardLabel}>Perfiles</span>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
 // Constructor manual: se muestra en /smart-link cuando no viene type/code en
 // la URL, para armar y copiar el link una vez que el Reel/post/perfil ya existe.
 const SmartLinkBuilder = () => {
@@ -121,6 +224,8 @@ const SmartLinkBuilder = () => {
       <p className={styles.builderHint}>
         Todavía no hay un posteo asignado a este link. Armá uno nuevo:
       </p>
+
+      <ScanStats />
 
       <div className={styles.card}>
         <fieldset className={styles.radioGroup}>
