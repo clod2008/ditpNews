@@ -263,9 +263,7 @@ const SmartLinkBuilder = () => {
     <div className={styles.builder}>
       <img src={ditpIso} alt="DITP" className={styles.builderLogo} />
       <h1 className={styles.builderTitle}>Constructor de Smart Link a Instagram</h1>
-      <p className={styles.builderHint}>
-        Todavía no hay un posteo asignado a este link. Armá uno nuevo:
-      </p>
+
 
       <ScanStats />
 
