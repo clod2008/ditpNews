@@ -196,6 +196,35 @@ $ditpBlue: #0A459B;
   letter-spacing: 0.04em;
 }
 
+.statsCodeSelect {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 10px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #333333;
+  font-size: 0.85rem;
+
+  &:focus {
+    outline: 2px solid $ditpBlue;
+    border-color: $ditpBlue;
+  }
+}
+
+.statsSelectedDestination {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  background: #f1f2f5;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.8rem;
+  color: $ditpBlue;
+  text-align: center;
+  word-break: break-all;
+}
+
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

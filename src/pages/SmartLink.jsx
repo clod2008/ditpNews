@@ -57,6 +57,9 @@ const ScanStats = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  // "" = agregado de todos los códigos. Se resetea al cambiar de rango,
+  // porque un código puede no tener escaneos en el rango nuevo.
+  const [selectedCode, setSelectedCode] = useState("");
 
   useEffect(() => {
     const adminKey = process.env.REACT_APP_SMART_LINK_ADMIN_KEY;
@@ -74,6 +77,7 @@ const ScanStats = () => {
     let cancelled = false;
     setLoading(true);
     setError(false);
+    setSelectedCode("");
 
     fetch(`/api/scan-stats?${params.toString()}`)
       .then((res) => res.json())
@@ -93,6 +97,12 @@ const ScanStats = () => {
       cancelled = true;
     };
   }, [range]);
+
+  const selectedEntry = selectedCode
+    ? stats?.byCode.find((c) => `${c.type}:${c.code}` === selectedCode)
+    : null;
+  const displayTotal = selectedEntry ? selectedEntry.total : stats?.total;
+  const displayUnique = selectedEntry ? selectedEntry.uniqueTotal : stats?.uniqueTotal;
 
   return (
     <div className={styles.statsBlock}>
@@ -120,31 +130,55 @@ const ScanStats = () => {
 
       {stats && !loading && !error && (
         <>
+          {stats.byCode.length > 0 && (
+            <select
+              className={styles.statsCodeSelect}
+              value={selectedCode}
+              onChange={(e) => setSelectedCode(e.target.value)}
+            >
+              <option value=''>Todos los códigos ({stats.byCode.length})</option>
+              {stats.byCode.map((c) => (
+                <option key={`${c.type}:${c.code}`} value={`${c.type}:${c.code}`}>
+                  {IG_TYPE_INFO[c.type]?.label || c.type} · {c.code} — {c.total}{" "}
+                  {c.total === 1 ? "escaneo" : "escaneos"}
+                </option>
+              ))}
+            </select>
+          )}
+
           <div className={styles.statsHeadlineRow}>
             <div className={styles.statsHeadline}>
-              <span className={styles.statsTotal}>{stats.total}</span>
+              <span className={styles.statsTotal}>{displayTotal}</span>
               <span className={styles.statsTotalLabel}>Escaneos totales</span>
             </div>
             <div className={styles.statsHeadline}>
-              <span className={styles.statsTotal}>{stats.uniqueTotal}</span>
+              <span className={styles.statsTotal}>{displayUnique}</span>
               <span className={styles.statsTotalLabel}>Usuarios únicos</span>
             </div>
           </div>
 
-          <div className={styles.statsGrid}>
-            <div className={styles.statsCard}>
-              <span className={styles.statsCardValue}>{stats.byType.p}</span>
-              <span className={styles.statsCardLabel}>Posts</span>
+          {selectedEntry ? (
+            selectedEntry.destination && (
+              <code className={styles.statsSelectedDestination}>
+                {selectedEntry.destination}
+              </code>
+            )
+          ) : (
+            <div className={styles.statsGrid}>
+              <div className={styles.statsCard}>
+                <span className={styles.statsCardValue}>{stats.byType.p}</span>
+                <span className={styles.statsCardLabel}>Posts</span>
+              </div>
+              <div className={styles.statsCard}>
+                <span className={styles.statsCardValue}>{stats.byType.reel}</span>
+                <span className={styles.statsCardLabel}>Reels</span>
+              </div>
+              <div className={styles.statsCard}>
+                <span className={styles.statsCardValue}>{stats.byType.profile}</span>
+                <span className={styles.statsCardLabel}>Perfiles</span>
+              </div>
             </div>
-            <div className={styles.statsCard}>
-              <span className={styles.statsCardValue}>{stats.byType.reel}</span>
-              <span className={styles.statsCardLabel}>Reels</span>
-            </div>
-            <div className={styles.statsCard}>
-              <span className={styles.statsCardValue}>{stats.byType.profile}</span>
-              <span className={styles.statsCardLabel}>Perfiles</span>
-            </div>
-          </div>
+          )}
         </>
       )}
     </div>

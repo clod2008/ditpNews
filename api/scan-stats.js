@@ -58,11 +58,12 @@ module.exports = async function handler(req, res) {
 
     const byType = { reel: 0, p: 0, profile: 0 };
     const uniqueByType = { reel: 0, p: 0, profile: 0 };
+    const byCodeMap = new Map();
     let total = 0;
     let uniqueTotal = 0;
 
     for (const row of rows) {
-      const [timestamp, event, type, , , , , firstScan] = row;
+      const [timestamp, event, type, code, , , destination, firstScan] = row;
       if (event !== "scan") continue; // "fallback" es diagnóstico, no un escaneo nuevo
       if (!KNOWN_TYPES.includes(type)) continue;
 
@@ -73,16 +74,31 @@ module.exports = async function handler(req, res) {
       byType[type] += 1;
       total += 1;
 
+      const isUnique = firstScan === "si";
       // "Usuario único" = primera vez que ESE navegador escaneó ESE code
       // puntual (ver isFirstScanForCode en SmartLink.jsx) — mismo dispositivo
       // escaneando dos códigos distintos cuenta como único en cada uno.
-      if (firstScan === "si") {
+      if (isUnique) {
         uniqueByType[type] += 1;
         uniqueTotal += 1;
       }
+
+      const codeKey = `${type}:${code}`;
+      const entry = byCodeMap.get(codeKey) || {
+        type,
+        code,
+        destination: destination || "",
+        total: 0,
+        uniqueTotal: 0,
+      };
+      entry.total += 1;
+      if (isUnique) entry.uniqueTotal += 1;
+      byCodeMap.set(codeKey, entry);
     }
 
-    res.status(200).json({ ok: true, total, byType, uniqueTotal, uniqueByType });
+    const byCode = Array.from(byCodeMap.values()).sort((a, b) => b.total - a.total);
+
+    res.status(200).json({ ok: true, total, byType, uniqueTotal, uniqueByType, byCode });
   } catch (err) {
     res.status(500).json({ ok: false, error: String(err) });
   }

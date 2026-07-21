@@ -153,8 +153,9 @@ La función escribe el rango `Scans!A:H`, pero los headers de la fila 1 hay que 
 Al entrar al constructor (`?admin=CLAVE`) se ve un panel arriba de todo con:
 
 - Selector de rango tipo pastillas: **Hoy / 7 días / 30 días / Todo**.
-- Dos números grandes: **Escaneos totales** y **Usuarios únicos**.
-- 3 tarjetas con el total de escaneos por categoría: **Posts / Reels / Perfiles**.
+- Desplegable **"Todos los códigos"** — filtra a un código puntual (ordenados de más a menos escaneado), calculado con los datos ya traídos para el rango elegido, sin pedir de nuevo al Sheet. Al elegir uno, los dos números grandes pasan a mostrar el total de *ese* código en vez del agregado, y aparece su link de destino debajo. Se resetea a "Todos" cada vez que cambiás de rango (un código puede no tener escaneos en el rango nuevo).
+- Dos números grandes: **Escaneos totales** y **Usuarios únicos** (agregados, o del código seleccionado).
+- 3 tarjetas con el total de escaneos por categoría: **Posts / Reels / Perfiles** — solo se muestran con "Todos los códigos" seleccionado.
 
 Lo resuelve `api/scan-stats.js` (mismo service account, mismo gate de origen + `?admin=` que `log-scan`), leyendo el Sheet completo y agregando en el momento — no hay caché ni base de datos aparte, el Sheet es la única fuente de verdad.
 
