@@ -157,7 +157,9 @@ Al entrar al constructor (`?admin=CLAVE`) se ve un panel arriba de todo con:
 - Dos números grandes: **Escaneos totales** y **Usuarios únicos** (agregados, o del código seleccionado).
 - 3 tarjetas con el total de escaneos por categoría: **Posts / Reels / Perfiles** — solo se muestran con "Todos los códigos" seleccionado.
 
-Lo resuelve `api/scan-stats.js` (mismo service account, mismo gate de origen + `?admin=` que `log-scan`), leyendo el Sheet completo y agregando en el momento — no hay caché ni base de datos aparte, el Sheet es la única fuente de verdad.
+Lo resuelve `api/scan-stats.js` (mismo service account que `log-scan`, vía el helper compartido `api/_google-sheets-auth.js`), leyendo el Sheet completo y agregando en el momento — no hay caché ni base de datos aparte, el Sheet es la única fuente de verdad.
+
+**Gate de acceso, más estricto que `log-scan`**: `scan-stats` exige origen permitido **y además** `?admin=CLAVE` correcta — a diferencia de `log-scan`, que solo pide el origen (tiene que poder loguear el escaneo de cualquier visitante real, sin clave). Así nadie externo puede leer las estadísticas aunque adivine la URL del endpoint.
 
 ### Usuarios únicos (no solo escaneos totales)
 
@@ -175,24 +177,53 @@ Si `localStorage` no está disponible (modo privado estricto, storage lleno), `f
 2. **IAM y administración → Cuentas de servicio** → crear una cuenta de servicio → generar una clave **JSON** y descargarla.
 3. Del JSON descargado, copiar `client_email` y `private_key`.
 4. Abrir el Google Sheet donde va el registro → **Compartir** → agregar el `client_email` de la cuenta de servicio como **Editor**.
-5. Crear una hoja/pestaña llamada **`Scans`** dentro de ese Sheet (la función escribe en el rango `Scans!A:F`).
+5. Crear una hoja/pestaña llamada **`Scans`** dentro de ese Sheet, con esta fila de headers (la función escribe en el rango `Scans!A:H`, pero los títulos hay que ponerlos a mano — la función no los toca):
+
+   | A | B | C | D | E | F | G | H |
+   |---|---|---|---|---|---|---|---|
+   | Timestamp | Evento | Type | Code | Plataforma | Referrer | Destino | PrimerEscaneo |
+
 6. Copiar el **ID del Sheet** (el segmento largo en la URL, entre `/d/` y `/edit`).
-7. En Vercel: Project Settings → Environment Variables → agregar (server-side, **sin** prefijo `REACT_APP_`):
+7. En Vercel: Project Settings → Environment Variables → agregar (server-side, **sin** prefijo `REACT_APP_`, entornos Production + Preview):
    - `GOOGLE_SERVICE_ACCOUNT_EMAIL`
    - `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` (pegar tal cual, con los `\n` literales que trae el JSON)
    - `GOOGLE_SHEET_ID`
-8. Redeploy.
+8. Además, para el constructor y el panel de estadísticas: agregar `REACT_APP_SMART_LINK_ADMIN_KEY` (esta sí con prefijo `REACT_APP_`, se hornea en build time) — ver [Constructor de links](#constructor-de-links-en-la-propia-ruta-protegido-por-clave) más arriba. Evitar `#`, `&`, `?` o espacios en el valor: son caracteres reservados de URL y complican compartir el link con `?admin=`.
+9. Redeploy — obligatorio después de cualquier cambio de env var, tanto las `REACT_APP_*` (se hornean en build time) como las del service account (Vercel las fija por deployment, no las relee en caliente).
 
-Si esas tres variables no están seteadas, `/api/log-scan` responde 200 sin escribir nada — no rompe ni tira error, el smart link funciona igual sin registro.
+Si `GOOGLE_SERVICE_ACCOUNT_EMAIL`/`PRIVATE_KEY`/`GOOGLE_SHEET_ID` no están seteadas, `/api/log-scan` y `/api/scan-stats` responden 200 sin hacer nada — no rompen ni tiran error, el smart link funciona igual sin registro ni panel.
+
+## Desarrollo local: `npm start` vs `vercel dev`
+
+- **`npm start`** (`http://localhost:3003`) es solo el servidor de CRA — **no** corre las funciones de `/api/*`. Sirve para ver y ajustar el diseño (constructor, QR, etc.), pero cualquier fetch a `/api/log-scan` o `/api/scan-stats` va a fallar siempre ahí, tenga o no las env vars bien puestas.
+- **`vercel dev`** sí corre las funciones localmente. Tenía un bug: por defecto ejecuta `react-scripts start` directo, sin pasar por el script `"start"` de `package.json` — así que el `FAST_REFRESH=false` de ahí (necesario para evitar un bug conocido de React Refresh: `Module not found: .../react-refresh/runtime.js falls outside of src/`) nunca se aplicaba y la compilación fallaba. Se arregló fijando `"devCommand": "FAST_REFRESH=false react-scripts start"` en `vercel.json` — con eso, `vercel dev` compila limpio sin pasos manuales.
+- Aun con `vercel dev` andando, **`localhost` no está en `ALLOWED_ORIGINS`** (ver `api/_google-sheets-auth.js`) — a propósito, para no tener que mantener esa lista sincronizada con el puerto local de cada quien. Las funciones van a responder `403` igual desde `localhost`. Para probar el flujo completo (redirección + registro + panel), usar la preview de la rama `dev` en Vercel.
+
+## Deployment Protection de Vercel (por qué está desactivada)
+
+Por defecto, Vercel exige login (**Vercel Authentication**) para ver cualquier preview deployment — esto rompe por completo el flujo de probar el smart link desde el celular (loopea en un redirect infinito a `vercel.com/sso-api`, sobre todo desde navegadores in-app o sin cookies persistentes). Se desactivó en **Project Settings → Deployment Protection → "Require Log In"** (proyecto `ditp-news`). Esto deja **todas** las preview deployments accesibles sin login para cualquiera con el link — no solo esta rama. Si en algún momento vuelve a aparecer el redirect a `vercel.com/sso-api` al abrir una preview, revisar que ese toggle siga apagado.
+
+## Modelo de ramas y deploy
+
+- **`dev`** → auto-deploya como Preview en cada push, alias fijo `https://ditp-news-git-dev-clod.vercel.app` (el que está en `ALLOWED_ORIGINS` para poder probar el registro/panel ahí).
+- **`main`** → rama de producción, sirve `www.ditp.com.ar`. **No se actualiza sola** — hay que mergear `dev` → `main` y pushear explícitamente cuando se quiera llevar cambios a producción. No asumir que lo último probado en `dev` ya está viviendo en `www.ditp.com.ar`; confirmar con `git log main..dev` si hay commits pendientes de llevar.
 
 ## Fuera de alcance (por ahora)
 
-- Analytics agregados (gráficos, dashboards) sobre el Sheet de escaneos — hoy es solo el registro crudo.
+- Analytics agregados (gráficos, dashboards) sobre el Sheet de escaneos — hoy es solo el registro crudo + el panel de totales del constructor.
 - Cualquier cambio en el repo `qrg`.
+- **Miniatura del post/reel/perfil en el panel de estadísticas** (mostrarla al elegir un código del desplegable). Evaluado, no implementado — tres caminos posibles si se retoma:
+  1. oEmbed de Meta Graph API (requiere crear una app en developers.facebook.com; no hay certeza de que siga funcionando sin trabas para posts de cualquier cuenta, Meta viene restringiendo el acceso).
+  2. Scrapear el `og:image` de la página pública del post (sin credenciales, pero frágil — Instagram bloquea/limita esto y puede romperse sin aviso).
+  3. Subida manual de la imagen en el constructor al armar el link (100% confiable, cero dependencia de Instagram, pero paso manual cada vez).
+- **Guardar la cuenta/usuario dueño del post** (no el código) en el registro — evaluado y descartado. El link funciona igual sin esto (Instagram resuelve el shortcode sin importar la cuenta); solo hubiera servido como dato de referencia.
 
 ## Referencias
 
 - Componente: `src/pages/SmartLink.jsx` / `src/pages/SmartLink.module.scss`
 - Ruta: `src/data/cont.js` (`paths.smartLink`) y `src/App.jsx`
+- Registro de escaneos: `api/log-scan.js` (escritura) y `api/scan-stats.js` (lectura/agregación)
+- Auth compartida con el service account: `api/_google-sheets-auth.js` (origen permitido, `?admin=`, JWT + intercambio de token)
+- Fix de `vercel dev`: `vercel.json` (`devCommand`)
 - Tarea original: `src/TASK_smart_link_instagram.md`
 - Lógica de referencia (vanilla JS, ya validada): vault de Apsis, `Clientes/DITP - TTC-BA/Campaña Thai Mali Rice 2026/smart-link-instagram-template.html`
