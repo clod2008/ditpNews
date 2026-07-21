@@ -16,7 +16,7 @@ const crypto = require("crypto");
 
 const TOKEN_URL = "https://oauth2.googleapis.com/token";
 const SHEETS_SCOPE = "https://www.googleapis.com/auth/spreadsheets";
-const SHEET_RANGE = "Scans!A:F";
+const SHEET_RANGE = "Scans!A:G";
 // Producción + el alias fijo de la rama dev pueden escribir en el Sheet
 // (este último para poder probar en desarrollo) — cualquier otro origen
 // (curl directo, otro sitio, previews por deployment) queda afuera.
@@ -96,7 +96,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
-    const { event, type, code, platform, referrer } = body;
+    const { event, type, code, platform, referrer, destination } = body;
 
     const accessToken = await getAccessToken(email, privateKey);
     const row = [
@@ -106,6 +106,7 @@ module.exports = async function handler(req, res) {
       code || "",
       platform || "",
       referrer || "",
+      destination || "",
     ];
 
     const appendUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(

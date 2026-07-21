@@ -323,6 +323,7 @@ export const SmartLink = () => {
       code,
       platform,
       referrer: document.referrer || "",
+      destination: webUrl,
     });
 
     if (isAndroid) {
@@ -339,7 +340,7 @@ export const SmartLink = () => {
     const safetyNet = setTimeout(() => {
       if (document.visibilityState === "visible") {
         setShowManualLink(true);
-        logScan({ event: "fallback", type, code, platform });
+        logScan({ event: "fallback", type, code, platform, destination: webUrl });
         window.location.href = webUrl;
       }
     }, 2500);

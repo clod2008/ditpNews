@@ -135,6 +135,7 @@ Qué se guarda por fila (sin cookies, sin IP explícita, sin fingerprinting):
 - `type` y `code` escaneados
 - Plataforma: `android` / `ios` / `desktop`
 - `document.referrer` (casi siempre vacío viniendo de un QR impreso)
+- **Destino**: la URL de Instagram calculada (`https://www.instagram.com/reel|p/code/` o `/usuario/` para perfil) — columna **G**, header manual "Destino" (la función escribe el rango `Scans!A:G`, pero el encabezado de la fila 1 hay que ponerlo a mano en el Sheet).
 
 ### Setup (una sola vez)
 
