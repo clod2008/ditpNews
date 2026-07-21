@@ -120,8 +120,16 @@ const ScanStats = () => {
 
       {stats && !loading && !error && (
         <>
-          <div className={styles.statsTotal}>{stats.total}</div>
-          <p className={styles.statsTotalLabel}>escaneos totales</p>
+          <div className={styles.statsHeadlineRow}>
+            <div className={styles.statsHeadline}>
+              <span className={styles.statsTotal}>{stats.total}</span>
+              <span className={styles.statsTotalLabel}>Escaneos totales</span>
+            </div>
+            <div className={styles.statsHeadline}>
+              <span className={styles.statsTotal}>{stats.uniqueTotal}</span>
+              <span className={styles.statsTotalLabel}>Usuarios únicos</span>
+            </div>
+          </div>
 
           <div className={styles.statsGrid}>
             <div className={styles.statsCard}>
@@ -397,6 +405,22 @@ const logScan = (payload) => {
   );
 };
 
+// "Usuario único" = primera vez que ESTE navegador escanea ESTE código en
+// particular — la marca es por type+code, no global, así que el mismo
+// dispositivo escaneando dos QR distintos cuenta como único en cada uno.
+// Devuelve null si localStorage no está disponible (modo privado estricto,
+// storage lleno, etc.) — en ese caso no se manda el dato, no se rompe nada.
+const isFirstScanForCode = (type, code) => {
+  try {
+    const key = `smartlink_seen_${type}_${code}`;
+    if (window.localStorage.getItem(key)) return false;
+    window.localStorage.setItem(key, "1");
+    return true;
+  } catch {
+    return null;
+  }
+};
+
 // Se muestra cuando no hay type/code Y tampoco el ?admin= correcto — no da
 // ninguna pista de que existe un constructor escondido detrás de esa clave.
 const NoTargetMessage = () => (
@@ -444,6 +468,7 @@ export const SmartLink = () => {
       platform,
       referrer: document.referrer || "",
       destination: webUrl,
+      firstScan: isFirstScanForCode(type, code),
     });
 
     if (isAndroid) {

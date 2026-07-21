@@ -143,7 +143,30 @@ Qué se guarda por fila (sin cookies, sin IP explícita, sin fingerprinting):
 - `type` y `code` escaneados
 - Plataforma: `android` / `ios` / `desktop`
 - `document.referrer` (casi siempre vacío viniendo de un QR impreso)
-- **Destino**: la URL de Instagram calculada (`https://www.instagram.com/reel|p/code/` o `/usuario/` para perfil) — columna **G**, header manual "Destino" (la función escribe el rango `Scans!A:G`, pero el encabezado de la fila 1 hay que ponerlo a mano en el Sheet).
+- **Destino**: la URL de Instagram calculada (`https://www.instagram.com/reel|p/code/` o `/usuario/` para perfil) — columna **G**, header manual "Destino".
+- **Primer escaneo**: `si` / `no` — columna **H**, header manual "PrimerEscaneo". Ver sección de "Usuarios únicos" más abajo para qué significa.
+
+La función escribe el rango `Scans!A:H`, pero los headers de la fila 1 hay que ponerlos a mano en el Sheet (la función no los toca).
+
+## Panel de estadísticas (dentro del constructor)
+
+Al entrar al constructor (`?admin=CLAVE`) se ve un panel arriba de todo con:
+
+- Selector de rango tipo pastillas: **Hoy / 7 días / 30 días / Todo**.
+- Dos números grandes: **Escaneos totales** y **Usuarios únicos**.
+- 3 tarjetas con el total de escaneos por categoría: **Posts / Reels / Perfiles**.
+
+Lo resuelve `api/scan-stats.js` (mismo service account, mismo gate de origen + `?admin=` que `log-scan`), leyendo el Sheet completo y agregando en el momento — no hay caché ni base de datos aparte, el Sheet es la única fuente de verdad.
+
+### Usuarios únicos (no solo escaneos totales)
+
+Además del total de escaneos, el panel distingue **usuarios únicos**: la primera vez que un navegador en particular escanea un código en particular. Se resuelve 100% en el cliente con `localStorage` (`isFirstScanForCode` en `SmartLink.jsx`) — sin cookies, sin IP, sin nada que identifique a la persona, solo "¿esta instalación de navegador ya vio este código antes?".
+
+Importante: la marca es **por código, no global**. Si el mismo celular escanea el QR del Reel A y después el QR del Post B, cuenta como usuario único en A **y** usuario único en B — no se consideran "la misma persona" entre códigos distintos, cada código lleva su propio conteo de únicos.
+
+Limitación conocida: si el link se abre dentro del navegador embebido de WhatsApp/Instagram (no el navegador normal del celular), esa sesión suele ser descartable y `localStorage` no persiste — cada apertura ahí puede contar como "único" aunque sea la misma persona. Escaneando el QR impreso con la cámara (que abre el navegador normal), el conteo es confiable.
+
+Si `localStorage` no está disponible (modo privado estricto, storage lleno), `firstScan` se manda vacío y esa fila no suma ni a favor ni en contra del conteo de únicos — solo entra en el total general.
 
 ### Setup (una sola vez)
 

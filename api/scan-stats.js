@@ -14,7 +14,7 @@ const {
   getServiceAccountConfig,
 } = require("./_google-sheets-auth");
 
-const SHEET_RANGE = "Scans!A:G";
+const SHEET_RANGE = "Scans!A:H";
 const KNOWN_TYPES = ["reel", "p", "profile"];
 
 module.exports = async function handler(req, res) {
@@ -57,10 +57,12 @@ module.exports = async function handler(req, res) {
     const to = req.query.to ? new Date(req.query.to) : null;
 
     const byType = { reel: 0, p: 0, profile: 0 };
+    const uniqueByType = { reel: 0, p: 0, profile: 0 };
     let total = 0;
+    let uniqueTotal = 0;
 
     for (const row of rows) {
-      const [timestamp, event, type] = row;
+      const [timestamp, event, type, , , , , firstScan] = row;
       if (event !== "scan") continue; // "fallback" es diagnóstico, no un escaneo nuevo
       if (!KNOWN_TYPES.includes(type)) continue;
 
@@ -70,9 +72,17 @@ module.exports = async function handler(req, res) {
 
       byType[type] += 1;
       total += 1;
+
+      // "Usuario único" = primera vez que ESE navegador escaneó ESE code
+      // puntual (ver isFirstScanForCode en SmartLink.jsx) — mismo dispositivo
+      // escaneando dos códigos distintos cuenta como único en cada uno.
+      if (firstScan === "si") {
+        uniqueByType[type] += 1;
+        uniqueTotal += 1;
+      }
     }
 
-    res.status(200).json({ ok: true, total, byType });
+    res.status(200).json({ ok: true, total, byType, uniqueTotal, uniqueByType });
   } catch (err) {
     res.status(500).json({ ok: false, error: String(err) });
   }

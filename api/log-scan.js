@@ -19,7 +19,7 @@ const {
   getServiceAccountConfig,
 } = require("./_google-sheets-auth");
 
-const SHEET_RANGE = "Scans!A:G";
+const SHEET_RANGE = "Scans!A:H";
 
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
@@ -42,7 +42,14 @@ module.exports = async function handler(req, res) {
 
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
-    const { event, type, code, platform, referrer, destination } = body;
+    const { event, type, code, platform, referrer, destination, firstScan } = body;
+    // firstScan viene de localStorage del navegador: true = primera vez que
+    // ESE navegador escanea ESE code puntual. null/undefined = no se pudo
+    // determinar (localStorage no disponible), queda vacío en el Sheet.
+    // "si"/"no" en vez de true/false: Sheets interpreta "true"/"false" como
+    // booleano con USER_ENTERED y lo devuelve como "TRUE" (mayúsculas), lo
+    // que rompe la comparación exacta al leerlo después.
+    const firstScanValue = firstScan === true ? "si" : firstScan === false ? "no" : "";
 
     const accessToken = await getAccessToken(email, privateKey, SHEETS_WRITE_SCOPE);
     const row = [
@@ -53,6 +60,7 @@ module.exports = async function handler(req, res) {
       platform || "",
       referrer || "",
       destination || "",
+      firstScanValue,
     ];
 
     const appendUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(
