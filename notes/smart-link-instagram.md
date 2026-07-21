@@ -126,7 +126,7 @@ Cada vez que `/smart-link` redirige de verdad (no en modo `stay=1`), manda un re
 
 Se intentó primero con un Google Apps Script Web App (mismo patrón que `src/pages/Credenciales.jsx` usa para leer), pero el Workspace de `apsis.com.ar` bloquea el acceso anónimo a Web Apps de Apps Script incluso con "Cualquier usuario" — por eso se pasó a un service account, que no depende de esa política.
 
-**Seguridad**: `/api/log-scan` corre server-side — la clave privada del service account nunca llega al navegador (a diferencia de una env var `REACT_APP_*`, que sí queda expuesta en el bundle público). La función además rechaza (403) cualquier request cuyo origen no sea `ditp.com.ar`, así que solo el sitio de producción puede escribir — **no va a registrar nada en local ni en previews**, es intencional.
+**Seguridad**: `/api/log-scan` corre server-side — la clave privada del service account nunca llega al navegador (a diferencia de una env var `REACT_APP_*`, que sí queda expuesta en el bundle público). La función además rechaza (403) cualquier request cuyo origen no esté en la allowlist (`ALLOWED_ORIGINS` en `api/log-scan.js`): hoy son `ditp.com.ar` (producción) y `https://ditp-news-git-dev-clod.vercel.app` (el alias fijo de la rama `dev`, para poder probar el registro en desarrollo). Cualquier otro origen — previews por deployment individual, curl directo, otro sitio — queda afuera.
 
 Qué se guarda por fila (sin cookies, sin IP explícita, sin fingerprinting):
 

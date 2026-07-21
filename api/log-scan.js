@@ -17,9 +17,14 @@ const crypto = require("crypto");
 const TOKEN_URL = "https://oauth2.googleapis.com/token";
 const SHEETS_SCOPE = "https://www.googleapis.com/auth/spreadsheets";
 const SHEET_RANGE = "Scans!A:F";
-// Solo el sitio de producción puede escribir en el Sheet — cualquier otro
-// origen (curl directo, otro sitio, previews de Vercel) queda afuera.
-const ALLOWED_ORIGINS = ["https://www.ditp.com.ar", "https://ditp.com.ar"];
+// Producción + el alias fijo de la rama dev pueden escribir en el Sheet
+// (este último para poder probar en desarrollo) — cualquier otro origen
+// (curl directo, otro sitio, previews por deployment) queda afuera.
+const ALLOWED_ORIGINS = [
+  "https://www.ditp.com.ar",
+  "https://ditp.com.ar",
+  "https://ditp-news-git-dev-clod.vercel.app",
+];
 
 function isAllowedOrigin(req) {
   const origin = req.headers.origin || "";
