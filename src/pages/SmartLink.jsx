@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import QRCode from "qrcode";
 import { ditpIso } from "../assets";
 import { paths } from "../data/cont";
 import styles from "./SmartLink.module.scss";
@@ -30,22 +31,81 @@ const IG_TYPE_INFO = {
   },
 };
 
+// Opciones de color del código del QR — el fondo siempre va transparente
+// (alpha 00), independientemente del color elegido.
+const QR_COLORS = {
+  black: { label: "Negro", swatch: "#000000", dark: "#000000ff" },
+  white: { label: "Blanco", swatch: "#ffffff", dark: "#ffffffff" },
+  blue: { label: "Azul DITP", swatch: "#0A459B", dark: "#0A459Bff" },
+};
+const QR_TRANSPARENT_BG = "#ffffff00";
+
 // Constructor manual: se muestra en /smart-link cuando no viene type/code en
 // la URL, para armar y copiar el link una vez que el Reel/post/perfil ya existe.
 const SmartLinkBuilder = () => {
   const [type, setType] = useState("reel");
   const [code, setCode] = useState("");
   const [stayMode, setStayMode] = useState(false);
+  const [qrColor, setQrColor] = useState("black");
   const [copied, setCopied] = useState(false);
+  const [qrSvg, setQrSvg] = useState("");
 
   const info = IG_TYPE_INFO[type];
   const trimmedCode = code.trim().replace(/^@/, "");
   const basePath = `${window.location.origin}/${paths.smartLink}`;
-  const generatedLink = trimmedCode
-    ? `${basePath}?type=${type}&code=${encodeURIComponent(trimmedCode)}${
-        stayMode ? "&stay=1" : ""
-      }`
+  // El QR siempre codifica el link REAL (sin &stay=1), sea cual sea el modo
+  // elegido arriba — no tiene sentido imprimir un QR que no redirige.
+  const qrLink = trimmedCode
+    ? `${basePath}?type=${type}&code=${encodeURIComponent(trimmedCode)}`
     : "";
+  const generatedLink = trimmedCode ? `${qrLink}${stayMode ? "&stay=1" : ""}` : "";
+
+  useEffect(() => {
+    if (!qrLink) {
+      setQrSvg("");
+      return;
+    }
+    let cancelled = false;
+    QRCode.toString(qrLink, {
+      type: "svg",
+      margin: 1,
+      color: { dark: QR_COLORS[qrColor].dark, light: QR_TRANSPARENT_BG },
+    })
+      .then((svg) => {
+        if (!cancelled) setQrSvg(svg);
+      })
+      .catch(() => {
+        if (!cancelled) setQrSvg("");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [qrLink, qrColor]);
+
+  const handleDownloadSvg = () => {
+    if (!qrSvg) return;
+    const blob = new Blob([qrSvg], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `smart-link-${type}-${trimmedCode}-${qrColor}.svg`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleDownloadPng = async () => {
+    if (!qrLink) return;
+    const dataUrl = await QRCode.toDataURL(qrLink, {
+      type: "image/png",
+      margin: 1,
+      width: 1024,
+      color: { dark: QR_COLORS[qrColor].dark, light: QR_TRANSPARENT_BG },
+    });
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.download = `smart-link-${type}-${trimmedCode}-${qrColor}.png`;
+    link.click();
+  };
 
   const handleCopy = async () => {
     if (!generatedLink) return;
@@ -148,6 +208,56 @@ const SmartLinkBuilder = () => {
             <button type='button' className={styles.copyButton} onClick={handleCopy}>
               {copied ? "Copiado ✓" : "Copiar link"}
             </button>
+          </div>
+        )}
+
+        {qrSvg && (
+          <div className={styles.qrBlock}>
+            <p className={styles.qrHint}>
+              El QR siempre apunta al link real (sin modo test), listo para imprimir.
+              Fondo transparente siempre.
+            </p>
+
+            <div className={styles.qrColorGroup}>
+              {Object.entries(QR_COLORS).map(([key, { label, swatch }]) => (
+                <label
+                  key={key}
+                  className={`${styles.qrColorOption} ${
+                    qrColor === key ? styles.qrColorOptionActive : ""
+                  }`}
+                >
+                  <input
+                    type='radio'
+                    name='qrColor'
+                    value={key}
+                    checked={qrColor === key}
+                    onChange={() => setQrColor(key)}
+                  />
+                  <span
+                    className={styles.qrColorSwatch}
+                    style={{ backgroundColor: swatch }}
+                  />
+                  {label}
+                </label>
+              ))}
+            </div>
+
+            <div
+              className={styles.qrPreview}
+              dangerouslySetInnerHTML={{ __html: qrSvg }}
+            />
+            <div className={styles.qrButtons}>
+              <button type='button' className={styles.copyButton} onClick={handleDownloadPng}>
+                Descargar QR (PNG)
+              </button>
+              <button
+                type='button'
+                className={styles.copyButtonSecondary}
+                onClick={handleDownloadSvg}
+              >
+                Descargar QR (SVG)
+              </button>
+            </div>
           </div>
         )}
       </div>

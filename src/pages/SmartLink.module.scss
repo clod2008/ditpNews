@@ -224,6 +224,109 @@ $ditpBlue: #0A459B;
   }
 }
 
+.qrBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #eeeeee;
+}
+
+.qrButtons {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+
+  button {
+    flex: 1;
+  }
+}
+
+.copyButtonSecondary {
+  background: #ffffff;
+  color: $ditpBlue;
+  border: 1px solid $ditpBlue;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: #f1f2f5;
+  }
+}
+
+.qrHint {
+  font-size: 0.8rem;
+  color: #777777;
+  text-align: center;
+  margin: 0;
+}
+
+.qrColorGroup {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.qrColorOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: #666666;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+.qrColorSwatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid #cccccc;
+  box-shadow: 0 0 0 2px transparent;
+}
+
+.qrColorOptionActive {
+  color: $ditpBlue;
+  font-weight: 700;
+
+  .qrColorSwatch {
+    box-shadow: 0 0 0 2px $ditpBlue;
+  }
+}
+
+// Fondo tipo "damero" solo para previsualizar el QR de fondo transparente
+// (el archivo exportado no lleva este patrón).
+.qrPreview {
+  width: 160px;
+  height: 160px;
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background-image: linear-gradient(45deg, #e0e0e0 25%, transparent 25%),
+    linear-gradient(-45deg, #e0e0e0 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e0e0e0 75%),
+    linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
 .example {
   color: rgba(255, 255, 255, 0.85);
   font-size: 1.1rem;
