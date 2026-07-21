@@ -50,6 +50,15 @@ $ditpBlue: #0A459B;
   font-size: 1rem;
 }
 
+.targetUrl {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  max-width: 320px;
+  word-break: break-all;
+}
+
 .builder {
   position: fixed;
   inset: 0;
@@ -114,6 +123,22 @@ $ditpBlue: #0A459B;
   cursor: pointer;
 }
 
+.checkboxOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #444444;
+  font-size: 0.85rem;
+  cursor: pointer;
+
+  code {
+    background: #f1f2f5;
+    border-radius: 4px;
+    padding: 1px 5px;
+    color: $ditpBlue;
+  }
+}
+
 .codeInput {
   padding: 10px 12px;
   border: 1px solid #cccccc;
@@ -161,12 +186,31 @@ $ditpBlue: #0A459B;
   font-size: 1.1rem;
   text-align: center;
   max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  p {
+    margin: 12px 0 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
 
   code {
     display: block;
-    margin-top: 8px;
     font-size: 1.15rem;
     font-weight: 600;
     word-break: break-all;
+  }
+}
+
+.exampleNote {
+  font-size: 0.9rem !important;
+  color: rgba(255, 255, 255, 0.7);
+
+  strong {
+    color: #ffffff;
   }
 }

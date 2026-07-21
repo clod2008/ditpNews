@@ -12,8 +12,8 @@ Dos parámetros, ambos obligatorios para que redirija. Si falta alguno, la pági
 
 | Parámetro | Valores posibles | Qué es |
 |---|---|---|
-| `type` | `reel` o `p` | Tipo de contenido: `reel` para un Reel, `p` para un post de feed normal |
-| `code` | shortcode alfanumérico | El identificador único del posteo en la URL de Instagram |
+| `type` | `reel`, `p` o `profile` | Tipo de contenido: `reel` para un Reel, `p` para un post de feed, `profile` para ir directo al perfil de Instagram (sin post específico) |
+| `code` | shortcode alfanumérico (`reel`/`p`) o nombre de usuario (`profile`) | El identificador del destino en la URL de Instagram |
 
 ## Cómo sacar el `code` de una URL real de Instagram
 
@@ -35,6 +35,14 @@ https://www.instagram.com/p/CxYz9AbCdEf/
 
 El `code` es siempre el segmento entre `/reel/` (o `/p/`) y la barra final. Se copia tal cual, sin barras.
 
+Para `type=profile`, en vez de un código va el **nombre de usuario** de Instagram (con o sin `@`, el builder lo limpia solo):
+
+```
+https://www.instagram.com/ditp.thailand/
+                          └─────┬─────┘
+                            este es el "code"
+```
+
 ## Ejemplos completos
 
 **Reel:**
@@ -45,6 +53,19 @@ https://www.ditp.com.ar/smart-link?type=reel&code=DA1b2C3dEfG
 **Post de feed:**
 ```
 https://www.ditp.com.ar/smart-link?type=p&code=CxYz9AbCdEf
+```
+
+**Perfil:**
+```
+https://www.ditp.com.ar/smart-link?type=profile&code=ditp.thailand
+```
+
+## Modo test: quedarse en la pantalla (`&stay=1`)
+
+Agregando `&stay=1` al link, la página **no** redirige automáticamente — se queda mostrando la pantalla de carga con la URL de destino calculada y un botón "Ir a Instagram" para disparar el link a mano cuando quieras. Útil para mirar/probar el diseño de la pantalla sin que te saque al instante.
+
+```
+https://www.ditp.com.ar/smart-link?type=reel&code=DA1b2C3dEfG&stay=1
 ```
 
 ## Cómo se conecta con `qrg` (el shortener del QR impreso)
@@ -63,8 +84,9 @@ Flujo el día que se publique el contenido:
 
 Si entrás a `/smart-link` **sin** `type`/`code` en la URL, en vez del mensaje de "no hay posteo asignado" ahora se muestra un formulario para armarlo:
 
-- Radio button **Reel / Post**.
-- Campo de texto para pegar el `code`.
+- Radio button **Reel / Post / Perfil**.
+- Campo de texto para pegar el código (o el usuario, si elegiste "Perfil") — el placeholder cambia según la opción elegida.
+- Bloque de ayuda "¿de dónde saco esto?" con la URL de ejemplo de Instagram y la parte a copiar, actualizado según el tipo elegido.
 - Muestra el link completo generado, con botón **Copiar link** listo para pegar en la columna B del Sheet de `qrg`.
 
 El link se arma con el dominio desde el que se esté viendo la página (`window.location.origin`), así que si lo abrís en `http://localhost:3003/smart-link` te da el link de prueba local, y si lo abrís en `https://www.ditp.com.ar/smart-link` te da directo el link de producción para copiar y pegar.

@@ -4,17 +4,47 @@ import { ditpIso } from "../assets";
 import { paths } from "../data/cont";
 import styles from "./SmartLink.module.scss";
 
+// Datos de ejemplo por tipo, para el placeholder del campo y el bloque de
+// ayuda "¿de dónde saco esto?" — se actualizan según el radio elegido.
+const IG_TYPE_INFO = {
+  reel: {
+    label: "Reel",
+    fieldLabel: "el código",
+    placeholder: "Código del posteo (ej: DZZ2TlTRrgt)",
+    urlSample: "https://www.instagram.com/reel/DA1b2C3dEfG/",
+    valueSample: "DA1b2C3dEfG",
+  },
+  p: {
+    label: "Post",
+    fieldLabel: "el código",
+    placeholder: "Código del posteo (ej: DZZ2TlTRrgt)",
+    urlSample: "https://www.instagram.com/p/CxYz9AbCdEf/",
+    valueSample: "CxYz9AbCdEf",
+  },
+  profile: {
+    label: "Perfil",
+    fieldLabel: "el usuario",
+    placeholder: "Usuario de Instagram (ej: ditp.thailand)",
+    urlSample: "https://www.instagram.com/ditp.thailand/",
+    valueSample: "ditp.thailand",
+  },
+};
+
 // Constructor manual: se muestra en /smart-link cuando no viene type/code en
-// la URL, para armar y copiar el link una vez que el Reel/post ya existe.
+// la URL, para armar y copiar el link una vez que el Reel/post/perfil ya existe.
 const SmartLinkBuilder = () => {
   const [type, setType] = useState("reel");
   const [code, setCode] = useState("");
+  const [stayMode, setStayMode] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const trimmedCode = code.trim();
+  const info = IG_TYPE_INFO[type];
+  const trimmedCode = code.trim().replace(/^@/, "");
   const basePath = `${window.location.origin}/${paths.smartLink}`;
   const generatedLink = trimmedCode
-    ? `${basePath}?type=${type}&code=${encodeURIComponent(trimmedCode)}`
+    ? `${basePath}?type=${type}&code=${encodeURIComponent(trimmedCode)}${
+        stayMode ? "&stay=1" : ""
+      }`
     : "";
 
   const handleCopy = async () => {
@@ -54,15 +84,34 @@ const SmartLinkBuilder = () => {
             />
             Post
           </label>
+          <label className={styles.radioOption}>
+            <input
+              type='radio'
+              name='type'
+              value='profile'
+              checked={type === "profile"}
+              onChange={() => setType("profile")}
+            />
+            Perfil
+          </label>
         </fieldset>
 
         <input
           type='text'
           className={styles.codeInput}
-          placeholder='Código del posteo (ej: DZZ2TlTRrgt)'
+          placeholder={info.placeholder}
           value={code}
           onChange={(e) => setCode(e.target.value)}
         />
+
+        <label className={styles.checkboxOption}>
+          <input
+            type='checkbox'
+            checked={stayMode}
+            onChange={(e) => setStayMode(e.target.checked)}
+          />
+          Modo test: no redirigir automático (agrega <code>&stay=1</code>)
+        </label>
 
         {generatedLink && (
           <div className={styles.result}>
@@ -75,8 +124,15 @@ const SmartLinkBuilder = () => {
       </div>
 
       <div className={styles.example}>
-        <p>Ejemplo:</p>
-        <code>{basePath}?type=reel&code=DA1b2C3dEfG</code>
+        <p>¿De dónde saco {info.fieldLabel}?</p>
+        <code>{info.urlSample}</code>
+        <p className={styles.exampleNote}>
+          Es la parte <strong>{info.valueSample}</strong> de esa URL.
+        </p>
+        <p>Link {info.label.toLowerCase()} de ejemplo:</p>
+        <code>
+          {basePath}?type={type}&code={info.valueSample}
+        </code>
       </div>
     </div>
   );
@@ -90,18 +146,24 @@ export const SmartLink = () => {
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type");
   const code = searchParams.get("code");
+  // Modo test: ?stay=1 frena la redirección automática para poder mirar la
+  // pantalla y disparar el link a mano cuando quieras.
+  const stay = searchParams.get("stay") === "1";
   const [showManualLink, setShowManualLink] = useState(false);
 
   const hasTarget = Boolean(type && code);
-  const webUrl = hasTarget ? `https://www.instagram.com/${type}/${code}/` : null;
+  // "profile" no lleva segmento de tipo en la URL de Instagram (instagram.com/usuario/),
+  // a diferencia de reel/post (instagram.com/reel|p/codigo/).
+  const igPath = type === "profile" ? `${code}/` : `${type}/${code}/`;
+  const webUrl = hasTarget ? `https://www.instagram.com/${igPath}` : null;
 
   useEffect(() => {
-    if (!hasTarget) return;
+    if (!hasTarget || stay) return;
 
     const isAndroid = /Android/i.test(navigator.userAgent);
 
     if (isAndroid) {
-      const intentUrl = `intent://instagram.com/${type}/${code}/#Intent;package=com.instagram.android;scheme=https;S.browser_fallback_url=${encodeURIComponent(
+      const intentUrl = `intent://instagram.com/${igPath}#Intent;package=com.instagram.android;scheme=https;S.browser_fallback_url=${encodeURIComponent(
         webUrl
       )};end`;
       window.location.href = intentUrl;
@@ -119,7 +181,7 @@ export const SmartLink = () => {
     }, 2500);
 
     return () => clearTimeout(safetyNet);
-  }, [hasTarget, type, code, webUrl]);
+  }, [hasTarget, stay, igPath, webUrl]);
 
   if (!hasTarget) {
     return <SmartLinkBuilder />;
@@ -128,11 +190,14 @@ export const SmartLink = () => {
   return (
     <div className={styles.smartLink}>
       <img src={ditpIso} alt="DITP" className={styles.logo} />
-      <div className={styles.spinner} />
-      <p className={styles.message}>Abriendo Instagram…</p>
-      {showManualLink && (
+      {!stay && <div className={styles.spinner} />}
+      <p className={styles.message}>
+        {stay ? "Modo test — no redirige solo." : "Abriendo Instagram…"}
+      </p>
+      {stay && <code className={styles.targetUrl}>{webUrl}</code>}
+      {(showManualLink || stay) && (
         <a href={webUrl} className={styles.manualLink}>
-          Tocá acá si no se abrió automáticamente
+          {stay ? "Ir a Instagram" : "Tocá acá si no se abrió automáticamente"}
         </a>
       )}
     </div>
