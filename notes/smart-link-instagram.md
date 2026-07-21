@@ -86,8 +86,9 @@ Si entrás a `/smart-link` **sin** `type`/`code` en la URL, en vez del mensaje d
 
 - Radio button **Reel / Post / Perfil**.
 - Campo de texto para pegar el código (o el usuario, si elegiste "Perfil") — el placeholder cambia según la opción elegida.
+- Selector **Real / Test**: "Real" genera el link definitivo (redirige solo); "Test" agrega `&stay=1` (ver sección de abajo) para poder mirar la pantalla sin que dispare la redirección.
 - Bloque de ayuda "¿de dónde saco esto?" con la URL de ejemplo de Instagram y la parte a copiar, actualizado según el tipo elegido.
-- Muestra el link completo generado, con botón **Copiar link** listo para pegar en la columna B del Sheet de `qrg`.
+- Muestra el link completo generado con una etiqueta **Modo real** / **Modo test** arriba, y botón **Copiar link**. El de "Modo real" es el que va a la columna B del Sheet de `qrg` — el de "Modo test" es solo para mirar la pantalla, no lo publiques.
 
 El link se arma con el dominio desde el que se esté viendo la página (`window.location.origin`), así que si lo abrís en `http://localhost:3003/smart-link` te da el link de prueba local, y si lo abrís en `https://www.ditp.com.ar/smart-link` te da directo el link de producción para copiar y pegar.
 

@@ -123,20 +123,63 @@ $ditpBlue: #0A459B;
   cursor: pointer;
 }
 
-.checkboxOption {
+.modeGroup {
+  display: flex;
+  border: 1px solid $ditpBlue;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.modeOption {
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: #444444;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  padding: 10px 6px;
   font-size: 0.85rem;
+  font-weight: 600;
+  color: $ditpBlue;
   cursor: pointer;
 
-  code {
-    background: #f1f2f5;
-    border-radius: 4px;
-    padding: 1px 5px;
-    color: $ditpBlue;
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
   }
+
+  & + & {
+    border-left: 1px solid $ditpBlue;
+  }
+}
+
+.modeOptionActive {
+  background: $ditpBlue;
+  color: #ffffff;
+}
+
+.modeBadge {
+  align-self: flex-start;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.modeBadgeReal {
+  background: #e6f4ea;
+  color: #1a7f37;
+}
+
+.modeBadgeTest {
+  background: #fff4e5;
+  color: #b25e00;
 }
 
 .codeInput {

@@ -104,17 +104,46 @@ const SmartLinkBuilder = () => {
           onChange={(e) => setCode(e.target.value)}
         />
 
-        <label className={styles.checkboxOption}>
-          <input
-            type='checkbox'
-            checked={stayMode}
-            onChange={(e) => setStayMode(e.target.checked)}
-          />
-          Modo test: no redirigir automático (agrega <code>&stay=1</code>)
-        </label>
+        <fieldset className={styles.modeGroup}>
+          <label
+            className={`${styles.modeOption} ${
+              !stayMode ? styles.modeOptionActive : ""
+            }`}
+          >
+            <input
+              type='radio'
+              name='mode'
+              value='real'
+              checked={!stayMode}
+              onChange={() => setStayMode(false)}
+            />
+            Real — redirige solo
+          </label>
+          <label
+            className={`${styles.modeOption} ${
+              stayMode ? styles.modeOptionActive : ""
+            }`}
+          >
+            <input
+              type='radio'
+              name='mode'
+              value='test'
+              checked={stayMode}
+              onChange={() => setStayMode(true)}
+            />
+            Test — no redirige
+          </label>
+        </fieldset>
 
         {generatedLink && (
           <div className={styles.result}>
+            <span
+              className={`${styles.modeBadge} ${
+                stayMode ? styles.modeBadgeTest : styles.modeBadgeReal
+              }`}
+            >
+              {stayMode ? "Modo test" : "Modo real"}
+            </span>
             <code className={styles.resultLink}>{generatedLink}</code>
             <button type='button' className={styles.copyButton} onClick={handleCopy}>
               {copied ? "Copiado ✓" : "Copiar link"}
