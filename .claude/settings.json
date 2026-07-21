@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx eslint *)",
+      "Bash(npm run *)",
+      "Bash(git stash *)",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill -9)",
+      "Bash(BROWSER=none npm start)",
+      "Bash(echo \"started pid $!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(lsof -ti:3003)",
+      "Bash(curl -s -o /dev/null -w \"port 3003: %{http_code}\\\\n\" http://localhost:3003)",
+      "Bash(ps -p 47660 -o pid,lstart,command)",
+      "Bash(lsof -iTCP:3003 -sTCP:LISTEN -n -P)",
+      "Bash(ps -p 63681 -o pid,ppid,lstart,command)",
+      "Bash(curl -s \"http://localhost:3003/smart-link?type=p&code=ABC123\" -o /dev/null -w \"HTTP %{http_code}\\\\n\")",
+      "Bash(curl -s \"http://localhost:3003/static/js/bundle.js\")",
+      "Bash(kill 63681)",
+      "Bash(xargs -r kill -9)",
+      "Bash(rm -f /tmp/cra-dev.log)",
+      "Bash(lsof -iTCP -sTCP:LISTEN -n -P)",
+      "Bash(ipconfig getifaddr *)",
+      "Bash(vercel whoami *)",
+      "Bash(vercel project *)",
+      "Bash(vercel teams *)",
+      "Bash(git commit -m ' *)",
+      "Bash(vercel link *)",
+      "Bash(vercel deploy *)",
+      "Bash(vercel deployments *)"
+    ]
+  }
+}

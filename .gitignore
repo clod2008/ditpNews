@@ -11,6 +11,9 @@
 # production
 /build
 
+# vercel
+.vercel
+
 # misc
 .DS_Store
 .env.local
@@ -24,4 +27,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # Personal Notes
-notes/
+# /notes

@@ -14,6 +14,7 @@ const paths = {
     business2024: `bm2024`,
     festivalMuayThai2024: `festival-muay-thai-2024`,
     bbm2025: `bbm2025`, // nueva ruta para BBM 2025
+    smartLink: `smart-link`, // ruta genérica de redirección deep-link a Instagram (Thai Mali Rice 2026 y futuras campañas)
 }
 
 // Home Page

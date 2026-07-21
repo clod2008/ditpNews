@@ -18,6 +18,7 @@ import { PdfContainer } from "./components/PdfContainer/PdfContainer";
 import { BusinessM2024 } from "./pages/BusinessM2024";
 import { FestivalMuayThai2024 } from "./pages/FestivalMuayThai2024";
 import { BBM2025 } from "./pages/BBM2025";
+import { SmartLink } from "./pages/SmartLink";
 
 const tagManagerArgs = {
   gtmId: `${process.env.REACT_APP_TAG_ID}`,
@@ -53,6 +54,7 @@ function App() {
             element={<FestivalMuayThai2024 />}
           />
           <Route path={paths.bbm2025} element={<BBM2025 />} />
+          <Route path={paths.smartLink} element={<SmartLink />} />
           <Route path='/report' element={<PdfContainer />} />
 
           <Route path='/*' element={<Navigate to={paths.home} replace />} />
