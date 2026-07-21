@@ -277,6 +277,16 @@ const SmartLinkBuilder = () => {
   );
 };
 
+// Registro de escaneos: Google Sheet vía Apps Script Web App (mismo patrón que
+// src/pages/Credenciales.jsx). Si la URL no está configurada, no se manda nada.
+// sendBeacon no bloquea ni demora la redirección — es la API pensada para
+// disparar datos justo antes de navegar fuera de la página.
+const logScan = (payload) => {
+  const url = process.env.REACT_APP_SCAN_LOG_URL;
+  if (!url || typeof navigator.sendBeacon !== "function") return;
+  navigator.sendBeacon(url, new Blob([JSON.stringify(payload)], { type: "text/plain" }));
+};
+
 // Puerta de entrada tipo "smart link": redirige a la app de Instagram si está
 // instalada (Android via intent://, iOS/resto via Universal Link), con fallback
 // web automático. type/code vienen por query string (?type=reel|p&code=...) para
@@ -300,6 +310,16 @@ export const SmartLink = () => {
     if (!hasTarget || stay) return;
 
     const isAndroid = /Android/i.test(navigator.userAgent);
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const platform = isAndroid ? "android" : isIOS ? "ios" : "desktop";
+
+    logScan({
+      event: "scan",
+      type,
+      code,
+      platform,
+      referrer: document.referrer || "",
+    });
 
     if (isAndroid) {
       const intentUrl = `intent://instagram.com/${igPath}#Intent;package=com.instagram.android;scheme=https;S.browser_fallback_url=${encodeURIComponent(
@@ -315,12 +335,13 @@ export const SmartLink = () => {
     const safetyNet = setTimeout(() => {
       if (document.visibilityState === "visible") {
         setShowManualLink(true);
+        logScan({ event: "fallback", type, code, platform });
         window.location.href = webUrl;
       }
     }, 2500);
 
     return () => clearTimeout(safetyNet);
-  }, [hasTarget, stay, igPath, webUrl]);
+  }, [hasTarget, stay, type, code, igPath, webUrl]);
 
   if (!hasTarget) {
     return <SmartLinkBuilder />;

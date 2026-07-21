@@ -120,9 +120,31 @@ Lo que dispara el "abrir app" es que el destino final es `instagram.com` (domini
 
 **No sirve** el emulador de dispositivo de Chrome DevTools para esto: solo cambia viewport y user-agent, no tiene Instagram instalada a nivel OS, así que nunca va a disparar el "abrir app". Sirve solo para chequear que el spinner/logo se vean bien en pantalla chica.
 
+## Registro de escaneos (Google Sheet)
+
+Cada vez que `/smart-link` redirige de verdad (no en modo `stay=1`), manda un registro no bloqueante vía `navigator.sendBeacon` a un Google Apps Script Web App — mismo patrón que ya usa `src/pages/Credenciales.jsx` para leer un Sheet, acá para escribir. `sendBeacon` no demora ni interfiere la redirección: dispara y sigue.
+
+Qué se guarda por fila (sin cookies, sin IP explícita, sin fingerprinting):
+
+- Timestamp
+- Evento: `scan` (llegada) o `fallback` (se activó la red de seguridad de 2.5s, señal de que el deep-link no abrió nada solo)
+- `type` y `code` escaneados
+- Plataforma: `android` / `ios` / `desktop`
+- `document.referrer` (casi siempre vacío viniendo de un QR impreso)
+
+### Setup (una sola vez)
+
+1. Crear un Google Sheet nuevo (o reusar uno existente del proyecto).
+2. Extensiones → Apps Script → pegar el contenido de `notes/smart-link-scan-log-apps-script.js` de este repo.
+3. Deploy → Nueva implementación → tipo **Aplicación web**. Ejecutar como **Yo**, acceso **Cualquier usuario** (tiene que poder recibir el POST sin login).
+4. Copiar la URL que termina en `/exec`.
+5. En Vercel: Project Settings → Environment Variables → agregar `REACT_APP_SCAN_LOG_URL` con esa URL, en los ambientes que corresponda (Production / Preview). Redeploy para que tome la variable (las `REACT_APP_*` de Create React App se inyectan en build time, no en runtime).
+
+Si la variable no está seteada, `logScan()` no manda nada — no rompe ni tira error, el smart link funciona igual sin registro.
+
 ## Fuera de alcance (por ahora)
 
-- Tracking/analytics de escaneos.
+- Analytics agregados (gráficos, dashboards) sobre el Sheet de escaneos — hoy es solo el registro crudo.
 - Cualquier cambio en el repo `qrg`.
 
 ## Referencias
