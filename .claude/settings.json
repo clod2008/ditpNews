@@ -26,7 +26,8 @@
       "Bash(vercel teams *)",
       "Bash(git commit -m ' *)",
       "Bash(vercel link *)",
-      "Bash(vercel deploy *)"
+      "Bash(vercel deploy *)",
+      "Bash(vercel deployments *)"
     ]
   }
 }
