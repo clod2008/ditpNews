@@ -292,6 +292,15 @@ const logScan = (payload) => {
   );
 };
 
+// Se muestra cuando no hay type/code Y tampoco el ?admin= correcto — no da
+// ninguna pista de que existe un constructor escondido detrás de esa clave.
+const NoTargetMessage = () => (
+  <div className={styles.smartLink}>
+    <img src={ditpIso} alt="DITP" className={styles.logo} />
+    <p className={styles.message}>Todavía no hay un posteo asignado a este link.</p>
+  </div>
+);
+
 // Puerta de entrada tipo "smart link": redirige a la app de Instagram si está
 // instalada (Android via intent://, iOS/resto via Universal Link), con fallback
 // web automático. type/code vienen por query string (?type=reel|p&code=...) para
@@ -303,6 +312,11 @@ export const SmartLink = () => {
   // Modo test: ?stay=1 frena la redirección automática para poder mirar la
   // pantalla y disparar el link a mano cuando quieras.
   const stay = searchParams.get("stay") === "1";
+  // Constructor escondido detrás de ?admin=CLAVE — sin la clave correcta se
+  // ve el mismo mensaje genérico de siempre, no un "acceso denegado" que
+  // delate que hay algo protegido acá.
+  const adminKey = process.env.REACT_APP_SMART_LINK_ADMIN_KEY;
+  const isAdmin = Boolean(adminKey) && searchParams.get("admin") === adminKey;
   const [showManualLink, setShowManualLink] = useState(false);
 
   const hasTarget = Boolean(type && code);
@@ -350,7 +364,7 @@ export const SmartLink = () => {
   }, [hasTarget, stay, type, code, igPath, webUrl]);
 
   if (!hasTarget) {
-    return <SmartLinkBuilder />;
+    return isAdmin ? <SmartLinkBuilder /> : <NoTargetMessage />;
   }
 
   return (

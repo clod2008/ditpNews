@@ -80,16 +80,24 @@ Flujo el día que se publique el contenido:
 4. Pegar esa URL en la columna B del Sheet de `qrg`, en la fila de esta campaña.
 5. Listo — el QR ya impreso empieza a llevar al contenido real, sin tocar código ni redeployar.
 
-## Constructor de links (en la propia ruta)
+## Constructor de links (en la propia ruta, protegido por clave)
 
-Si entrás a `/smart-link` **sin** `type`/`code` en la URL, en vez del mensaje de "no hay posteo asignado" ahora se muestra un formulario para armarlo:
+El constructor está escondido detrás de una clave en la query string — **sin la clave correcta, `/smart-link` sin `type`/`code` siempre muestra el mismo mensaje genérico** ("todavía no hay un posteo asignado"), no da ninguna pista de que existe un modo admin. Esto es disuasión simple (la clave queda en el bundle de JS, cualquiera con ganas de mirar el código fuente la puede sacar), no seguridad fuerte — pero como el peor caso de acceso no autorizado es "alguien genera un QR de más", alcanza.
+
+```
+https://www.ditp.com.ar/smart-link?admin=LA_CLAVE
+```
+
+La clave se define en `REACT_APP_SMART_LINK_ADMIN_KEY` (`.env.local` en desarrollo, Environment Variables de Vercel en Production/Preview). Sin esa variable seteada, el constructor queda inaccesible para cualquiera.
+
+Con la clave correcta, en vez del mensaje genérico se muestra un formulario para armar el link:
 
 - Radio button **Reel / Post / Perfil**.
 - Campo de texto para pegar el código (o el usuario, si elegiste "Perfil") — el placeholder cambia según la opción elegida.
 - Selector **Real / Test**: "Real" genera el link definitivo (redirige solo); "Test" agrega `&stay=1` (ver sección de abajo) para poder mirar la pantalla sin que dispare la redirección.
 - Bloque de ayuda "¿de dónde saco esto?" con la URL de ejemplo de Instagram y la parte a copiar, actualizado según el tipo elegido.
 - Muestra el link completo generado con una etiqueta **Modo real** / **Modo test** arriba, y botón **Copiar link**. El de "Modo real" es el que va a la columna B del Sheet de `qrg` — el de "Modo test" es solo para mirar la pantalla, no lo publiques.
-- Debajo, un **QR generado en el momento** con selector de color del código (**Negro / Blanco / Azul DITP**, fondo siempre transparente) y botones **Descargar QR (PNG)** y **Descargar QR (SVG)**. El QR siempre codifica el link real (nunca el de modo test, aunque tengas el selector en "Test") — así el archivo que bajás está listo para imprimir directo, sin pasos extra. PNG es la opción recomendada para uso general (celular, WhatsApp, imprentas que no aceptan vectorial); SVG para diseño/impresión en alta resolución. La previsualización muestra un fondo tipo damero solo para que se vea el código blanco — el archivo exportado no lleva ese patrón, es transparente de verdad. Usa la librería `qrcode` (nueva dependencia del proyecto).
+- Debajo, un **QR generado en el momento** con selector de color del código (**Negro / Blanco / Azul DITP**, fondo siempre transparente) y botones **Descargar QR (PNG)** y **Descargar QR (SVG)**. El QR siempre codifica el link real (nunca el de modo test, aunque tengas el selector en "Test") — así el archivo que bajás está listo para imprimir directo, sin pasos extra. PNG es la opción recomendada para uso general (celular, WhatsApp, imprentas que no aceptan vectorial); SVG para diseño/impresión en alta resolución. El fondo de la previsualización se invierte solo (blanco detrás de código Negro/Azul, negro detrás de código Blanco) para que siempre se vea con contraste — el archivo exportado no lleva ningún fondo, es transparente de verdad. Usa la librería `qrcode` (nueva dependencia del proyecto).
 
 El link se arma con el dominio desde el que se esté viendo la página (`window.location.origin`), así que si lo abrís en `http://localhost:3003/smart-link` te da el link de prueba local, y si lo abrís en `https://www.ditp.com.ar/smart-link` te da directo el link de producción para copiar y pegar.
 
