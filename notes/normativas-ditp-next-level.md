@@ -199,7 +199,12 @@ https://thinkthailand.ditp.go.th/articles1-en
 
 ### Pancake Khemanit Jamikorn
 **Sector: Moda · Fashion**  
-**Credenciales:** Thai Supermodel Contest · Model of the World
+**Credenciales:** Thai Supermodel Contest · Model of the World  
+**Artículo oficial DITP:** https://thinkthailand.ditp.go.th/articles2-en (15 marzo 2026)  
+**Título del artículo:** *"Pancake Khemanit Ignites Thai Fashion — Elevating Thai Products, Expanding into New Markets, Advancing to the Global Stage."*  
+**Redes sociales:** Instagram `@khemanito` · TikTok `@pancakekhemanit`
+
+> ⚠️ **Regla de copy:** igual que Bie — nunca "embajadora" sola. Siempre "figura de marca global" o "embajadora de marca".
 
 **Bio oficial (ES):**  
 Modelo y actriz tailandesa, ganadora del Thai Supermodel Contest y Model of the World. Con amplia experiencia en pasarelas internacionales, representa a la moda tailandesa como fusión de herencia cultural, creatividad y diseño contemporáneo. Comunica la fortaleza y el potencial de la industria de la moda tailandesa a consumidores, socios e inversores globales, destacando que los productos de moda tailandesa son distintivos, estilizados y plenamente competitivos en el mercado internacional.
@@ -275,9 +280,39 @@ Fuente: https://thinkthailand.ditp.go.th/articles3-en
 | **Fruit King** | Fruta procesada premium con producción bajo estándares internacionales certificados. |
 | **De La Lita** | Snack saludable que equilibra nutrición y sabor. |
 
+### Sector Fashion / Moda — Argentina (fuente: artículo oficial 15 mar 2026)
+
+Fuente: https://thinkthailand.ditp.go.th/articles2-en · 23 marcas participantes
+
+| Marca | Descripción |
+|-------|-------------|
+| **ROCE** | Ropa cotidiana minimalista, comfort y tonos cálidos. |
+| **Rukbatik** | Reinterpretación contemporánea de patrones Lanna con tintes naturales. |
+| **RIVA by Frank Weeneggsinn** | Ropa moderna basada en técnicas de smocking del s.XIX. |
+| **SUNTREE** | Textiles Thai Puan tejidos a mano desde Sukhothai. |
+| **Mohhomphrae** | Artesanía de Phrae con índigo natural GI certificado. |
+| **Hom Studio** | Algodón tejido a mano vibrante, con colaboración comunitaria. |
+| **Keerata** | Fibras naturales para uso funcional contemporáneo. |
+| **Mantra Crafts** | Algodón tejido a mano con técnica tie-dye Shibori. |
+| **Monarch** | Moda femenina elegante de simplicidad refinada. |
+| **Pharata** | Reinterpretación experimental de la cultura local como lifestyle. |
+| **SAAMU** | Artesanía con estándares internacionales, mezcla cultural y contemporánea. |
+| **Bellve** | Bolsos eco-friendly en cuero vegano. |
+| **Big Foot** | Diseño de bolsos inspirado en viajes y aventura. |
+| **Eleganza** | Marca de cuero tailandés para mujeres profesionales. |
+| **Mince** | Bolsos con materiales locales tailandeses. |
+| **Munie** | Textil de jacinto de agua con alianzas comunitarias. |
+| **Capthai** | Sombreros con protección solar y portabilidad. |
+| **Marmoris** | Calzado con materiales reciclados. |
+| **BEENAPA** | Zapatos de mujer en cuero genuino. |
+| **Folkcharm** | Ropa de algodón tejida a mano sin químicos. |
+| **Alter & Beyond** | Ropa moderna de lujo accesible. |
+| **Homrak Studio** | Índigo y tie-dye de base comunitaria. |
+| **Maison** | Ropa contemporánea con estilo gender-inclusive. |
+
 ### Sector Wellness — No activado en Argentina
 
-> Argentina activa únicamente el sector **Gastronomía / Food** en 2026. Los sectores Moda y Wellness del normativo global no aplican para esta landing.
+> Argentina activa **Moda y Gastronomía** en 2026. El sector Wellness no aplica para esta landing.
 
 ---
 
