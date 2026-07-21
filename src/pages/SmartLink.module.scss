@@ -66,7 +66,10 @@ $ditpBlue: #0A459B;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  // justify-content: flex-start (no "center") a propósito: con contenido más
+  // alto que el viewport, centrar verticalmente en un contenedor con scroll
+  // deja la parte de arriba inalcanzable — bug clásico de flexbox+overflow.
+  justify-content: flex-start;
   gap: 20px;
   background-color: $ditpBlue;
   padding: 24px;
@@ -305,20 +308,15 @@ $ditpBlue: #0A459B;
   }
 }
 
-// Fondo tipo "damero" solo para previsualizar el QR de fondo transparente
-// (el archivo exportado no lleva este patrón).
+// El color de fondo del preview se setea inline desde el JSX según el color
+// de código elegido (blanco/negro invertido para que siempre se lea) — el
+// archivo exportado (PNG/SVG) sigue siendo transparente, esto es solo visual.
 .qrPreview {
-  width: 160px;
-  height: 160px;
-  padding: 8px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 12px;
   box-sizing: border-box;
   border-radius: 6px;
-  background-image: linear-gradient(45deg, #e0e0e0 25%, transparent 25%),
-    linear-gradient(-45deg, #e0e0e0 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #e0e0e0 75%),
-    linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
-  background-size: 16px 16px;
-  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
 
   svg {
     width: 100%;

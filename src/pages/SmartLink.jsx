@@ -244,6 +244,7 @@ const SmartLinkBuilder = () => {
 
             <div
               className={styles.qrPreview}
+              style={{ backgroundColor: qrColor === "white" ? "#000000" : "#ffffff" }}
               dangerouslySetInnerHTML={{ __html: qrSvg }}
             />
             <div className={styles.qrButtons}>
@@ -277,6 +278,29 @@ const SmartLinkBuilder = () => {
   );
 };
 
+// Registro de escaneos: pega contra /api/log-scan (función serverless propia,
+// ver api/log-scan.js), que a su vez escribe en un Google Sheet autenticado
+// con un service account — esa función solo acepta requests con origen
+// ditp.com.ar, así que esto no va a registrar nada en local ni en previews.
+// sendBeacon no bloquea ni demora la redirección — es la API pensada para
+// disparar datos justo antes de navegar fuera de la página.
+const logScan = (payload) => {
+  if (typeof navigator.sendBeacon !== "function") return;
+  navigator.sendBeacon(
+    "/api/log-scan",
+    new Blob([JSON.stringify(payload)], { type: "application/json" })
+  );
+};
+
+// Se muestra cuando no hay type/code Y tampoco el ?admin= correcto — no da
+// ninguna pista de que existe un constructor escondido detrás de esa clave.
+const NoTargetMessage = () => (
+  <div className={styles.smartLink}>
+    <img src={ditpIso} alt="DITP" className={styles.logo} />
+    <p className={styles.message}>Todavía no hay un posteo asignado a este link.</p>
+  </div>
+);
+
 // Puerta de entrada tipo "smart link": redirige a la app de Instagram si está
 // instalada (Android via intent://, iOS/resto via Universal Link), con fallback
 // web automático. type/code vienen por query string (?type=reel|p&code=...) para
@@ -288,6 +312,11 @@ export const SmartLink = () => {
   // Modo test: ?stay=1 frena la redirección automática para poder mirar la
   // pantalla y disparar el link a mano cuando quieras.
   const stay = searchParams.get("stay") === "1";
+  // Constructor escondido detrás de ?admin=CLAVE — sin la clave correcta se
+  // ve el mismo mensaje genérico de siempre, no un "acceso denegado" que
+  // delate que hay algo protegido acá.
+  const adminKey = process.env.REACT_APP_SMART_LINK_ADMIN_KEY;
+  const isAdmin = Boolean(adminKey) && searchParams.get("admin") === adminKey;
   const [showManualLink, setShowManualLink] = useState(false);
 
   const hasTarget = Boolean(type && code);
@@ -300,6 +329,17 @@ export const SmartLink = () => {
     if (!hasTarget || stay) return;
 
     const isAndroid = /Android/i.test(navigator.userAgent);
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const platform = isAndroid ? "android" : isIOS ? "ios" : "desktop";
+
+    logScan({
+      event: "scan",
+      type,
+      code,
+      platform,
+      referrer: document.referrer || "",
+      destination: webUrl,
+    });
 
     if (isAndroid) {
       const intentUrl = `intent://instagram.com/${igPath}#Intent;package=com.instagram.android;scheme=https;S.browser_fallback_url=${encodeURIComponent(
@@ -315,15 +355,16 @@ export const SmartLink = () => {
     const safetyNet = setTimeout(() => {
       if (document.visibilityState === "visible") {
         setShowManualLink(true);
+        logScan({ event: "fallback", type, code, platform, destination: webUrl });
         window.location.href = webUrl;
       }
     }, 2500);
 
     return () => clearTimeout(safetyNet);
-  }, [hasTarget, stay, igPath, webUrl]);
+  }, [hasTarget, stay, type, code, igPath, webUrl]);
 
   if (!hasTarget) {
-    return <SmartLinkBuilder />;
+    return isAdmin ? <SmartLinkBuilder /> : <NoTargetMessage />;
   }
 
   return (
