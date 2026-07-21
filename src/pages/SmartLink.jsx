@@ -277,14 +277,18 @@ const SmartLinkBuilder = () => {
   );
 };
 
-// Registro de escaneos: Google Sheet vía Apps Script Web App (mismo patrón que
-// src/pages/Credenciales.jsx). Si la URL no está configurada, no se manda nada.
+// Registro de escaneos: pega contra /api/log-scan (función serverless propia,
+// ver api/log-scan.js), que a su vez escribe en un Google Sheet autenticado
+// con un service account — esa función solo acepta requests con origen
+// ditp.com.ar, así que esto no va a registrar nada en local ni en previews.
 // sendBeacon no bloquea ni demora la redirección — es la API pensada para
 // disparar datos justo antes de navegar fuera de la página.
 const logScan = (payload) => {
-  const url = process.env.REACT_APP_SCAN_LOG_URL;
-  if (!url || typeof navigator.sendBeacon !== "function") return;
-  navigator.sendBeacon(url, new Blob([JSON.stringify(payload)], { type: "text/plain" }));
+  if (typeof navigator.sendBeacon !== "function") return;
+  navigator.sendBeacon(
+    "/api/log-scan",
+    new Blob([JSON.stringify(payload)], { type: "application/json" })
+  );
 };
 
 // Puerta de entrada tipo "smart link": redirige a la app de Instagram si está

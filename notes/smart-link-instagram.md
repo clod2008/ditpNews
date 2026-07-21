@@ -120,9 +120,13 @@ Lo que dispara el "abrir app" es que el destino final es `instagram.com` (domini
 
 **No sirve** el emulador de dispositivo de Chrome DevTools para esto: solo cambia viewport y user-agent, no tiene Instagram instalada a nivel OS, así que nunca va a disparar el "abrir app". Sirve solo para chequear que el spinner/logo se vean bien en pantalla chica.
 
-## Registro de escaneos (Google Sheet)
+## Registro de escaneos (Google Sheet vía service account)
 
-Cada vez que `/smart-link` redirige de verdad (no en modo `stay=1`), manda un registro no bloqueante vía `navigator.sendBeacon` a un Google Apps Script Web App — mismo patrón que ya usa `src/pages/Credenciales.jsx` para leer un Sheet, acá para escribir. `sendBeacon` no demora ni interfiere la redirección: dispara y sigue.
+Cada vez que `/smart-link` redirige de verdad (no en modo `stay=1`), manda un registro no bloqueante vía `navigator.sendBeacon` a **`/api/log-scan`** (`api/log-scan.js`, función serverless de Vercel) — esa función se autentica contra la API de Sheets con un **service account de Google Cloud** y agrega una fila. `sendBeacon` no demora ni interfiere la redirección: dispara y sigue.
+
+Se intentó primero con un Google Apps Script Web App (mismo patrón que `src/pages/Credenciales.jsx` usa para leer), pero el Workspace de `apsis.com.ar` bloquea el acceso anónimo a Web Apps de Apps Script incluso con "Cualquier usuario" — por eso se pasó a un service account, que no depende de esa política.
+
+**Seguridad**: `/api/log-scan` corre server-side — la clave privada del service account nunca llega al navegador (a diferencia de una env var `REACT_APP_*`, que sí queda expuesta en el bundle público). La función además rechaza (403) cualquier request cuyo origen no sea `ditp.com.ar`, así que solo el sitio de producción puede escribir — **no va a registrar nada en local ni en previews**, es intencional.
 
 Qué se guarda por fila (sin cookies, sin IP explícita, sin fingerprinting):
 
@@ -134,13 +138,19 @@ Qué se guarda por fila (sin cookies, sin IP explícita, sin fingerprinting):
 
 ### Setup (una sola vez)
 
-1. Crear un Google Sheet nuevo (o reusar uno existente del proyecto).
-2. Extensiones → Apps Script → pegar el contenido de `notes/smart-link-scan-log-apps-script.js` de este repo.
-3. Deploy → Nueva implementación → tipo **Aplicación web**. Ejecutar como **Yo**, acceso **Cualquier usuario** (tiene que poder recibir el POST sin login).
-4. Copiar la URL que termina en `/exec`.
-5. En Vercel: Project Settings → Environment Variables → agregar `REACT_APP_SCAN_LOG_URL` con esa URL, en los ambientes que corresponda (Production / Preview). Redeploy para que tome la variable (las `REACT_APP_*` de Create React App se inyectan en build time, no en runtime).
+1. **Google Cloud Console** → crear/elegir un proyecto → habilitar la **Google Sheets API**.
+2. **IAM y administración → Cuentas de servicio** → crear una cuenta de servicio → generar una clave **JSON** y descargarla.
+3. Del JSON descargado, copiar `client_email` y `private_key`.
+4. Abrir el Google Sheet donde va el registro → **Compartir** → agregar el `client_email` de la cuenta de servicio como **Editor**.
+5. Crear una hoja/pestaña llamada **`Scans`** dentro de ese Sheet (la función escribe en el rango `Scans!A:F`).
+6. Copiar el **ID del Sheet** (el segmento largo en la URL, entre `/d/` y `/edit`).
+7. En Vercel: Project Settings → Environment Variables → agregar (server-side, **sin** prefijo `REACT_APP_`):
+   - `GOOGLE_SERVICE_ACCOUNT_EMAIL`
+   - `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` (pegar tal cual, con los `\n` literales que trae el JSON)
+   - `GOOGLE_SHEET_ID`
+8. Redeploy.
 
-Si la variable no está seteada, `logScan()` no manda nada — no rompe ni tira error, el smart link funciona igual sin registro.
+Si esas tres variables no están seteadas, `/api/log-scan` responde 200 sin escribir nada — no rompe ni tira error, el smart link funciona igual sin registro.
 
 ## Fuera de alcance (por ahora)
 
