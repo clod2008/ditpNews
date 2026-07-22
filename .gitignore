@@ -28,3 +28,7 @@ yarn-error.log*
 
 # Personal Notes
 /notes
+
+# Cerebro (Obsidian, local a esta máquina)
+.cerebro
+.cerebro-master.md
