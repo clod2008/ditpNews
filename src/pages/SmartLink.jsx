@@ -11,24 +11,68 @@ const IG_TYPE_INFO = {
   reel: {
     label: "Reel",
     fieldLabel: "el código",
-    placeholder: "Código del posteo (ej: DZZ2TlTRrgt)",
+    placeholder: "Pegá el link del Reel o solo el código",
     urlSample: "https://www.instagram.com/reel/DA1b2C3dEfG/",
     valueSample: "DA1b2C3dEfG",
   },
   p: {
     label: "Post",
     fieldLabel: "el código",
-    placeholder: "Código del posteo (ej: DZZ2TlTRrgt)",
+    placeholder: "Pegá el link del posteo o solo el código",
     urlSample: "https://www.instagram.com/p/CxYz9AbCdEf/",
     valueSample: "CxYz9AbCdEf",
   },
   profile: {
     label: "Perfil",
     fieldLabel: "el usuario",
-    placeholder: "Usuario de Instagram (ej: ditp.thailand)",
+    placeholder: "Pegá el link del perfil o el usuario",
     urlSample: "https://www.instagram.com/ditp.thailand/",
     valueSample: "ditp.thailand",
   },
+};
+
+// Segmentos de instagram.com que NO son un usuario de perfil — evita que
+// "instagram.com/explore/..." se interprete como el perfil "explore".
+const IG_NON_PROFILE_PATHS = new Set([
+  "p",
+  "reel",
+  "reels",
+  "tv",
+  "stories",
+  "explore",
+  "accounts",
+  "direct",
+  "about",
+  "legal",
+]);
+
+// Deja pegar el link completo de Instagram (con o sin https://, con o sin
+// query string tipo ?img_index=1) en vez de tener que ir a buscar el código
+// a mano — engorroso sobre todo desde el celular. Si lo que se pegó no es
+// una URL de instagram.com, devuelve null y el campo se trata como código
+///usuario suelto (comportamiento de siempre).
+const parseInstagramInput = (raw) => {
+  const trimmed = raw.trim();
+  if (!/instagram\.com/i.test(trimmed)) return null;
+
+  let pathname;
+  try {
+    const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+    pathname = new URL(withProtocol).pathname;
+  } catch {
+    return null;
+  }
+
+  const [first, second] = pathname.split("/").filter(Boolean);
+  if (!first) return null;
+
+  if ((first === "p" || first === "reel") && second) {
+    return { type: first, code: second };
+  }
+  if (!IG_NON_PROFILE_PATHS.has(first)) {
+    return { type: "profile", code: first };
+  }
+  return null;
 };
 
 // Opciones de color del código del QR — el fondo siempre va transparente
@@ -254,6 +298,17 @@ const SmartLinkBuilder = () => {
     link.click();
   };
 
+  const handleCodeChange = (e) => {
+    const value = e.target.value;
+    const parsed = parseInstagramInput(value);
+    if (parsed) {
+      setType(parsed.type);
+      setCode(parsed.code);
+    } else {
+      setCode(value);
+    }
+  };
+
   const handleCopy = async () => {
     if (!generatedLink) return;
     await navigator.clipboard.writeText(generatedLink);
@@ -317,9 +372,9 @@ const SmartLinkBuilder = () => {
           type='text'
           className={styles.codeInput}
           placeholder={info.placeholder}
-          aria-label={`Ingresá ${info.fieldLabel}`}
+          aria-label={`Pegá el link o ingresá ${info.fieldLabel}`}
           value={code}
-          onChange={(e) => setCode(e.target.value)}
+          onChange={handleCodeChange}
         />
 
         <fieldset className={styles.modeGroup}>
@@ -422,10 +477,11 @@ const SmartLinkBuilder = () => {
       </div>
 
       <div className={styles.example}>
-        <p>¿De dónde saco {info.fieldLabel}?</p>
+        <p>Pegá el link tal cual, por ejemplo:</p>
         <code>{info.urlSample}</code>
         <p className={styles.exampleNote}>
-          Es la parte <strong>{info.valueSample}</strong> de esa URL.
+          El código se detecta solo — o escribilo directo (
+          <strong>{info.valueSample}</strong>) si ya lo tenés.
         </p>
         <p>Link {info.label.toLowerCase()} de ejemplo:</p>
         <code>
