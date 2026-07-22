@@ -1,5 +1,34 @@
+// Tipografía oficial DITP (manual de marca, ver .cerebro Brand_Guidelines) —
+// se carga acá porque el resto del sitio usa la fuente de sistema (index.scss)
+// y no vale la pena tocar eso para una sola página.
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
+
 // Azul DITP oficial (#0A459B) — distinto del $blueStrong-hex de Muay Thai Fest 2024 en scss/color.scss, no reusar ese.
 $ditpBlue: #0A459B;
+$fontBrand: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseLogo {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.85;
+  }
+}
 
 .smartLink {
   position: fixed;
@@ -14,6 +43,8 @@ $ditpBlue: #0A459B;
   color: #ffffff;
   text-align: center;
   padding: 32px;
+  font-family: $fontBrand;
+  animation: fadeInUp 400ms ease-out;
 }
 
 .logo {
@@ -22,6 +53,7 @@ $ditpBlue: #0A459B;
   // ditpIso.svg trae colores fijos (azul/rojo), no currentColor —
   // se fuerza a blanco puro con filtro en vez de tocar el asset.
   filter: brightness(0) invert(1);
+  animation: pulseLogo 2.2s ease-in-out infinite;
 }
 
 .spinner {
@@ -41,19 +73,34 @@ $ditpBlue: #0A459B;
 
 .message {
   font-size: 1.15rem;
+  font-weight: 500;
   max-width: 320px;
 }
 
 .manualLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
   color: #ffffff;
   text-decoration: underline;
+  text-underline-offset: 3px;
   font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background-color 150ms;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.12);
+  }
 }
 
 .targetUrl {
   background: rgba(255, 255, 255, 0.12);
-  border-radius: 6px;
-  padding: 8px 12px;
+  border-radius: 8px;
+  padding: 10px 14px;
   font-size: 0.85rem;
   max-width: 320px;
   word-break: break-all;
@@ -73,18 +120,24 @@ $ditpBlue: #0A459B;
   gap: 20px;
   background-color: $ditpBlue;
   padding: 24px;
+  padding-top: max(24px, env(safe-area-inset-top));
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
   overflow-y: auto;
+  font-family: $fontBrand;
 }
 
 .builderLogo {
   width: 72px;
   height: auto;
   filter: brightness(0) invert(1);
+  margin-top: 4px;
 }
 
 .builderTitle {
   color: #ffffff;
   font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   margin: 0;
   text-align: center;
 }
@@ -99,18 +152,20 @@ $ditpBlue: #0A459B;
 
 .card {
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 18px;
   padding: 24px;
   width: 100%;
   max-width: 380px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  animation: fadeInUp 400ms ease-out both;
 }
 
 .statsBlock {
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 18px;
   padding: 24px;
   width: 100%;
   max-width: 380px;
@@ -118,6 +173,8 @@ $ditpBlue: #0A459B;
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  animation: fadeInUp 400ms ease-out both;
 }
 
 .statsTitle {
@@ -253,22 +310,54 @@ $ditpBlue: #0A459B;
   color: #555555;
 }
 
+// Mismo patrón visual que .modeGroup/.modeOption más abajo (segmented
+// control) — antes esto era radios sueltos con texto al lado, inconsistente
+// con el toggle Real/Test que está a un scroll de distancia.
 .radioGroup {
   display: flex;
-  gap: 24px;
-  justify-content: center;
-  border: none;
+  border: 1px solid $ditpBlue;
+  border-radius: 10px;
+  overflow: hidden;
   padding: 0;
   margin: 0;
 }
 
 .radioOption {
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 6px;
+  font-size: 0.9rem;
   color: $ditpBlue;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 150ms, color 150ms;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &:hover {
+    background: #f1f2f5;
+  }
+
+  & + & {
+    border-left: 1px solid $ditpBlue;
+  }
+}
+
+.radioOptionActive {
+  background: $ditpBlue;
+  color: #ffffff;
+
+  &:hover {
+    background: $ditpBlue;
+  }
 }
 
 .modeGroup {
@@ -331,14 +420,18 @@ $ditpBlue: #0A459B;
 }
 
 .codeInput {
+  min-height: 44px;
   padding: 10px 12px;
   border: 1px solid #cccccc;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 150ms, box-shadow 150ms;
 
   &:focus {
-    outline: 2px solid $ditpBlue;
+    outline: none;
     border-color: $ditpBlue;
+    box-shadow: 0 0 0 3px rgba(10, 69, 155, 0.15);
   }
 }
 
@@ -358,17 +451,29 @@ $ditpBlue: #0A459B;
 }
 
 .copyButton {
+  min-height: 44px;
   background: $ditpBlue;
   color: #ffffff;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 10px;
   font-size: 0.95rem;
   font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
+  transition: opacity 150ms, transform 150ms;
 
   &:hover {
     opacity: 0.9;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ditpBlue;
+    outline-offset: 2px;
   }
 }
 
@@ -392,17 +497,29 @@ $ditpBlue: #0A459B;
 }
 
 .copyButtonSecondary {
+  min-height: 44px;
   background: #ffffff;
   color: $ditpBlue;
   border: 1px solid $ditpBlue;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 10px;
   font-size: 0.95rem;
   font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
+  transition: background-color 150ms, transform 150ms;
 
   &:hover {
     background: #f1f2f5;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ditpBlue;
+    outline-offset: 2px;
   }
 }
 
@@ -423,10 +540,20 @@ $ditpBlue: #0A459B;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 4px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 6px 10px;
+  border-radius: 8px;
   font-size: 0.75rem;
   color: #666666;
   cursor: pointer;
+  transition: background-color 150ms;
+
+  &:hover {
+    background: #f1f2f5;
+  }
 
   input {
     position: absolute;
@@ -471,13 +598,20 @@ $ditpBlue: #0A459B;
 }
 
 .example {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  padding: 16px 20px 20px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
   text-align: center;
+  width: 100%;
   max-width: 380px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  animation: fadeInUp 400ms ease-out both;
 
   p {
     margin: 12px 0 0;
@@ -489,14 +623,14 @@ $ditpBlue: #0A459B;
 
   code {
     display: block;
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     font-weight: 600;
     word-break: break-all;
   }
 }
 
 .exampleNote {
-  font-size: 0.9rem !important;
+  font-size: 0.85rem !important;
   color: rgba(255, 255, 255, 0.7);
 
   strong {

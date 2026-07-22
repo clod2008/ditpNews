@@ -123,10 +123,12 @@ const ScanStats = () => {
         ))}
       </div>
 
-      {loading && <p className={styles.statsHint}>Cargando…</p>}
-      {error && !loading && (
-        <p className={styles.statsHint}>No se pudieron cargar los datos.</p>
-      )}
+      <div aria-live='polite'>
+        {loading && <p className={styles.statsHint}>Cargando…</p>}
+        {error && !loading && (
+          <p className={styles.statsHint}>No se pudieron cargar los datos.</p>
+        )}
+      </div>
 
       {stats && !loading && !error && (
         <>
@@ -267,7 +269,11 @@ const SmartLinkBuilder = () => {
 
       <div className={styles.card}>
         <fieldset className={styles.radioGroup}>
-          <label className={styles.radioOption}>
+          <label
+            className={`${styles.radioOption} ${
+              type === "reel" ? styles.radioOptionActive : ""
+            }`}
+          >
             <input
               type='radio'
               name='type'
@@ -277,7 +283,11 @@ const SmartLinkBuilder = () => {
             />
             Reel
           </label>
-          <label className={styles.radioOption}>
+          <label
+            className={`${styles.radioOption} ${
+              type === "p" ? styles.radioOptionActive : ""
+            }`}
+          >
             <input
               type='radio'
               name='type'
@@ -287,7 +297,11 @@ const SmartLinkBuilder = () => {
             />
             Post
           </label>
-          <label className={styles.radioOption}>
+          <label
+            className={`${styles.radioOption} ${
+              type === "profile" ? styles.radioOptionActive : ""
+            }`}
+          >
             <input
               type='radio'
               name='type'
@@ -303,6 +317,7 @@ const SmartLinkBuilder = () => {
           type='text'
           className={styles.codeInput}
           placeholder={info.placeholder}
+          aria-label={`Ingresá ${info.fieldLabel}`}
           value={code}
           onChange={(e) => setCode(e.target.value)}
         />
