@@ -93,6 +93,29 @@ const DATE_RANGES = {
   all: { label: "Todo", days: null },
 };
 
+// Ícono de refrescar (feather-icons "refresh-cw", inline para no sumar una
+// dependencia solo por un ícono) — gira mientras stats está cargando.
+const RefreshIcon = ({ spinning }) => (
+  <svg
+    className={`${styles.statsRefreshIcon} ${
+      spinning ? styles.statsRefreshIconSpinning : ""
+    }`}
+    viewBox='0 0 24 24'
+    width='18'
+    height='18'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth='2'
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    aria-hidden='true'
+  >
+    <polyline points='23 4 23 10 17 10' />
+    <polyline points='1 20 1 14 7 14' />
+    <path d='M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15' />
+  </svg>
+);
+
 // Panel de estadísticas: pega contra /api/scan-stats (misma protección que
 // el constructor, ?admin=CLAVE) y muestra el total de escaneos reales
 // (evento "scan", "fallback" no cuenta) agrupados por tipo.
@@ -104,6 +127,15 @@ const ScanStats = () => {
   // "" = agregado de todos los códigos. Se resetea al cambiar de rango,
   // porque un código puede no tener escaneos en el rango nuevo.
   const [selectedCode, setSelectedCode] = useState("");
+  // Se incrementa al tocar el botón de refrescar — no cambia nada del
+  // request en sí, solo re-dispara el fetch de abajo sin recargar la página.
+  const [refreshTick, setRefreshTick] = useState(0);
+
+  // Aparte del fetch: el código seleccionado solo se resetea al cambiar de
+  // rango (puede no tener escaneos en el rango nuevo), no en cada refresh.
+  useEffect(() => {
+    setSelectedCode("");
+  }, [range]);
 
   useEffect(() => {
     const adminKey = process.env.REACT_APP_SMART_LINK_ADMIN_KEY;
@@ -121,7 +153,6 @@ const ScanStats = () => {
     let cancelled = false;
     setLoading(true);
     setError(false);
-    setSelectedCode("");
 
     fetch(`/api/scan-stats?${params.toString()}`)
       .then((res) => res.json())
@@ -140,7 +171,7 @@ const ScanStats = () => {
     return () => {
       cancelled = true;
     };
-  }, [range]);
+  }, [range, refreshTick]);
 
   const selectedEntry = selectedCode
     ? stats?.byCode.find((c) => `${c.type}:${c.code}` === selectedCode)
@@ -150,7 +181,18 @@ const ScanStats = () => {
 
   return (
     <div className={styles.statsBlock}>
-      <h2 className={styles.statsTitle}>Escaneos</h2>
+      <div className={styles.statsHeader}>
+        <h2 className={styles.statsTitle}>Escaneos</h2>
+        <button
+          type='button'
+          className={styles.statsRefreshButton}
+          onClick={() => setRefreshTick((t) => t + 1)}
+          disabled={loading}
+          aria-label='Actualizar estadísticas'
+        >
+          <RefreshIcon spinning={loading} />
+        </button>
+      </div>
 
       <div className={styles.statsRangeGroup}>
         {Object.entries(DATE_RANGES).map(([key, { label }]) => (
@@ -168,13 +210,18 @@ const ScanStats = () => {
       </div>
 
       <div aria-live='polite'>
-        {loading && <p className={styles.statsHint}>Cargando…</p>}
-        {error && !loading && (
+        {loading && !stats && <p className={styles.statsHint}>Cargando…</p>}
+        {error && !stats && (
           <p className={styles.statsHint}>No se pudieron cargar los datos.</p>
+        )}
+        {error && stats && (
+          <p className={styles.statsHint}>
+            No se pudo actualizar — mostrando los últimos datos.
+          </p>
         )}
       </div>
 
-      {stats && !loading && !error && (
+      {stats && (
         <>
           {stats.byCode.length > 0 && (
             <select
