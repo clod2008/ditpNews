@@ -289,8 +289,36 @@ $fontBrand: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-se
   cursor: pointer;
   transition: background-color 150ms;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background: #f1f2f5;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: default;
+  }
+}
+
+.dangerButton {
+  min-height: 44px;
+  background: #ffffff;
+  color: #c0392b;
+  border: 1px solid #c0392b;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 150ms;
+
+  &:hover {
+    background: #fdecea;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #c0392b;
+    outline-offset: 2px;
   }
 }
 

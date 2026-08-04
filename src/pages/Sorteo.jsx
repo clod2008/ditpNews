@@ -82,7 +82,16 @@ const logPremio = async (registro) => {
 // Panel escondido detrás de ?admin=CLAVE (mismo esquema que /smart-link):
 // define tipos de premio + cantidad, repone stock al arrancar cada día de
 // evento, y muestra cuánto quedó sin sincronizar todavía.
-const SorteoAdmin = ({ config, onGuardarConfig, stock, onReiniciarDia, queue }) => {
+const SorteoAdmin = ({
+  config,
+  onGuardarConfig,
+  stock,
+  onReiniciarDia,
+  queue,
+  onSincronizar,
+  sincronizando,
+  onPurgarTodo,
+}) => {
   const [borrador, setBorrador] = useState(config.premios);
   const pendientes = queue.filter((r) => !r.synced).length;
 
@@ -166,6 +175,19 @@ const SorteoAdmin = ({ config, onGuardarConfig, stock, onReiniciarDia, queue }) 
         <p className={styles.syncLine}>
           {pendientes > 0 ? `${pendientes} todavía sin subir al Sheet.` : "Todo sincronizado."}
         </p>
+        <button type="button" className={styles.secondaryButton} onClick={onSincronizar} disabled={sincronizando}>
+          {sincronizando ? "Sincronizando…" : "Sincronizar datos"}
+        </button>
+      </section>
+
+      <section className={styles.card}>
+        <h2 className={styles.cardTitle}>Zona de peligro</h2>
+        <p className={styles.cardHint}>
+          Borra configuración, stock e historial completo de este dispositivo. No se puede deshacer.
+        </p>
+        <button type="button" className={styles.dangerButton} onClick={onPurgarTodo}>
+          Borrar todo
+        </button>
       </section>
     </div>
   );
@@ -259,6 +281,33 @@ export const Sorteo = () => {
     writeJSON(STORAGE_KEYS.stock, nuevoStock);
   };
 
+  // Distinto de "Reiniciar día": esto borra TODO (config, stock e historial),
+  // no solo repone el stock. Confirmación nativa con aviso extra si hay
+  // premios sin sincronizar — se pierden para siempre si se borra ahora.
+  const handlePurgarTodo = () => {
+    const pendientesActuales = readJSON(STORAGE_KEYS.queue, []).filter((r) => !r.synced).length;
+    const advertencia =
+      pendientesActuales > 0
+        ? `Hay ${pendientesActuales} premios sin sincronizar todavía — si borrás ahora se pierden para siempre. `
+        : "";
+    const confirmado = window.confirm(
+      `${advertencia}Esto borra la configuración, el stock y el historial completo de este dispositivo. No se puede deshacer. ¿Continuar?`
+    );
+    if (!confirmado) return;
+
+    try {
+      window.localStorage.removeItem(STORAGE_KEYS.config);
+      window.localStorage.removeItem(STORAGE_KEYS.stock);
+      window.localStorage.removeItem(STORAGE_KEYS.queue);
+    } catch {
+      // localStorage no disponible — no rompe, igual se limpia el estado en memoria abajo
+    }
+
+    setConfig(DEFAULT_CONFIG);
+    setStock(stockDesdeConfig(DEFAULT_CONFIG));
+    setQueue([]);
+  };
+
   const handleResultado = (premioId, premio) => {
     const restante = stock[premioId] - 1;
     const nuevoStock = { ...stock, [premioId]: restante };
@@ -283,9 +332,11 @@ export const Sorteo = () => {
   // primer fallo de un registro — se reintenta entero en el próximo trigger,
   // no hace falta reintento por-item acá.
   const sincronizandoRef = useRef(false);
+  const [sincronizando, setSincronizando] = useState(false);
   const trySync = useCallback(async () => {
     if (sincronizandoRef.current) return;
     sincronizandoRef.current = true;
+    setSincronizando(true);
     try {
       const colaActual = readJSON(STORAGE_KEYS.queue, []);
       const actualizada = [...colaActual];
@@ -308,6 +359,7 @@ export const Sorteo = () => {
       }
     } finally {
       sincronizandoRef.current = false;
+      setSincronizando(false);
     }
   }, []);
 
@@ -317,6 +369,25 @@ export const Sorteo = () => {
     return () => window.removeEventListener("online", trySync);
   }, [trySync]);
 
+  // El evento "storage" solo dispara en OTRAS pestañas/ventanas del mismo
+  // origen, nunca en la que hizo el cambio — esa ya se actualiza sola por su
+  // propio setState. Sirve para admin abierto en una laptop mientras el
+  // sorteo corre en la tablet: el stock/cola se refleja solo, sin recargar.
+  useEffect(() => {
+    const handleStorage = (event) => {
+      if (event.key === STORAGE_KEYS.stock) {
+        const nuevo = readJSON(STORAGE_KEYS.stock, null);
+        if (nuevo) setStock(nuevo);
+      } else if (event.key === STORAGE_KEYS.queue) {
+        setQueue(readJSON(STORAGE_KEYS.queue, []));
+      } else if (event.key === STORAGE_KEYS.config) {
+        setConfig(readJSON(STORAGE_KEYS.config, DEFAULT_CONFIG));
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
+
   if (isAdmin) {
     return (
       <SorteoAdmin
@@ -325,6 +396,9 @@ export const Sorteo = () => {
         stock={stock}
         onReiniciarDia={handleReiniciarDia}
         queue={queue}
+        onSincronizar={trySync}
+        sincronizando={sincronizando}
+        onPurgarTodo={handlePurgarTodo}
       />
     );
   }
