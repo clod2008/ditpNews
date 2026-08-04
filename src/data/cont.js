@@ -15,6 +15,7 @@ const paths = {
     festivalMuayThai2024: `festival-muay-thai-2024`,
     bbm2025: `bbm2025`, // nueva ruta para BBM 2025
     smartLink: `smart-link`, // ruta genérica de redirección deep-link a Instagram (Thai Mali Rice 2026 y futuras campañas)
+    sorteo: `sorteo`, // sorteador de premios para eventos presenciales (13-14 y 21-22 de agosto 2026)
 }
 
 // Home Page
