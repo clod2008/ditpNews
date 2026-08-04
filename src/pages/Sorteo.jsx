@@ -10,6 +10,7 @@ const STORAGE_KEYS = {
   config: "sorteo_config",
   stock: "sorteo_stock",
   queue: "sorteo_queue",
+  deviceId: "sorteo_device_id",
 };
 
 const DEFAULT_CONFIG = {
@@ -47,6 +48,26 @@ const writeJSON = (key, value) => {
 
 const uuid = () =>
   window.crypto?.randomUUID ? window.crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+
+// Id persistente por dispositivo (no por sesión) — se genera una sola vez y
+// se reusa siempre, así todas las entregas del mismo celular/tablet quedan
+// agrupadas bajo el mismo valor en el Sheet, incluso entre los 4 días del
+// evento. No identifica a la persona, solo al aparato.
+const getDeviceId = () => {
+  const existente = readJSON(STORAGE_KEYS.deviceId, null);
+  if (existente) return existente;
+  const nuevo = uuid();
+  writeJSON(STORAGE_KEYS.deviceId, nuevo);
+  return nuevo;
+};
+
+// Igual criterio que SmartLink.jsx para platform.
+const getPlataforma = () => {
+  const ua = navigator.userAgent || "";
+  if (/Android/i.test(ua)) return "android";
+  if (/iPhone|iPad|iPod/i.test(ua)) return "ios";
+  return "desktop";
+};
 
 const stockDesdeConfig = (config) => {
   const stock = {};
@@ -316,6 +337,8 @@ export const Sorteo = () => {
       premioId,
       premioNombre: premio?.nombre || premioId,
       stockRestante: restante,
+      dispositivoId: getDeviceId(),
+      plataforma: getPlataforma(),
       timestamp: new Date().toISOString(),
       synced: false,
     };
