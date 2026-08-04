@@ -260,11 +260,13 @@ export const Sorteo = () => {
   };
 
   const handleResultado = (premioId, premio) => {
-    const nuevoStock = { ...stock, [premioId]: stock[premioId] - 1 };
+    const restante = stock[premioId] - 1;
+    const nuevoStock = { ...stock, [premioId]: restante };
     const registro = {
       id: uuid(),
       premioId,
       premioNombre: premio?.nombre || premioId,
+      stockRestante: restante,
       timestamp: new Date().toISOString(),
       synced: false,
     };
