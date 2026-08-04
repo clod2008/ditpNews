@@ -21,6 +21,10 @@ const DEFAULT_CONFIG = {
 
 const ESTADOS = { LISTO: "listo", SORTEANDO: "sorteando", RESULTADO: "resultado", AGOTADO: "agotado" };
 
+// No es información sensible (solo evita que cualquiera tropiece con el
+// panel admin) — hardcodeada en vez de env var, ver TASK_sorteo_premios.md.
+const ADMIN_KEY = "devtest123";
+
 // localStorage puede fallar (modo privado estricto, storage lleno) — en ese
 // caso el sorteo sigue funcionando en memoria durante la sesión, solo no
 // persiste entre recargas. No rompemos el flujo por eso.
@@ -237,8 +241,7 @@ const SorteoDraw = ({ config, stock, onResultado }) => {
 
 export const Sorteo = () => {
   const [searchParams] = useSearchParams();
-  const adminKey = process.env.REACT_APP_SORTEO_ADMIN_KEY;
-  const isAdmin = Boolean(adminKey) && searchParams.get("admin") === adminKey;
+  const isAdmin = searchParams.get("admin") === ADMIN_KEY;
 
   const [config, setConfig] = useState(() => readJSON(STORAGE_KEYS.config, DEFAULT_CONFIG));
   const [stock, setStock] = useState(() => readJSON(STORAGE_KEYS.stock, null) || stockDesdeConfig(config));

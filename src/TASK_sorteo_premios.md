@@ -9,11 +9,11 @@ Se integró como una ruta más de `ditpNews` (`ditp.com.ar`) en vez de un proyec
 ## Qué se hizo
 
 1. **Ruta `/sorteo`** — `src/data/cont.js` (entrada `sorteo` en `paths`) + `src/App.jsx`.
-2. **`src/pages/Sorteo.jsx`** — mismo esquema que `SmartLink.jsx`: panel admin escondido detrás de `?admin=CLAVE` (`REACT_APP_SORTEO_ADMIN_KEY`, **nueva** env var, no confundir con `REACT_APP_SMART_LINK_ADMIN_KEY`).
+2. **`src/pages/Sorteo.jsx`** — mismo esquema que `SmartLink.jsx`: panel admin escondido detrás de `?admin=CLAVE`, pero acá la clave (`ADMIN_KEY`) está **hardcodeada en el archivo** en vez de env var — decisión de Claudio 2026-08-04: no es información sensible (solo evita que alguien tropiece con el panel sin querer, no protege datos reales), y una env var de CRA de todos modos termina horneada en texto plano en el bundle público — no había ninguna diferencia real de seguridad, solo un paso extra de configuración en Vercel. Para cambiar la clave: editar la constante `ADMIN_KEY` en `Sorteo.jsx` y redeployar.
    - **Vista pública (`/sorteo`)**: botón "Sortear" → 1.6s de animación → resultado. Deshabilitado si no queda stock de ningún premio.
    - **Vista admin (`/sorteo?admin=CLAVE`)**: definir tipos de premio + cantidad (agregar/quitar filas libremente, no está hardcodeado a 2), ver stock restante, botón "Reiniciar día" (repone el stock a la cantidad configurada — usar una vez al arrancar cada jornada), estado de sincronización (cuántos premios entregados quedan sin subir al Sheet).
 3. **Persistencia 100% local** (`localStorage`, claves `sorteo_config` / `sorteo_stock` / `sorteo_queue`) — el sorteo entero (elegir premio, descontar stock, guardar el registro) no depende de la red en ningún punto. Random ponderado por stock restante (`elegirPremio` en `Sorteo.jsx`): un premio con más unidades disponibles tiene más chance de salir; tope duro — un tipo en 0 nunca puede volver a salir.
-4. **`api/log-premio.js`** — mismo patrón que `api/log-scan.js`: función serverless que agrega una fila (`timestamp`, `premioNombre`, `id`, `origin`) a la pestaña **"Premios"** del mismo Google Sheet que ya usa `GOOGLE_SHEET_ID` (no hace falta una planilla nueva, solo crear esa pestaña con esas 4 columnas si no existe). Reusa las mismas tres env vars server-side que `log-scan.js` — nada nuevo que configurar en Vercel salvo `REACT_APP_SORTEO_ADMIN_KEY`.
+4. **`api/log-premio.js`** — mismo patrón que `api/log-scan.js`: función serverless que agrega una fila (`timestamp`, `premioNombre`, `id`, `origin`) a la pestaña **"Premios"** del mismo Google Sheet que ya usa `GOOGLE_SHEET_ID` (no hace falta una planilla nueva, solo crear esa pestaña con esas 4 columnas si no existe). Reusa las mismas tres env vars server-side que `log-scan.js` — nada nuevo que configurar en Vercel para esta parte.
 5. **Sync**: `Sorteo.jsx` reintenta la cola pendiente al montar y en cada evento `online` del navegador. Se corta al primer fallo (se reintenta entera en el próximo trigger) — no hace falta reintento fino por-item para este volumen.
 6. **`public/service-worker.js`** + registro en `src/index.jsx`: estrategia *network-first* (red primero, cache solo si falla el fetch) para que `/sorteo` cargue sin conexión en el dispositivo del evento, sin arriesgar contenido viejo en el resto de `ditp.com.ar` para visitantes normales — ver comentarios en el propio archivo. **No existía ningún service worker antes en este repo.**
 
@@ -27,12 +27,11 @@ Se integró como una ruta más de `ditpNews` (`ditp.com.ar`) en vez de un proyec
 ## Cómo probarlo
 
 - `npm start` y entrar a `/sorteo` — el flujo de sorteo, stock y localStorage funciona en local sin nada más.
-- `/sorteo?admin=LA_CLAVE` (con `REACT_APP_SORTEO_ADMIN_KEY` seteada en `.env.local`) para el panel de configuración.
+- `/sorteo?admin=devtest123` para el panel de configuración (clave hardcodeada, ver `ADMIN_KEY` en `Sorteo.jsx`).
 - **El sync a Sheets NO va a andar en local ni en preview de esta rama**: `isAllowedOrigin` en `_google-sheets-auth.js` solo permite `ditp.com.ar` y el alias fijo `ditp-news-git-dev-clod.vercel.app` — va a devolver 403 hasta que esto se mergee a `dev` (o se agregue el preview de esta rama a `ALLOWED_ORIGINS`, no se tocó ese archivo compartido desde acá). Mientras tanto, se puede validar el resto del flujo igual — el registro queda en la cola local marcado `synced:false` y no se pierde.
 - Para el offline real: abrir `/sorteo` una vez con conexión (así el SW cachea el bundle), después probar en modo avión.
 
 ## Pendiente / fuera de alcance
 
-- Setear `REACT_APP_SORTEO_ADMIN_KEY` en Vercel (no se puede hacer desde acá).
 - Crear la pestaña "Premios" en el Google Sheet si todavía no existe.
 - Instalar la PWA (Agregar a pantalla de inicio) en el dispositivo real antes del 13/08 — recomendado para que en iOS no dependa del comportamiento normal de Safari entre jornadas.
