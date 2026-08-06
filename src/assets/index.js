@@ -18,6 +18,7 @@ export { default as bbm25LogoPrimary } from './svg/bbm2025LogoPrimary.svg';
 export { default as whatsAppFloatButton } from './svg/boton-whatsapp.svg';
 
 // Img
+export { default as logoDipBlanco } from './logoDipBlanco.png';
 export { default as logoTTC } from './img/new-logo-2.webp';
 export { default as noPic450x450 } from './img/noPicture450x450.webp';
 export { default as bannerHomeBM } from './img/festivalMT24Banner.webp';

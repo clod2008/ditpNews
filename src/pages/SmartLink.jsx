@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import QRCode from "qrcode";
-import { ditpIso } from "../assets";
+import { logoDipBlanco } from "../assets";
 import { paths } from "../data/cont";
 import styles from "./SmartLink.module.scss";
 
@@ -535,7 +535,7 @@ const SmartLinkBuilder = () => {
 
   return (
     <div className={styles.builder}>
-      <img src={ditpIso} alt="DITP" className={styles.builderLogo} />
+      <img src={logoDipBlanco} alt="DITP" className={styles.builderLogo} />
       <h1 className={styles.builderTitle}>Constructor de Smart Link</h1>
       <ScanStats />
 
@@ -769,7 +769,7 @@ const isFirstScanForCode = (type, code) => {
 // ninguna pista de que existe un constructor escondido detrás de esa clave.
 const NoTargetMessage = () => (
   <div className={styles.smartLink}>
-    <img src={ditpIso} alt="DITP" className={styles.logo} />
+    <img src={logoDipBlanco} alt="DITP" className={styles.logo} />
     <p className={styles.message}>Todavía no hay un posteo asignado a este link.</p>
   </div>
 );
@@ -847,7 +847,7 @@ export const SmartLink = () => {
 
   return (
     <div className={styles.smartLink}>
-      <img src={ditpIso} alt="DITP" className={styles.logo} />
+      <img src={logoDipBlanco} alt="DITP" className={styles.logo} />
       {!stay && <div className={styles.spinner} />}
       <p className={styles.message}>
         {stay
