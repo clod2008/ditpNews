@@ -37,7 +37,19 @@ self.addEventListener("fetch", (event) => {
       .then((response) => {
         if (response.ok) {
           const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          // waitUntil() a propósito: sin esto, el navegador puede matar el SW
+          // apenas se resuelve la promesa de respondWith(), cortando el
+          // guardado en cache a mitad de camino — iOS Safari es mucho más
+          // agresivo terminando SWs que Chrome/Android, y eso se vio arrastrar
+          // el propio fetch en curso (imagen rota solo en iPhone). El .catch
+          // evita que un error acá (ej. cuota de storage llena) tire abajo la
+          // respuesta real que ya se le está por devolver a la página.
+          event.waitUntil(
+            caches
+              .open(CACHE_NAME)
+              .then((cache) => cache.put(request, copy))
+              .catch(() => {})
+          );
         }
         return response;
       })
