@@ -55,7 +55,7 @@ $fontBrand: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-se
   // no hace falta filter. De paso saca de encima un filter sobre <img> con
   // fuente SVG, combinación con bugs de renderizado conocidos en iOS Safari
   // (posible causa real del logo roto solo en iPhone).
-  animation: pulseLogo 2.2s ease-in-out infinite;
+  // animation: pulseLogo 2.2s ease-in-out infinite;
 }
 
 .spinner {
