@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import QRCode from "qrcode";
 import { ditpIso } from "../assets";
@@ -101,6 +101,99 @@ const QR_COLORS = {
 };
 const QR_TRANSPARENT_BG = "#ffffff00";
 
+// Cada cuánto se refresca solo el panel de stats mientras la pestaña está
+// visible — no hay push real desde el Sheet, así que "tiempo real" acá es
+// polling. 20s es un compromiso entre sentirse vivo y no golpear de más la
+// API de Sheets (ver límite conocido en el cerebro del repo: scan-stats.js
+// no pagina, trae todo el historial en cada consulta).
+const STATS_POLL_MS = 20000;
+
+// Ícono recortado del propio ditpIso.svg (src/assets/svg/ditpIso.svg): solo
+// el símbolo "><" a la derecha del wordmark "DITP" (paths originales x≈402-515,
+// y≈0-98), NO el wordmark completo — ese es 5.2:1 de ancho, ilegible como
+// mancha central de QR. El símbolo solo es ~1.15:1, casi cuadrado, mejor para
+// el centro. viewBox con un pelo de margen extra sobre el bbox real.
+const QR_LOGO_VIEWBOX = "396 -6 124 110";
+const QR_LOGO_WIDTH = 124;
+const QR_LOGO_HEIGHT = 110;
+const QR_LOGO_PATHS = [
+  '<path d="M514.97 0L511.72 17.45L452.88 27.61C452.55 28.75 454.37 34.71 453.73 35.15L411.63 42.4L414.83 25.08L450.83 18.79C451.14 17.64 449.28 11.68 450.01 11.27L514.97 0Z" fill="#BA0E30"/>',
+  '<path d="M504.92 55.46L501.86 72.73L462.19 79.56C461.78 79.98 463.49 85.98 463.15 87.04L401.83 97.61L405.02 80.34L460.01 70.77C460.75 70.37 458.8 64.39 459.19 63.26L504.93 55.46H504.92Z" fill="#BA0E30"/>',
+  '<path d="M509.95 27.35L506.74 44.67L457.4 53.2L458.65 60.72L406.85 69.51L409.85 52.3L455.63 44.41L454.4 36.9L509.95 27.35Z" fill="#0B459B"/>',
+].join("");
+
+// Tamaños relativos del logo sobre el QR — conservadores a propósito, muy por
+// debajo del ~30% de daño que tolera errorCorrectionLevel "H", para que siga
+// leyendo bien aunque se imprima chico, con mala luz o en papel brillante.
+const QR_LOGO_BACKING_RATIO = 0.28; // fondo blanco redondeado, % del ancho del QR
+const QR_LOGO_CORNER_RATIO = 0.16; // redondeo de esquinas del fondo, % de su propio lado
+const QR_LOGO_PADDING_RATIO = 0.8; // logo dentro del fondo, deja aire alrededor
+
+// Fondo blanco + símbolo, centrados — mismas proporciones para el SVG (acá,
+// insertado como texto) y el PNG (drawImage sobre canvas, ver handleDownloadPng).
+const buildQrLogoOverlaySvg = (qrSize) => {
+  const backingSize = qrSize * QR_LOGO_BACKING_RATIO;
+  const backingPos = (qrSize - backingSize) / 2;
+  const radius = backingSize * QR_LOGO_CORNER_RATIO;
+  const logoW = backingSize * QR_LOGO_PADDING_RATIO;
+  const logoH = logoW * (QR_LOGO_HEIGHT / QR_LOGO_WIDTH);
+  const logoX = (qrSize - logoW) / 2;
+  const logoY = (qrSize - logoH) / 2;
+  return (
+    `<rect x="${backingPos}" y="${backingPos}" width="${backingSize}" height="${backingSize}" rx="${radius}" fill="#ffffff"/>` +
+    `<svg x="${logoX}" y="${logoY}" width="${logoW}" height="${logoH}" viewBox="${QR_LOGO_VIEWBOX}">${QR_LOGO_PATHS}</svg>`
+  );
+};
+
+// El QR generado por la librería trae viewBox="0 0 N N" (N = módulos + margen)
+// — de ahí se saca el tamaño real para calcular el overlay. Si por lo que sea
+// no matchea, devuelve el SVG tal cual (sin logo) en vez de romper.
+const addLogoToQrSvg = (svgString) => {
+  const match = svgString.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
+  if (!match) return svgString;
+  const overlay = buildQrLogoOverlaySvg(parseFloat(match[1]));
+  return svgString.replace("</svg>", `${overlay}</svg>`);
+};
+
+const qrLogoDataUri = () => {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${QR_LOGO_VIEWBOX}">${QR_LOGO_PATHS}</svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+};
+
+const loadImage = (src) =>
+  new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+
+// Dibuja el mismo fondo blanco + símbolo que addLogoToQrSvg, pero sobre un
+// canvas — lo usa la descarga en PNG (ver handleDownloadPng), que no puede
+// reusar el string SVG directo.
+const drawQrLogoOnCanvas = async (canvas) => {
+  const ctx = canvas.getContext("2d");
+  const size = canvas.width;
+  const backingSize = size * QR_LOGO_BACKING_RATIO;
+  const backingPos = (size - backingSize) / 2;
+  const radius = backingSize * QR_LOGO_CORNER_RATIO;
+
+  ctx.fillStyle = "#ffffff";
+  ctx.beginPath();
+  ctx.moveTo(backingPos + radius, backingPos);
+  ctx.arcTo(backingPos + backingSize, backingPos, backingPos + backingSize, backingPos + backingSize, radius);
+  ctx.arcTo(backingPos + backingSize, backingPos + backingSize, backingPos, backingPos + backingSize, radius);
+  ctx.arcTo(backingPos, backingPos + backingSize, backingPos, backingPos, radius);
+  ctx.arcTo(backingPos, backingPos, backingPos + backingSize, backingPos, radius);
+  ctx.closePath();
+  ctx.fill();
+
+  const logoImg = await loadImage(qrLogoDataUri());
+  const logoW = backingSize * QR_LOGO_PADDING_RATIO;
+  const logoH = logoW * (QR_LOGO_HEIGHT / QR_LOGO_WIDTH);
+  ctx.drawImage(logoImg, (size - logoW) / 2, (size - logoH) / 2, logoW, logoH);
+};
+
 // Rangos de fecha para el panel de estadísticas — presets en vez de un
 // calendario, más rápido de usar con el pulgar en celular.
 const DATE_RANGES = {
@@ -144,9 +237,41 @@ const ScanStats = () => {
   // "" = agregado de todos los códigos. Se resetea al cambiar de rango,
   // porque un código puede no tener escaneos en el rango nuevo.
   const [selectedCode, setSelectedCode] = useState("");
-  // Se incrementa al tocar el botón de refrescar — no cambia nada del
-  // request en sí, solo re-dispara el fetch de abajo sin recargar la página.
+  // Se incrementa al tocar el botón de refrescar o en cada poll automático —
+  // no cambia nada del request en sí, solo re-dispara el fetch de abajo sin
+  // recargar la página.
   const [refreshTick, setRefreshTick] = useState(0);
+  // Distingue un tick automático de uno manual, para no mostrar el spinner
+  // de carga en cada poll de fondo — solo cuando el usuario toca el botón.
+  const isAutoTickRef = useRef(false);
+
+  const handleManualRefresh = () => {
+    isAutoTickRef.current = false;
+    setRefreshTick((t) => t + 1);
+  };
+
+  // "Tiempo real" acá es polling, no push: no hay forma de que el Sheet
+  // avise solo de un escaneo nuevo (a diferencia de /sorteo, donde el evento
+  // "storage" sincroniza pestañas del mismo dispositivo vía localStorage —
+  // acá los escaneos vienen de cualquier celular, no de otra pestaña propia).
+  // Se pausa con la pestaña oculta para no gastar cuota de la API de Sheets
+  // de más, y refresca al toque apenas volvés a la pestaña.
+  useEffect(() => {
+    const tick = () => {
+      if (document.visibilityState !== "visible") return;
+      isAutoTickRef.current = true;
+      setRefreshTick((t) => t + 1);
+    };
+    const interval = setInterval(tick, STATS_POLL_MS);
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") tick();
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, []);
 
   // Aparte del fetch: el código seleccionado solo se resetea al cambiar de
   // rango (puede no tener escaneos en el rango nuevo), no en cada refresh.
@@ -168,7 +293,9 @@ const ScanStats = () => {
     }
 
     let cancelled = false;
-    setLoading(true);
+    const isBackground = isAutoTickRef.current;
+    isAutoTickRef.current = false;
+    if (!isBackground) setLoading(true);
     setError(false);
 
     fetch(`/api/scan-stats?${params.toString()}`)
@@ -203,7 +330,7 @@ const ScanStats = () => {
         <button
           type='button'
           className={styles.statsRefreshButton}
-          onClick={() => setRefreshTick((t) => t + 1)}
+          onClick={handleManualRefresh}
           disabled={loading}
           aria-label='Actualizar estadísticas'
         >
@@ -335,10 +462,13 @@ const SmartLinkBuilder = () => {
     QRCode.toString(qrLink, {
       type: "svg",
       margin: 1,
+      // "H" (máxima corrección de errores) a propósito: es lo que deja
+      // superponer el logo en el centro sin arriesgar la lectura.
+      errorCorrectionLevel: "H",
       color: { dark: QR_COLORS[qrColor].dark, light: QR_TRANSPARENT_BG },
     })
       .then((svg) => {
-        if (!cancelled) setQrSvg(svg);
+        if (!cancelled) setQrSvg(addLogoToQrSvg(svg));
       })
       .catch(() => {
         if (!cancelled) setQrSvg("");
@@ -361,12 +491,18 @@ const SmartLinkBuilder = () => {
 
   const handleDownloadPng = async () => {
     if (!qrLink) return;
-    const dataUrl = await QRCode.toDataURL(qrLink, {
-      type: "image/png",
+    // Vía canvas (no toDataURL directo) porque hace falta dibujar el logo
+    // encima después de generar el QR — mismo overlay que addLogoToQrSvg,
+    // pero rasterizado (ver drawQrLogoOnCanvas).
+    const canvas = document.createElement("canvas");
+    await QRCode.toCanvas(canvas, qrLink, {
       margin: 1,
       width: 1024,
+      errorCorrectionLevel: "H",
       color: { dark: QR_COLORS[qrColor].dark, light: QR_TRANSPARENT_BG },
     });
+    await drawQrLogoOnCanvas(canvas);
+    const dataUrl = canvas.toDataURL("image/png");
     const link = document.createElement("a");
     link.href = dataUrl;
     link.download = `smart-link-${type}-${fileSlug}-${qrColor}.png`;
