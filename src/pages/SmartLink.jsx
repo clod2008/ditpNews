@@ -7,6 +7,8 @@ import styles from "./SmartLink.module.scss";
 
 // Datos de ejemplo por tipo, para el placeholder del campo y el bloque de
 // ayuda "¿de dónde saco esto?" — se actualizan según el radio elegido.
+// Dejó de ser solo Instagram (se sumó "url" para links externos), pero el
+// nombre IG_TYPE_INFO se mantiene por historia — no vale la pena el churn.
 const IG_TYPE_INFO = {
   reel: {
     label: "Reel",
@@ -28,6 +30,13 @@ const IG_TYPE_INFO = {
     placeholder: "Pegá el link del perfil o el usuario",
     urlSample: "https://www.instagram.com/ditp.thailand/",
     valueSample: "ditp.thailand",
+  },
+  url: {
+    label: "Link externo",
+    fieldLabel: "la URL",
+    placeholder: "Pegá la URL completa (https://...)",
+    urlSample: "https://www.ditp.com.ar/promo-especial",
+    valueSample: "https://www.ditp.com.ar/promo-especial",
   },
 };
 
@@ -73,6 +82,14 @@ const parseInstagramInput = (raw) => {
     return { type: "profile", code: first };
   }
   return null;
+};
+
+// Para type "url": si pegaron el dominio sin protocolo (ej. "ditp.com.ar/promo")
+// le suma https:// solo — evita links rotos por un olvido común al pegar rápido.
+const normalizeExternalUrl = (raw) => {
+  const trimmed = raw.trim();
+  if (!trimmed) return "";
+  return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
 };
 
 // Opciones de color del código del QR — el fondo siempre va transparente
@@ -270,6 +287,10 @@ const ScanStats = () => {
                 <span className={styles.statsCardValue}>{stats.byType.profile}</span>
                 <span className={styles.statsCardLabel}>Perfiles</span>
               </div>
+              <div className={styles.statsCard}>
+                <span className={styles.statsCardValue}>{stats.byType.url}</span>
+                <span className={styles.statsCardLabel}>Links externos</span>
+              </div>
             </div>
           )}
         </>
@@ -289,8 +310,15 @@ const SmartLinkBuilder = () => {
   const [qrSvg, setQrSvg] = useState("");
 
   const info = IG_TYPE_INFO[type];
-  const trimmedCode = code.trim().replace(/^@/, "");
+  const trimmedCode =
+    type === "url" ? normalizeExternalUrl(code) : code.trim().replace(/^@/, "");
   const basePath = `${window.location.origin}/${paths.smartLink}`;
+  // Para el nombre de archivo del QR: una URL completa tiene barras y puntos
+  // que no sirven como nombre de archivo, así que se recorta a algo legible.
+  const fileSlug =
+    type === "url"
+      ? trimmedCode.replace(/^https?:\/\//i, "").replace(/[^a-zA-Z0-9]+/g, "-").slice(0, 40)
+      : trimmedCode;
   // El QR siempre codifica el link REAL (sin &stay=1), sea cual sea el modo
   // elegido arriba — no tiene sentido imprimir un QR que no redirige.
   const qrLink = trimmedCode
@@ -326,7 +354,7 @@ const SmartLinkBuilder = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `smart-link-${type}-${trimmedCode}-${qrColor}.svg`;
+    link.download = `smart-link-${type}-${fileSlug}-${qrColor}.svg`;
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -341,12 +369,18 @@ const SmartLinkBuilder = () => {
     });
     const link = document.createElement("a");
     link.href = dataUrl;
-    link.download = `smart-link-${type}-${trimmedCode}-${qrColor}.png`;
+    link.download = `smart-link-${type}-${fileSlug}-${qrColor}.png`;
     link.click();
   };
 
   const handleCodeChange = (e) => {
     const value = e.target.value;
+    // Para "Link externo" no tiene sentido auto-detectar tipo de Instagram
+    // — lo que se pega ahí ES el destino, tal cual.
+    if (type === "url") {
+      setCode(value);
+      return;
+    }
     const parsed = parseInstagramInput(value);
     if (parsed) {
       setType(parsed.type);
@@ -366,7 +400,7 @@ const SmartLinkBuilder = () => {
   return (
     <div className={styles.builder}>
       <img src={ditpIso} alt="DITP" className={styles.builderLogo} />
-      <h1 className={styles.builderTitle}>Constructor de Smart Link a Instagram</h1>
+      <h1 className={styles.builderTitle}>Constructor de Smart Link</h1>
       <ScanStats />
 
       <div className={styles.card}>
@@ -412,6 +446,23 @@ const SmartLinkBuilder = () => {
               onChange={() => setType("profile")}
             />
             Perfil
+          </label>
+          <label
+            className={`${styles.radioOption} ${
+              type === "url" ? styles.radioOptionActive : ""
+            }`}
+          >
+            <input
+              type='radio'
+              name='type'
+              value='url'
+              checked={type === "url"}
+              onChange={() => {
+                setType("url");
+                setCode("");
+              }}
+            />
+            Link externo
           </label>
         </fieldset>
 
@@ -524,15 +575,24 @@ const SmartLinkBuilder = () => {
       </div>
 
       <div className={styles.example}>
-        <p>Pegá el link tal cual, por ejemplo:</p>
-        <code>{info.urlSample}</code>
-        <p className={styles.exampleNote}>
-          El código se detecta solo — o escribilo directo (
-          <strong>{info.valueSample}</strong>) si ya lo tenés.
-        </p>
+        {type === "url" ? (
+          <p className={styles.exampleNote}>
+            Pegá cualquier URL — no tiene que ser de Instagram. El escaneo se
+            cuenta igual que con un Reel, Post o Perfil.
+          </p>
+        ) : (
+          <>
+            <p>Pegá el link tal cual, por ejemplo:</p>
+            <code>{info.urlSample}</code>
+            <p className={styles.exampleNote}>
+              El código se detecta solo — o escribilo directo (
+              <strong>{info.valueSample}</strong>) si ya lo tenés.
+            </p>
+          </>
+        )}
         <p>Link {info.label.toLowerCase()} de ejemplo:</p>
         <code>
-          {basePath}?type={type}&code={info.valueSample}
+          {basePath}?type={type}&code={encodeURIComponent(info.valueSample)}
         </code>
       </div>
     </div>
@@ -597,10 +657,13 @@ export const SmartLink = () => {
   const [showManualLink, setShowManualLink] = useState(false);
 
   const hasTarget = Boolean(type && code);
+  const isExternal = type === "url";
   // "profile" no lleva segmento de tipo en la URL de Instagram (instagram.com/usuario/),
-  // a diferencia de reel/post (instagram.com/reel|p/codigo/).
+  // a diferencia de reel/post (instagram.com/reel|p/codigo/). Para "url" el
+  // destino es directamente lo que vino en ?code= (ya viene decodificado por
+  // useSearchParams), no se arma nada con instagram.com.
   const igPath = type === "profile" ? `${code}/` : `${type}/${code}/`;
-  const webUrl = hasTarget ? `https://www.instagram.com/${igPath}` : null;
+  const webUrl = !hasTarget ? null : isExternal ? code : `https://www.instagram.com/${igPath}`;
 
   useEffect(() => {
     if (!hasTarget || stay) return;
@@ -619,14 +682,15 @@ export const SmartLink = () => {
       firstScan: isFirstScanForCode(type, code),
     });
 
-    if (isAndroid) {
+    if (!isExternal && isAndroid) {
       const intentUrl = `intent://instagram.com/${igPath}#Intent;package=com.instagram.android;scheme=https;S.browser_fallback_url=${encodeURIComponent(
         webUrl
       )};end`;
       window.location.href = intentUrl;
     } else {
-      // iOS y el resto: Universal Links de Apple abren la app si está instalada,
-      // o el navegador si no — no hace falta intent scheme.
+      // Link externo (cualquier plataforma), o iOS/resto para Instagram:
+      // Universal Links de Apple abren la app si está instalada, o el
+      // navegador si no — no hace falta intent scheme en ningún caso acá.
       window.location.href = webUrl;
     }
 
@@ -639,7 +703,7 @@ export const SmartLink = () => {
     }, 2500);
 
     return () => clearTimeout(safetyNet);
-  }, [hasTarget, stay, type, code, igPath, webUrl]);
+  }, [hasTarget, stay, type, code, igPath, webUrl, isExternal]);
 
   if (!hasTarget) {
     return isAdmin ? <SmartLinkBuilder /> : <NoTargetMessage />;
@@ -650,12 +714,20 @@ export const SmartLink = () => {
       <img src={ditpIso} alt="DITP" className={styles.logo} />
       {!stay && <div className={styles.spinner} />}
       <p className={styles.message}>
-        {stay ? "Modo test — no redirige solo." : "Abriendo Instagram…"}
+        {stay
+          ? "Modo test — no redirige solo."
+          : isExternal
+          ? "Redirigiendo…"
+          : "Abriendo Instagram…"}
       </p>
       {stay && <code className={styles.targetUrl}>{webUrl}</code>}
       {(showManualLink || stay) && (
         <a href={webUrl} className={styles.manualLink}>
-          {stay ? "Ir a Instagram" : "Tocá acá si no se abrió automáticamente"}
+          {stay
+            ? isExternal
+              ? "Ir al link"
+              : "Ir a Instagram"
+            : "Tocá acá si no se abrió automáticamente"}
         </a>
       )}
     </div>

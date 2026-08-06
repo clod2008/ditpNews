@@ -15,7 +15,7 @@ const {
 } = require("./_google-sheets-auth");
 
 const SHEET_RANGE = "Scans!A:H";
-const KNOWN_TYPES = ["reel", "p", "profile"];
+const KNOWN_TYPES = ["reel", "p", "profile", "url"];
 
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
@@ -56,8 +56,8 @@ module.exports = async function handler(req, res) {
     const from = req.query.from ? new Date(req.query.from) : null;
     const to = req.query.to ? new Date(req.query.to) : null;
 
-    const byType = { reel: 0, p: 0, profile: 0 };
-    const uniqueByType = { reel: 0, p: 0, profile: 0 };
+    const byType = { reel: 0, p: 0, profile: 0, url: 0 };
+    const uniqueByType = { reel: 0, p: 0, profile: 0, url: 0 };
     const byCodeMap = new Map();
     let total = 0;
     let uniqueTotal = 0;
