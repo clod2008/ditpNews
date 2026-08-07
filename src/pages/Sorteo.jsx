@@ -18,6 +18,9 @@ const DEFAULT_CONFIG = {
     { id: "premio-1", nombre: "Premio 1", cantidad: 50 },
     { id: "premio-2", nombre: "Premio 2", cantidad: 50 },
   ],
+  // Obligatorio desde el admin (ver SorteoAdmin) — queda registrado en cada
+  // entrega en el Sheet, no solo en la config.
+  encargado: "",
 };
 
 const ESTADOS = { LISTO: "listo", SORTEANDO: "sorteando", RESULTADO: "resultado", AGOTADO: "agotado" };
@@ -114,7 +117,17 @@ const SorteoAdmin = ({
   onPurgarTodo,
 }) => {
   const [borrador, setBorrador] = useState(config.premios);
+  const [encargado, setEncargado] = useState(config.encargado || "");
   const pendientes = queue.filter((r) => !r.synced).length;
+
+  const guardarConfig = () => {
+    const encargadoTrim = encargado.trim();
+    if (!encargadoTrim) {
+      window.alert("El nombre del encargado del sorteo es obligatorio.");
+      return;
+    }
+    onGuardarConfig(borrador, encargadoTrim);
+  };
 
   const actualizarPremio = (id, campo, valor) => {
     setBorrador((prev) =>
@@ -134,6 +147,18 @@ const SorteoAdmin = ({
     <div className={styles.admin}>
       <img src={ditpIso} alt="DITP" className={styles.adminLogo} />
       <h1 className={styles.adminTitle}>Admin — Sorteo de premios</h1>
+
+      <section className={styles.card}>
+        <h2 className={styles.cardTitle}>Encargado del sorteo</h2>
+        <input
+          className={styles.textInput}
+          value={encargado}
+          onChange={(e) => setEncargado(e.target.value)}
+          placeholder="Nombre y apellido"
+          aria-label="Nombre del encargado del sorteo"
+        />
+        <p className={styles.cardHint}>Obligatorio — queda registrado en cada premio entregado.</p>
+      </section>
 
       <section className={styles.card}>
         <h2 className={styles.cardTitle}>Tipos de premio</h2>
@@ -169,7 +194,7 @@ const SorteoAdmin = ({
         <button type="button" className={styles.secondaryButton} onClick={agregarPremio}>
           + Agregar tipo de premio
         </button>
-        <button type="button" className={styles.primaryButton} onClick={() => onGuardarConfig(borrador)}>
+        <button type="button" className={styles.primaryButton} onClick={guardarConfig}>
           Guardar configuración
         </button>
       </section>
@@ -218,6 +243,7 @@ const SorteoAdmin = ({
 const SorteoDraw = ({ config, stock, onResultado }) => {
   const [estado, setEstado] = useState(ESTADOS.LISTO);
   const [ganador, setGanador] = useState(null);
+  const [participante, setParticipante] = useState("");
   const timeoutRef = useRef(null);
 
   const hayStock = Object.values(stock).some((c) => c > 0);
@@ -229,6 +255,7 @@ const SorteoDraw = ({ config, stock, onResultado }) => {
     setEstado(ESTADOS.SORTEANDO);
     setGanador(null);
 
+    const participanteActual = participante.trim();
     timeoutRef.current = setTimeout(() => {
       const premioId = elegirPremio(stock);
       if (!premioId) {
@@ -236,7 +263,7 @@ const SorteoDraw = ({ config, stock, onResultado }) => {
         return;
       }
       const premio = config.premios.find((p) => p.id === premioId);
-      onResultado(premioId, premio);
+      onResultado(premioId, premio, participanteActual);
       setGanador(premio);
       setEstado(ESTADOS.RESULTADO);
     }, 1600);
@@ -244,6 +271,7 @@ const SorteoDraw = ({ config, stock, onResultado }) => {
 
   const jugarDeNuevo = () => {
     setGanador(null);
+    setParticipante("");
     setEstado(hayStock ? ESTADOS.LISTO : ESTADOS.AGOTADO);
   };
 
@@ -254,6 +282,13 @@ const SorteoDraw = ({ config, stock, onResultado }) => {
       {estado === ESTADOS.LISTO && (
         <>
           <p className={styles.drawHint}>Tocá el botón para sortear tu premio</p>
+          <input
+            className={styles.participanteInput}
+            value={participante}
+            onChange={(e) => setParticipante(e.target.value)}
+            placeholder="Nombre del participante (opcional)"
+            aria-label="Nombre del participante"
+          />
           <button type="button" className={styles.drawButton} onClick={sortear} disabled={!hayStock}>
             Sortear
           </button>
@@ -290,8 +325,8 @@ export const Sorteo = () => {
   const [stock, setStock] = useState(() => readJSON(STORAGE_KEYS.stock, null) || stockDesdeConfig(config));
   const [queue, setQueue] = useState(() => readJSON(STORAGE_KEYS.queue, []));
 
-  const handleGuardarConfig = (premios) => {
-    const nuevaConfig = { premios };
+  const handleGuardarConfig = (premios, encargado) => {
+    const nuevaConfig = { premios, encargado };
     setConfig(nuevaConfig);
     writeJSON(STORAGE_KEYS.config, nuevaConfig);
   };
@@ -329,13 +364,15 @@ export const Sorteo = () => {
     setQueue([]);
   };
 
-  const handleResultado = (premioId, premio) => {
+  const handleResultado = (premioId, premio, participanteNombre) => {
     const restante = stock[premioId] - 1;
     const nuevoStock = { ...stock, [premioId]: restante };
     const registro = {
       id: uuid(),
       premioId,
       premioNombre: premio?.nombre || premioId,
+      participanteNombre: participanteNombre || "",
+      encargado: config.encargado || "",
       stockRestante: restante,
       dispositivoId: getDeviceId(),
       plataforma: getPlataforma(),

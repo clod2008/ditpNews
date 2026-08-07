@@ -20,7 +20,7 @@ const {
   getServiceAccountConfig,
 } = require("./_google-sheets-auth");
 
-const SHEET_RANGE = "Premios!A:G";
+const SHEET_RANGE = "Premios!A:I";
 
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
@@ -42,7 +42,16 @@ module.exports = async function handler(req, res) {
 
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
-    const { id, premioNombre, stockRestante, dispositivoId, plataforma, timestamp } = body;
+    const {
+      id,
+      premioNombre,
+      participanteNombre,
+      encargado,
+      stockRestante,
+      dispositivoId,
+      plataforma,
+      timestamp,
+    } = body;
 
     if (!id || !premioNombre) {
       res.status(400).json({ ok: false, reason: "missing fields" });
@@ -50,13 +59,15 @@ module.exports = async function handler(req, res) {
     }
 
     const accessToken = await getAccessToken(email, privateKey, SHEETS_WRITE_SCOPE);
-    // Orden pedido por Claudio: momento exacto, premio entregado, cuánto
-    // queda de ese premio, después info del dispositivo que lo entregó —
-    // id/origin al final, son metadata técnica (dedup/debug), no lo primero
-    // que se quiere leer.
+    // Orden pedido por Claudio: momento exacto, premio entregado, a quién y
+    // quién lo entregó, después cuánto queda de ese premio y la info del
+    // dispositivo — id/origin al final, son metadata técnica (dedup/debug),
+    // no lo primero que se quiere leer.
     const row = [
       timestamp || new Date().toISOString(),
       premioNombre,
+      participanteNombre || "",
+      encargado || "",
       stockRestante ?? "",
       plataforma || "",
       dispositivoId || "",
