@@ -15,8 +15,8 @@ const STORAGE_KEYS = {
 
 const DEFAULT_CONFIG = {
   premios: [
-    { id: "premio-1", nombre: "Premio 1", cantidad: 50 },
-    { id: "premio-2", nombre: "Premio 2", cantidad: 50 },
+    { id: "premio-1", nombre: "Arroz tailandes", cantidad: 40 },
+    { id: "premio-2", nombre: "Bebida tailandesa", cantidad: 100 },
   ],
   // Obligatorio desde el admin (ver SorteoAdmin) — queda registrado en cada
   // entrega en el Sheet, no solo en la config.
